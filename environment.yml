@@ -1,0 +1,12 @@
+name: cricinfo-scorecard-automate
+dependencies:
+  - python=3.8
+  - numpy
+  - pandas
+  - pytest
+  - requests
+  - pip
+  - pip:
+    - beautifulsoup4
+    - gspread
+    - oauth2client
