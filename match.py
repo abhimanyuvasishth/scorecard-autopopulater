@@ -95,6 +95,21 @@ class Match:
                 except IndexError as e:
                     continue
 
+    def get_player_info(self, player_name):
+        player = self.players[player_name]
+        return [
+            player.get('runs_scored', 0),
+            player.get('balls_faced', 0),
+            player.get('strike_rate', 0.0),
+            player.get('not_out', 0),
+            player.get('overs', 0),
+            player.get('economy_rate', 0),
+            player.get('wickets', 0),
+            player.get('maidens', 0),
+            player.get('hattricks', 0),
+            player.get('fielding', 0),
+        ]
+
     def convert_to_csv(self):
         header = ['name'] + [a.get_name() for a in BatCols] + [a.get_name() for a in BowlCols]
         with open(f'data/{self.match_id}.csv', 'w') as f:
