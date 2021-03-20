@@ -12,11 +12,12 @@ def write_player_row(g, info, game_num):
 if __name__ == '__main__':
     game = 1
     g = GoogleSheet()
-    match_ids = [1237177]
+    match_ids = [1216500]
     start_time = time.time()
     for match_id in match_ids:
         match = Match(match_id)
         match.scrape_page()
-        for player_name in match.players.keys():
-            player_info = match.get_player_info(player_name)
-            write_player_row(g, player_info, game)
+        assert len(match.players.keys()) == 22
+        # for player_name in match.players.keys():
+        #     player_info = match.get_player_info(player_name)
+        #     write_player_row(g, player_info, game)

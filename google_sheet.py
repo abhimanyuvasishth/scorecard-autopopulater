@@ -13,11 +13,13 @@ class GoogleSheet:
         file = 'credentials.json'
         creds = ServiceAccountCredentials.from_json_keyfile_name(file, scope)
         self.client = gspread.authorize(creds)
+        self.doc_name = 'IPL 14 auction'
+        self.sheet_name = 'Test Points Worksheet'
         self.sheet = self.get_sheet()
         self.players = self.get_all_players()
 
     def get_sheet(self):
-        return self.client.open('IPL 14 auction').worksheet('Test Points Worksheet')
+        return self.client.open(self.doc_name).worksheet(self.sheet_name)
 
     def get_all_players(self):
         return self.sheet.col_values(1)
