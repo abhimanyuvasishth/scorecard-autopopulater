@@ -16,8 +16,14 @@ class Match:
         self.match_id = match_id
         self.match_url = f'{self.base_url}/{match_id}.html'
         self.soup = self.get_soup()
+        self.save_html()
         self.content = self.get_content()
         self.players = {}
+        if self.content:
+            self.scrape_page()
+            assert len(self.players.keys()) == 22
+        else:
+            print('no content to scrape')
 
     def get_soup(self):
         page = urlopen(self.match_url)
@@ -26,6 +32,10 @@ class Match:
     def get_content(self):
         class_name = 'Collapsible__contentInner'
         return self.soup.find_all(class_=class_name, recursive=True)
+
+    def save_html(self):
+        with open(f'data/{self.match_id}.html', 'w') as file:
+            file.write(str(self.soup))
 
     @staticmethod
     def extract_fielder_name(name):
