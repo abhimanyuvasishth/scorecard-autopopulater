@@ -144,7 +144,11 @@ class Match:
                     fielder = self.extract_name(raw_bowler)
                 else:
                     fielder = self.extract_fielder_name(fielder)
-                print('catch', name, fielder, self.name_to_player(fielder))
+                player = self.name_to_player(fielder)
+                if not player.get('fielding'):
+                    player['fielding'] = 1
+                else:
+                    player['fielding'] += 1
             except IndexError:
                 # print('stumping', name, dismissal)
                 continue
