@@ -11,10 +11,11 @@ from utils import safe_int, safe_float
 
 class Match:
 
-    def __init__(self, match_id):
-        self.base_url = 'https://www.espncricinfo.com/matches/engine/match'
+    def __init__(self, series_id, match_id):
+        self.base_url = 'https://www.espncricinfo.com/series'
+        self.series_id = series_id
         self.match_id = match_id
-        self.match_url = f'{self.base_url}/{match_id}.html'
+        self.match_url = f'{self.base_url}/{series_id}/scorecard/{match_id}'
         self.soup = self.get_soup()
         self.save_html()
         self.content = self.get_content()
@@ -61,7 +62,7 @@ class Match:
                     cols = row.find_all('td')
                     cols = [x.text.strip() for x in cols]
                     name = self.extract_name(cols[0])
-                    if name.startswith('Did not bat'):
+                    if name.startswith('Did not bat') or name.startswith('Yet to bat'):
                         self.extract_did_not_bat(name)
 
                     bat_dict = {
