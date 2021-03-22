@@ -3,8 +3,6 @@ import csv
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import pandas as pd
-import re
-import numpy as np
 
 from constants import BatCols, BowlCols, FieldCols
 from utils import extract_name, extract_fielder_name, safe_int, safe_float

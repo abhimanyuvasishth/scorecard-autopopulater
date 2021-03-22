@@ -2,6 +2,9 @@ from enum import Enum
 
 game1_col = 'E'
 
+in_date_fmt = '%d-%b-%Y, %I:%M %p'
+out_date_fmt = '%Y-%m-%d %H:%M:%S'
+
 class BatCols(Enum):
     DISMISSAL = (0, 'dismissal')
     RUNS_SCORED = (1, 'runs_scored')
@@ -68,3 +71,25 @@ class SheetOffsetCols(Enum):
 
     def get_name(self):
         return self.value[1]
+
+class Teams(Enum):
+    BANGALORE = (0, 'RCB', 'Bangalore', 'Royal Challengers Bangalore')
+    CHENNAI = (1, 'CSK', 'Chennai', 'Chennai Super Kings')
+    DELHI = (2, 'DC', 'Delhi', 'Delhi Capitals')
+    HYDERABAD = (3, 'SRH', 'Hyderabad', 'Sunrisers Hyderabad')
+    KOLKATA = (4, 'KKR', 'Kolkata', 'Kolkata Knight Riders')
+    MUMBAI = (5, 'MI', 'Mumbai', 'Mumbai Indians')
+    PUNJAB = (6, 'KXIP', 'Punjab', 'Punjab Kings')
+    RAJASTHAN = (7, 'RR', 'Rajasthan', 'Rajasthan Royals')
+
+    def get_id(self):
+        return self.value[0]
+
+    def get_abbrev(self):
+        return self.value[1]
+
+    def get_name(self):
+        return self.value[2]
+
+    def get_full_name(self):
+        return self.value[3]
