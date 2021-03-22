@@ -12,12 +12,11 @@ def write_player_row(g, info, game_num):
 if __name__ == '__main__':
     game = 1
     g = GoogleSheet()
-    url_ids = [(1253264, 1253273)]
+    url_ids = [(1210595, 1216492)]
     start_time = time.time()
     for series_id, match_id in url_ids:
         match = Match(series_id, match_id)
-        if match.players:
-            pass
-            # for player_name in match.players.keys():
-            #     player_info = match.get_player_info(player_name)
-            #     write_player_row(g, player_info, game)
+        match.convert_to_csv()
+        # for player_name in match.players.keys():
+        #     player_info = match.get_player_info(player_name)
+        #     write_player_row(g, player_info, game)

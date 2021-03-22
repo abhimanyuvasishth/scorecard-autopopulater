@@ -1,5 +1,7 @@
 from enum import Enum
 
+game1_col = 'E'
+
 class BatCols(Enum):
     DISMISSAL = (0, 'dismissal')
     RUNS_SCORED = (1, 'runs_scored')
@@ -26,6 +28,7 @@ class BowlCols(Enum):
     SIXES_CONCEDED = (7, 'sixes_conceded')
     WIDES = (8, 'wides')
     NO_BALLS = (9, 'no_balls')
+    HATTRICKS = (10, 'hattricks')
 
     def get_id(self):
         return self.value[0]
@@ -33,7 +36,14 @@ class BowlCols(Enum):
     def get_name(self):
         return self.value[1]
 
-game1_col = 'E'
+class FieldCols(Enum):
+    FIELDING = (0, 'fielding')
+
+    def get_id(self):
+        return self.value[0]
+
+    def get_name(self):
+        return self.value[1]
 
 class SheetOffsetCols(Enum):
     RUNS_SCORED = (0, 'runs_scored')

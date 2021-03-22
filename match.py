@@ -6,7 +6,7 @@ import pandas as pd
 import re
 import numpy as np
 
-from constants import BatCols, BowlCols
+from constants import BatCols, BowlCols, FieldCols
 from utils import safe_int, safe_float
 
 class Match:
@@ -17,14 +17,14 @@ class Match:
         self.match_id = match_id
         self.match_url = f'{self.base_url}/{series_id}/scorecard/{match_id}'
         self.soup = self.get_soup()
-        self.save_html()
         self.content = self.get_content()
         self.players = {}
         if self.content:
             self.scrape_page()
             assert len(self.players.keys()) == 22
         else:
-            print('no content to scrape')
+            self.save_html()
+            print(f'{self.series_id}, {self.match_id}: no content to scrape')
 
     def get_soup(self):
         page = urlopen(self.match_url)
@@ -130,8 +130,9 @@ class Match:
                     if fielder in name.split(' '):
                         return name
                 elif num_parts == 2:
-                    if parts[1] in name.split(' ') and name[0] == fielder[0]:
-                        return name
+                    if parts[1] in name.split(' '):
+                        if name[0] == fielder[0] or fielder[0] == fielder[0].lower():
+                            return name
         return None
 
     def extract_fielding_stats(self):
@@ -144,7 +145,7 @@ class Match:
                     fielder = self.extract_name(raw_bowler)
                 else:
                     fielder = self.extract_fielder_name(fielder)
-                player = self.name_to_player(fielder)
+                player = self.players[self.name_to_player(fielder)]
                 if not player.get('fielding'):
                     player['fielding'] = 1
                 else:
@@ -175,7 +176,11 @@ class Match:
         ]
 
     def convert_to_csv(self):
-        header = ['name'] + [a.get_name() for a in BatCols] + [a.get_name() for a in BowlCols]
+        general_cols = ['name']
+        bat_cols = [col.get_name() for col in BatCols]
+        bowl_cols = [col.get_name() for col in BowlCols]
+        field_cols = [col.get_name() for col in FieldCols]
+        header = general_cols + bat_cols + bowl_cols + field_cols
         with open(f'data/{self.match_id}.csv', 'w') as f:
             writer = csv.DictWriter(f, fieldnames=header)
             writer.writeheader()
