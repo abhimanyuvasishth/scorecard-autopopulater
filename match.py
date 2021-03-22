@@ -7,7 +7,7 @@ import re
 import numpy as np
 
 from constants import BatCols, BowlCols, FieldCols
-from utils import safe_int, safe_float
+from utils import extract_name, extract_fielder_name, safe_int, safe_float
 
 class Match:
 
@@ -38,16 +38,6 @@ class Match:
         with open(f'data/{self.match_id}.html', 'w') as file:
             file.write(str(self.soup))
 
-    @staticmethod
-    def extract_fielder_name(name):
-        new_name = name.replace('sub','').replace(r'\(.*\)','')
-        return Match.extract_name(new_name)
-
-    @staticmethod
-    def extract_name(name):
-        new_name = name.replace(u'\xa0',' ').replace('†', '').replace('(c)', '')
-        return new_name.strip()
-
     def scrape_page(self):
         self.extract_batting_stats()
         self.extract_bowling_stats()
@@ -61,7 +51,7 @@ class Match:
                 try:
                     cols = row.find_all('td')
                     cols = [x.text.strip() for x in cols]
-                    name = self.extract_name(cols[0])
+                    name = extract_name(cols[0])
                     if name.startswith('Did not bat') or name.startswith('Yet to bat'):
                         self.extract_did_not_bat(name)
 
@@ -91,7 +81,7 @@ class Match:
                 try:
                     cols = row.find_all('td')
                     cols = [x.text.strip() for x in cols]
-                    name = self.extract_name(cols[0])
+                    name = extract_name(cols[0])
 
                     bowl_dict = {
                         BowlCols.OVERS.get_name(): safe_int(cols[1]),
@@ -135,30 +125,54 @@ class Match:
                             return name
         return None
 
+    def update_fielding(self, fielder_name):
+        try:
+            player = self.players[self.name_to_player(fielder_name)]
+        except KeyError:
+            print(fielder_name)
+            return
+        if not player.get('fielding'):
+            player['fielding'] = 1
+        else:
+            player['fielding'] += 1
+
+    @staticmethod
+    def extract_caught_or_stumped(dismissal):
+        raw_fielder, raw_bowler = dismissal.split(' b ')
+        if raw_fielder.startswith('c'):
+            dismissal_type = 'c '
+        elif raw_fielder.startswith('st '):
+            dismissal_type = 'st '
+        else:
+            return None
+        fielder = raw_fielder.split(dismissal_type)[1]
+        if fielder == '&':
+            return extract_name(raw_bowler)
+        else:
+            return extract_fielder_name(fielder)
+
+    @staticmethod
+    def extract_run_out(dismissal):
+        if dismissal.startswith('run out'):
+            fielders = extract_fielder_name(dismissal.split('run out')[1])
+            return fielders.split('/')[0]
+
     def extract_fielding_stats(self):
         for name, player_info in self.players.items():
+            fielder_name = ''
             dismissal = player_info.get(BatCols.DISMISSAL.get_name())
             try:
-                raw_fielder, raw_bowler = dismissal.split(' b ')
-                fielder = raw_fielder.split('c ')[1]
-                if fielder == '&':
-                    fielder = self.extract_name(raw_bowler)
-                else:
-                    fielder = self.extract_fielder_name(fielder)
-                player = self.players[self.name_to_player(fielder)]
-                if not player.get('fielding'):
-                    player['fielding'] = 1
-                else:
-                    player['fielding'] += 1
+                _, _ = dismissal.split(' b ')
+                fielder_name = self.extract_caught_or_stumped(dismissal)
             except IndexError:
-                # print('stumping', name, dismissal)
-                continue
+                fielder_name = self.extract_caught_or_stumped(dismissal)
             except ValueError:
-                # print('other dismissal', name, dismissal)
-                continue
+                fielder_name = self.extract_run_out(dismissal)
             except AttributeError:
-                # print('no dismissal', name)
                 continue
+            finally:
+                if fielder_name:
+                    self.update_fielding(fielder_name)
 
     def get_player_info(self, player_name):
         player = self.players[player_name]

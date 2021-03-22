@@ -38,3 +38,12 @@ def get_game_col(game_number):
     game1_col_num = letter_to_number(game1_col)
     col = game1_col_num + (game_number - 1) * len([v for v in SheetOffsetCols])
     return number_to_letter(col)
+
+def extract_fielder_name(name):
+    for char in '[]()':
+        name = name.replace(char, '')
+    return extract_name(name)
+
+def extract_name(name):
+    new_name = name.replace(u'\xa0',' ').replace('†', '').replace('(c)', '')
+    return new_name.strip()
