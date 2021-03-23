@@ -18,6 +18,9 @@ class Match:
         self.content = self.get_content()
         self.players = {}
         if self.content:
+            self.teams = self.get_teams()
+            if not self.teams:
+                print('Match has not started yet')
             self.scrape_page()
             assert len(self.players.keys()) == 22
         else:
@@ -36,6 +39,16 @@ class Match:
         with open(f'data/{self.match_id}.html', 'w') as file:
             file.write(str(self.soup))
 
+    def get_teams(self):
+        teams = []
+        containers = self.soup.find_all(class_='Collapsible')
+        if not containers:
+            return teams
+        for container in containers:
+            header = container.find(class_='header-title label').text
+            teams.append(header.split('INNINGS')[0].strip().title())
+        return teams
+
     def scrape_page(self):
         self.extract_batting_stats()
         self.extract_bowling_stats()
@@ -51,7 +64,7 @@ class Match:
                     cols = [x.text.strip() for x in cols]
                     name = extract_name(cols[0])
                     if name.startswith('Did not bat') or name.startswith('Yet to bat'):
-                        self.extract_did_not_bat(name)
+                        self.extract_did_not_bat(name, i)
 
                     bat_dict = {
                         BatCols.DISMISSAL.get_name(): cols[1],
@@ -64,7 +77,10 @@ class Match:
                     }
 
                     if not self.players.get(name):
-                        self.players[name] = {'name': name}
+                        self.players[name] = {
+                            'name': name,
+                            'team': self.teams[i]
+                        }
 
                     self.players[name].update(bat_dict)
                 except IndexError as e:
@@ -102,10 +118,13 @@ class Match:
                 except IndexError as e:
                     continue
 
-    def extract_did_not_bat(self, dnb_string):
+    def extract_did_not_bat(self, dnb_string, innings):
         players = [p.strip() for p in dnb_string.split(':')[1].split(',')]
         for name in players:
-            self.players[name] = {'name': name}
+            self.players[name] = {
+                'name': name,
+                'team': self.teams[innings]
+            }
 
     def name_to_player(self, fielder):
         for name in self.players.keys():
@@ -188,7 +207,7 @@ class Match:
         ]
 
     def convert_to_csv(self):
-        general_cols = ['name']
+        general_cols = ['name', 'team']
         bat_cols = [col.get_name() for col in BatCols]
         bowl_cols = [col.get_name() for col in BowlCols]
         field_cols = [col.get_name() for col in FieldCols]
