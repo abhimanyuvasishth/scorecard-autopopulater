@@ -61,10 +61,9 @@ class SheetOffsetCols(Enum):
     FIELDING = (9, 'fielding')
     BATTING_POINTS = (10, 'batting_points')
     BOWLING_POINTS = (11, 'bowling_points')
-    FIELDING_POINTS = (12, 'fielding_points')
-    MOTM = (13, 'motm')
-    KAPTAAN = (14, 'kaptaan')
-    POINTS = (15, 'points')
+    MOTM = (12, 'motm')
+    KAPTAAN = (13, 'kaptaan')
+    POINTS = (14, 'points')
 
     def get_offset(self):
         return self.value[0]

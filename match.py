@@ -98,7 +98,7 @@ class Match:
                     name = extract_name(cols[0])
 
                     bowl_dict = {
-                        BowlCols.OVERS.get_name(): safe_int(cols[1]),
+                        BowlCols.OVERS.get_name(): safe_float(cols[1]),
                         BowlCols.MAIDENS.get_name(): safe_int(cols[2]),
                         BowlCols.RUNS_CONCEDED.get_name(): safe_int(cols[3]),
                         BowlCols.WICKETS.get_name(): safe_int(cols[4]),

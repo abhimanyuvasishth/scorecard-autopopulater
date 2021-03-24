@@ -1,3 +1,4 @@
+import csv
 from google_sheet import GoogleSheet
 from match import Match
 import time
@@ -10,37 +11,16 @@ def write_player_row(g, info, game_num):
     g.update_row(player_row, col_start, col_end, [info])
 
 if __name__ == '__main__':
-    game = 1
     g = GoogleSheet()
-    url_ids = [
-        (1210595, 1237181),
-        (1210595, 1237180),
-        (1210595, 1237178),
-        (1210595, 1237177),
-        (1210595, 1216495),
-        (1210595, 1216505),
-        (1210595, 1216530),
-        (1210595, 1216506),
-        (1210595, 1216502),
-        (1210595, 1216535),
-        (1210595, 1216537),
-        (1210595, 1216536),
-        (1210595, 1216499),
-        (1210595, 1216524),
-        (1210595, 1216520),
-        (1210595, 1216541),
-        (1210595, 1216544),
-        (1210595, 1216498),
-        (1210595, 1216497),
-        (1210595, 1216521),
-        (1210595, 1216494),
-    ]
-    start_time = time.time()
-    for series_id, match_id in url_ids:
-        time.sleep(30)
-        print(match_id)
-        match = Match(series_id, match_id)
-        match.convert_to_csv()
-        for player_name in match.players.keys():
-            player_info = match.get_player_info(player_name)
-            write_player_row(g, player_info, game)
+    with open(f'schedule_2020.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            print(row)
+            time.sleep(30)
+            match = Match(row['series_id'], row['match_id'])
+            for player_name in match.players.keys():
+                player_info = match.get_player_info(player_name)
+                team = match.players[player_name]['team']
+                game = row['game_1'] if team == row['team_1'] else row['game_2']
+                assert team in [row['team_1'], row['team_2']]
+                write_player_row(g, player_info, int(game))
