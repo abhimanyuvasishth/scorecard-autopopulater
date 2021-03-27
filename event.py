@@ -35,7 +35,7 @@ class Event:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 print(row)
-                # time.sleep(30)
+                time.sleep(30)
                 match = Match(row['series_id'], row['match_id'])
                 for name in match.players.keys():
                     player_info = match.get_player_info(name)
