@@ -5,7 +5,7 @@ from utils import letter_to_number, number_to_letter
 
 class GoogleSheet:
 
-    def __init__(self):
+    def __init__(self, test):
         scope = [
             'https://www.googleapis.com/auth/drive',
             'https://www.googleapis.com/auth/drive.file'
@@ -14,7 +14,8 @@ class GoogleSheet:
         creds = ServiceAccountCredentials.from_json_keyfile_name(file, scope)
         self.client = gspread.authorize(creds)
         self.doc_name = 'IPL 14 auction'
-        self.sheet_name = 'Test Points Worksheet'
+        test_prefix = 'Test ' if test else ''
+        self.sheet_name = f'{test_prefix}Points Worksheet'
         self.sheet = self.get_sheet()
         self.players = self.get_all_players()
 
