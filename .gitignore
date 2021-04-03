@@ -3,4 +3,4 @@ __pycache__/
 data/
 credentials.json
 .DS_Store
-log.txt
+*log.txt

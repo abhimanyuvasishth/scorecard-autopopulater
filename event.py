@@ -58,7 +58,7 @@ class Event:
     def populate_scores(self):
         cur_time = datetime.now(pytz.timezone('UTC')).replace(tzinfo=None)
         matches_scraped = []
-        with open(f'schedule_2020.csv') as csvfile:
+        with open(f'schedule_2021.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 match_time = datetime.strptime(row['start'], out_date_fmt)
