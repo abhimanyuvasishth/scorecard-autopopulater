@@ -32,7 +32,6 @@ class Squad:
         for i, elem in enumerate(self.content):
             team_url = f'{self.base_url}{elem["href"]}'
             team_name = elem.text.replace('Squad', '').strip()
-            print(team_name, team_url)
             self.extract_players(team_url, team_name)
 
     def extract_players(self, team_url, team_name):

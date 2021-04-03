@@ -1,5 +1,6 @@
 import json
 import csv
+import logging
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -19,13 +20,11 @@ class Match:
         self.players = {}
         if self.content:
             self.teams = self.get_teams()
-            if not self.teams:
-                print('Match has not started yet')
-            self.scrape_page()
-            assert len(self.players.keys()) == 22
+            if self.teams:
+                self.scrape_page()
+                assert len(self.players.keys()) == 22
         else:
-            self.save_html()
-            print(f'{self.series_id}, {self.match_id}: no content to scrape')
+            logging.info(f'{self.series_id}, {self.match_id}: no content')
 
     def get_soup(self):
         page = urlopen(self.match_url)
@@ -146,7 +145,7 @@ class Match:
         try:
             player = self.players[self.name_to_player(fielder_name)]
         except KeyError:
-            print(fielder_name)
+            logging.error(f'Fielder does not exist: {fielder_name}')
             return
         if not player.get('fielding'):
             player['fielding'] = 1

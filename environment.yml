@@ -1,4 +1,4 @@
-name: cricinfo-scorecard-automate
+name: scorecard-autopopulater
 dependencies:
   - python=3.8
   - numpy
