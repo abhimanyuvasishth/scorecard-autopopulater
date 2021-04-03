@@ -29,20 +29,20 @@ class Event:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 if row['name'] not in self.sheet.players:
-                    print(row)
+                    logger.info(row)
                 if row['name'] in players:
-                    print(row)
+                    logger.info(row)
                 players.add(row['name'])
 
         for player in self.sheet.players:
             if player and player not in players:
-                print(player)
+                logger.info(player)
 
     def simulate_last_ipl(self):
         with open(f'schedule_2020.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                print(row)
+                logger.info(row)
                 time.sleep(30)
                 match = Match(row['series_id'], row['match_id'])
                 for name in match.players.keys():
@@ -53,7 +53,7 @@ class Event:
                     try:
                         self.write_player_row(player_info, int(game), name)
                     except ValueError:
-                        print(name)
+                        logging.error(f'Player not in sheet: {name}')
 
     def populate_scores(self):
         cur_time = datetime.now(pytz.timezone('UTC')).replace(tzinfo=None)
