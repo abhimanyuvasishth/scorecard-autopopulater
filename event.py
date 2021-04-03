@@ -18,10 +18,11 @@ class Event:
         self.sheet = GoogleSheet(test)
 
     def write_player_row(self, info, game_num, player_name):
-        player_row = self.sheet.players.index(player_name) + 1
+        player_row = self.sheet.players[player_name]['row']
         col_start = get_game_col(game_num)
         col_end = number_to_letter(letter_to_number(col_start) + len(info) - 1)
-        self.sheet.update_row(player_row, col_start, col_end, [info])
+        if not self.test:
+            self.sheet.update_row(player_row, col_start, col_end, [info])
 
     def check_players_matching(self):
         players = set()
@@ -71,12 +72,16 @@ class Event:
                 for name in match.players.keys():
                     player_info = match.get_player_info(name)
                     team = match.players[name]['team']
+                    abbrev = match.players[name]['abbrev']
                     game = row['game_1'] if team == row['team_1'] else row['game_2']
-                    assert team in [row['team_1'], row['team_2']]
                     try:
+                        assert team in [row['team_1'], row['team_2']]
+                        assert self.sheet.players[name]['abbrev'] == abbrev
                         self.write_player_row(player_info, int(game), name)
-                    except ValueError:
+                    except (ValueError, KeyError):
                         logging.error(f'Player not in sheet: {name}')
+                    except AssertionError:
+                        logging.error(f'Player {name} team mismatch {abbrev}')
 
         if not matches_scraped:
             logger.info('No matches to scrape')

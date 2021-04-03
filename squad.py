@@ -3,7 +3,7 @@ from datetime import datetime
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-from constants import in_date_fmt, out_date_fmt, Teams
+from constants import in_date_fmt, out_date_fmt, Teams, abbrev_lookup
 
 class Squad:
 
@@ -14,7 +14,6 @@ class Squad:
         self.soup = self.get_soup()
         self.content = self.get_content()
         assert len(self.content) == 8
-        self.abbrev_lookup = {k.get_full_name(): k.get_abbrev() for k in Teams}
         self.players = []
         if self.content:
             self.scrape_page()
@@ -38,7 +37,7 @@ class Squad:
         page = urlopen(team_url)
         soup = BeautifulSoup(page, 'html.parser')
         player_soups = soup.find(class_='squads_main').find_all('a')
-        abbrev = self.abbrev_lookup[team_name]
+        abbrev = abbrev_lookup[team_name]
         for player_soup in player_soups:
             name = player_soup.text.strip()
             if not name:

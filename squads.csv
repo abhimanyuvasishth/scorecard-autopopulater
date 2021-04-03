@@ -10,7 +10,6 @@ Faf du Plessis,Chennai Super Kings,CSK
 Ruturaj Gaikwad,Chennai Super Kings,CSK
 Krishnappa Gowtham,Chennai Super Kings,CSK
 C Hari Nishaanth,Chennai Super Kings,CSK
-Josh Hazlewood,Chennai Super Kings,CSK
 Imran Tahir,Chennai Super Kings,CSK
 Ravindra Jadeja,Chennai Super Kings,CSK
 Narayan Jagadeesan,Chennai Super Kings,CSK
@@ -24,7 +23,8 @@ Mitchell Santner,Chennai Super Kings,CSK
 Karn Sharma,Chennai Super Kings,CSK
 Shardul Thakur,Chennai Super Kings,CSK
 Robin Uthappa,Chennai Super Kings,CSK
-Shreyas Iyer,Delhi Capitals,DC
+Josh Hazlewood,Chennai Super Kings,CSK
+Rishabh Pant,Delhi Capitals,DC
 Ravichandran Ashwin,Delhi Capitals,DC
 Avesh Khan,Delhi Capitals,DC
 Sam Billings,Delhi Capitals,DC
@@ -35,7 +35,6 @@ Shimron Hetmyer,Delhi Capitals,DC
 Lukman Meriwala,Delhi Capitals,DC
 Amit Mishra,Delhi Capitals,DC
 Anrich Nortje,Delhi Capitals,DC
-Rishabh Pant,Delhi Capitals,DC
 Axar Patel,Delhi Capitals,DC
 Ripal Patel,Delhi Capitals,DC
 Kagiso Rabada,Delhi Capitals,DC
@@ -49,11 +48,13 @@ Vishnu Vinod,Delhi Capitals,DC
 Chris Woakes,Delhi Capitals,DC
 Lalit Yadav,Delhi Capitals,DC
 Umesh Yadav,Delhi Capitals,DC
+Shreyas Iyer,Delhi Capitals,DC
 Eoin Morgan,Kolkata Knight Riders,KKR
 Vaibhav Arora,Kolkata Knight Riders,KKR
 Pat Cummins,Kolkata Knight Riders,KKR
 Ben Cutting,Kolkata Knight Riders,KKR
 Lockie Ferguson,Kolkata Knight Riders,KKR
+Gurkeerat Singh Mann,Kolkata Knight Riders,KKR
 Harbhajan Singh,Kolkata Knight Riders,KKR
 Venkatesh Iyer,Kolkata Knight Riders,KKR
 Sheldon Jackson,Kolkata Knight Riders,KKR
@@ -71,9 +72,9 @@ Tim Seifert,Kolkata Knight Riders,KKR
 Shakib Al Hasan,Kolkata Knight Riders,KKR
 Shivam Mavi,Kolkata Knight Riders,KKR
 Shubman Gill,Kolkata Knight Riders,KKR
-Rinku Singh,Kolkata Knight Riders,KKR
 Rahul Tripathi,Kolkata Knight Riders,KKR
 Varun Chakravarthy,Kolkata Knight Riders,KKR
+Rinku Singh,Kolkata Knight Riders,KKR
 Rohit Sharma,Mumbai Indians,MI
 Anmolpreet Singh,Mumbai Indians,MI
 Trent Boult,Mumbai Indians,MI
@@ -183,16 +184,17 @@ Jason Holder,Sunrisers Hyderabad,SRH
 Kedar Jadhav,Sunrisers Hyderabad,SRH
 Siddarth Kaul,Sunrisers Hyderabad,SRH
 Bhuvneshwar Kumar,Sunrisers Hyderabad,SRH
-Mitchell Marsh,Sunrisers Hyderabad,SRH
 Mohammad Nabi,Sunrisers Hyderabad,SRH
 Mujeeb Ur Rahman,Sunrisers Hyderabad,SRH
 Shahbaz Nadeem,Sunrisers Hyderabad,SRH
 T Natarajan,Sunrisers Hyderabad,SRH
 Manish Pandey,Sunrisers Hyderabad,SRH
 Rashid Khan,Sunrisers Hyderabad,SRH
+Jason Roy,Sunrisers Hyderabad,SRH
 Wriddhiman Saha,Sunrisers Hyderabad,SRH
 Sandeep Sharma,Sunrisers Hyderabad,SRH
 Vijay Shankar,Sunrisers Hyderabad,SRH
 Jagadeesha Suchith,Sunrisers Hyderabad,SRH
 Virat Singh,Sunrisers Hyderabad,SRH
 Kane Williamson,Sunrisers Hyderabad,SRH
+Mitchell Marsh,Sunrisers Hyderabad,SRH

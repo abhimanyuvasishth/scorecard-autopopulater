@@ -5,7 +5,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import pandas as pd
 
-from constants import BatCols, BowlCols, FieldCols
+from constants import BatCols, BowlCols, FieldCols, abbrev_lookup
 from utils import extract_name, extract_fielder_name, safe_int, safe_float
 
 class Match:
@@ -78,7 +78,8 @@ class Match:
                     if not self.players.get(name):
                         self.players[name] = {
                             'name': name,
-                            'team': self.teams[i]
+                            'team': self.teams[i],
+                            'abbrev': abbrev_lookup[self.teams[i]]
                         }
 
                     self.players[name].update(bat_dict)
@@ -122,7 +123,8 @@ class Match:
         for name in players:
             self.players[name] = {
                 'name': name,
-                'team': self.teams[innings]
+                'team': self.teams[innings],
+                'abbrev': abbrev_lookup[self.teams[innings]]
             }
 
     def name_to_player(self, fielder):
@@ -206,7 +208,7 @@ class Match:
         ]
 
     def convert_to_csv(self):
-        general_cols = ['name', 'team']
+        general_cols = ['name', 'team', 'abbrev']
         bat_cols = [col.get_name() for col in BatCols]
         bowl_cols = [col.get_name() for col in BowlCols]
         field_cols = [col.get_name() for col in FieldCols]

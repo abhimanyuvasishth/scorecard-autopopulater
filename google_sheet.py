@@ -5,7 +5,7 @@ from utils import letter_to_number, number_to_letter
 
 class GoogleSheet:
 
-    def __init__(self, test):
+    def __init__(self):
         scope = [
             'https://www.googleapis.com/auth/drive',
             'https://www.googleapis.com/auth/drive.file'
@@ -14,8 +14,7 @@ class GoogleSheet:
         creds = ServiceAccountCredentials.from_json_keyfile_name(file, scope)
         self.client = gspread.authorize(creds)
         self.doc_name = 'IPL 14 auction'
-        test_prefix = 'Test ' if test else ''
-        self.sheet_name = f'{test_prefix}Points Worksheet'
+        self.sheet_name = 'Points Worksheet'
         self.sheet = self.get_sheet()
         self.players = self.get_all_players()
 
@@ -23,7 +22,14 @@ class GoogleSheet:
         return self.client.open(self.doc_name).worksheet(self.sheet_name)
 
     def get_all_players(self):
-        return self.sheet.col_values(1)
+        players = {}
+        names = self.sheet.col_values(1)
+        abbrevs = self.sheet.col_values(2)
+        for i in range(len(names)):
+            name, abbrev, row = names[i], abbrevs[i], i + 1
+            if name:
+                players[name] = {'name': names, 'abbrev': abbrev, 'row': row}
+        return players
 
     def get_cell_value(self, row, col_str):
         col_num = letter_to_number(col_str)

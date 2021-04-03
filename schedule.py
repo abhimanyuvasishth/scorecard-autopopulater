@@ -3,7 +3,7 @@ from datetime import datetime
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-from constants import in_date_fmt, out_date_fmt, Teams
+from constants import in_date_fmt, out_date_fmt, Teams, abbrev_lookup
 
 class Schedule:
 
@@ -14,7 +14,6 @@ class Schedule:
         self.full_url = f'{self.series_url}/match-schedule-fixtures'
         self.soup = self.get_soup()
         self.content = self.get_content()
-        self.abbrev_lookup = {k.get_full_name(): k.get_abbrev() for k in Teams}
         self.team_counts = {}
         self.matches = []
         if self.content:
@@ -39,10 +38,10 @@ class Schedule:
             self.matches.append({
                 'match_num': i + 1,
                 'team_1': team_1,
-                'abbrev_1': self.abbrev_lookup[team_1],
+                'abbrev_1': abbrev_lookup[team_1],
                 'game_1': self.get_and_update_game_count(team_1),
                 'team_2': team_2,
-                'abbrev_2': self.abbrev_lookup[team_2],
+                'abbrev_2': abbrev_lookup[team_2],
                 'game_2': self.get_and_update_game_count(team_2),
                 'start': self.extract_start(elem),
                 'series_id': self.series_id,
