@@ -25,3 +25,7 @@ def test_extract_dismissal():
     assert Match.extract_caught_or_stumped('c †Dickwella b Chameera') == 'Dickwella'
     assert Match.extract_caught_or_stumped('c de Silva b Lakmal') == 'de Silva'
     assert Match.extract_run_out('run out (Shankar)') == 'Shankar'
+
+def test_extract_sub():
+    assert Match.extract_run_out('run out (sub (Shankar)/Dube)') == 'Shankar'
+    assert extract_fielder_name('sub (du Plessis)') == 'du Plessis'

@@ -15,7 +15,8 @@ logger = logging.getLogger(__name__)
 
 class Event:
     def __init__(self, test=True):
-        self.sheet = GoogleSheet(test)
+        self.sheet = GoogleSheet()
+        self.test = test
 
     def write_player_row(self, info, game_num, player_name):
         player_row = self.sheet.players[player_name]['row']

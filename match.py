@@ -18,11 +18,13 @@ class Match:
         self.soup = self.get_soup()
         self.content = self.get_content()
         self.players = {}
+        self.innings = 0
         if self.content:
             self.teams = self.get_teams()
+            self.squads = self.get_squads()
             if self.teams:
                 self.scrape_page()
-                assert len(self.players.keys()) == 22
+                assert len(self.players.keys()) >= 22
         else:
             logging.info(f'{self.series_id}, {self.match_id}: no content')
 
@@ -48,6 +50,19 @@ class Match:
             teams.append(header.split('INNINGS')[0].strip().title())
         return teams
 
+    def get_squads(self):
+        squads = [[], []]
+        with open(f'squads.csv') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if row['team'] == self.teams[0]:
+                    squads[0].append(row['name'])
+                elif row['team'] == self.teams[1]:
+                    squads[1].append(row['name'])
+                else:
+                    continue
+        return squads
+
     def scrape_page(self):
         self.extract_batting_stats()
         self.extract_bowling_stats()
@@ -55,6 +70,7 @@ class Match:
 
     def extract_batting_stats(self):
         for i in range(2):
+            self.innings = i
             table = self.content[i].find(class_='table batsman')
             rows = table.find_all('tr')
             for row in rows:
@@ -63,7 +79,7 @@ class Match:
                     cols = [x.text.strip() for x in cols]
                     name = extract_name(cols[0])
                     if name.startswith('Did not bat') or name.startswith('Yet to bat'):
-                        self.extract_did_not_bat(name, i)
+                        self.extract_did_not_bat(name)
 
                     bat_dict = {
                         BatCols.DISMISSAL.get_name(): cols[1],
@@ -88,6 +104,7 @@ class Match:
 
     def extract_bowling_stats(self):
         for i in range(2):
+            self.innings = i
             table = self.content[i].find(class_='table bowler')
             rows = table.find_all('tr')
 
@@ -118,17 +135,17 @@ class Match:
                 except IndexError as e:
                     continue
 
-    def extract_did_not_bat(self, dnb_string, innings):
+    def extract_did_not_bat(self, dnb_string):
         players = [p.strip() for p in dnb_string.split(':')[1].split(',')]
         for name in players:
             self.players[name] = {
                 'name': name,
-                'team': self.teams[innings],
-                'abbrev': abbrev_lookup[self.teams[innings]]
+                'team': self.teams[self.innings],
+                'abbrev': abbrev_lookup[self.teams[self.innings]]
             }
 
     def name_to_player(self, fielder):
-        for name in self.players.keys():
+        for name in list(self.players.keys()) + self.squads[not self.innings]:
             if fielder == name:
                 return name
             else:
@@ -144,11 +161,21 @@ class Match:
         return None
 
     def update_fielding(self, fielder_name):
+        player_name = self.name_to_player(fielder_name)
         try:
-            player = self.players[self.name_to_player(fielder_name)]
+            player = self.players[player_name]
         except KeyError:
-            logging.error(f'Fielder does not exist: {fielder_name}')
-            return
+            if player_name not in self.squads[not self.innings]:
+                logging.error(f'Fielder does not exist: {fielder_name}')
+                return
+            else:
+                player = {
+                    'name': player_name,
+                    'team': self.teams[not self.innings],
+                    'abbrev': abbrev_lookup[self.teams[not self.innings]]
+                }
+                self.players[player_name] = player
+                logging.info(f'Sub fielder added {player_name}')
         if not player.get('fielding'):
             player['fielding'] = 1
         else:
@@ -176,7 +203,9 @@ class Match:
             return fielders.split('/')[0]
 
     def extract_fielding_stats(self):
-        for name, player_info in self.players.items():
+        player_items = list(self.players.items()).copy()
+        for name, player_info in player_items:
+            self.innings = self.teams.index(player_info['team'])
             fielder_name = ''
             dismissal = player_info.get(BatCols.DISMISSAL.get_name())
             try:

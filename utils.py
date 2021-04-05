@@ -40,6 +40,7 @@ def get_game_col(game_number):
     return number_to_letter(col)
 
 def extract_fielder_name(name):
+    name = name.replace('sub', '').strip()
     for char in '[]()':
         name = name.replace(char, '')
     return extract_name(name)
