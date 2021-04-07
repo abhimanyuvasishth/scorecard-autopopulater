@@ -67,6 +67,7 @@ class Match:
         self.extract_batting_stats()
         self.extract_bowling_stats()
         self.extract_fielding_stats()
+        self.extract_player_of_the_match()
 
     def extract_batting_stats(self):
         for i in range(2):
@@ -220,6 +221,17 @@ class Match:
             finally:
                 if fielder_name:
                     self.update_fielding(fielder_name)
+
+    def extract_player_of_the_match(self):
+        try:
+            class_name = 'best-player-name'
+            potm = self.soup.find(class_=class_name, recursive=True).text
+            self.players[potm]['potm'] = 1
+            logging.info(f'Player of the match: {potm}')
+        except AttributeError:
+            logging.info('No potm found')
+        except KeyError:
+            logging.error(f'Potm does not exist: {potm}')
 
     def get_player_info(self, player_name):
         player = self.players[player_name]

@@ -61,7 +61,7 @@ class SheetOffsetCols(Enum):
     FIELDING = (9, 'fielding')
     BATTING_POINTS = (10, 'batting_points')
     BOWLING_POINTS = (11, 'bowling_points')
-    MOTM = (12, 'motm')
+    POTM = (12, 'potm')
     KAPTAAN = (13, 'kaptaan')
     POINTS = (14, 'points')
 

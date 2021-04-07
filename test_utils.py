@@ -1,11 +1,11 @@
 from match import Match
-from utils import letter_to_number, number_to_letter, safe_int, safe_float, \
+from utils import str_2_num, num_2_str, safe_int, safe_float, \
     get_letters, extract_fielder_name, extract_name
 
 def test_column_number_conversion():
-    assert number_to_letter(letter_to_number('A')) == 'A'
-    assert number_to_letter(letter_to_number('IG')) == 'IG'
-    assert number_to_letter(letter_to_number('JF')) == 'JF'
+    assert num_2_str(str_2_num('A')) == 'A'
+    assert num_2_str(str_2_num('IG')) == 'IG'
+    assert num_2_str(str_2_num('JF')) == 'JF'
 
 def test_basic_utils():
     assert safe_int('2') == 2

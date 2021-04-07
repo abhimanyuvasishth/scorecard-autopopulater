@@ -15,7 +15,7 @@ def safe_float(val):
 def get_letters():
     return [l for l in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ']
 
-def number_to_letter(number):
+def num_2_str(number):
     letters = get_letters()
     result = ""
     base = len(letters)
@@ -27,7 +27,7 @@ def number_to_letter(number):
 
     return result
 
-def letter_to_number(column):
+def str_2_num(column):
     letters = get_letters()
     number = 0
     for i, char in enumerate(reversed(column)):
@@ -35,9 +35,9 @@ def letter_to_number(column):
     return number
 
 def get_game_col(game_number):
-    game1_col_num = letter_to_number(game1_col)
+    game1_col_num = str_2_num(game1_col)
     col = game1_col_num + (game_number - 1) * len([v for v in SheetOffsetCols])
-    return number_to_letter(col)
+    return num_2_str(col)
 
 def extract_fielder_name(name):
     name = name.replace('sub', '').strip()

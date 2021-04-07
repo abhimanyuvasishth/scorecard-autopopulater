@@ -1,7 +1,7 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-from utils import letter_to_number, number_to_letter
+from utils import str_2_num, num_2_str
 
 class GoogleSheet:
 
@@ -28,15 +28,15 @@ class GoogleSheet:
         for i in range(len(names)):
             name, abbrev, row = names[i], abbrevs[i], i + 1
             if name:
-                players[name] = {'name': names, 'abbrev': abbrev, 'row': row}
+                players[name] = {'name': name, 'abbrev': abbrev, 'row': row}
         return players
 
     def get_cell_value(self, row, col_str):
-        col_num = letter_to_number(col_str)
+        col_num = str_2_num(col_str)
         return self.sheet.cell(row, col_num).value
 
     def write_cell_value(self, row, col_str, value):
-        col_num = letter_to_number(col_str)
+        col_num = str_2_num(col_str)
         self.sheet.update_cell(row, col_num, value)
 
     def update_row(self, row, start_str, end_str, values):

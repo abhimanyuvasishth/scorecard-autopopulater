@@ -5,8 +5,8 @@ import pytz
 from google_sheet import GoogleSheet
 from match import Match
 import time
-from constants import in_date_fmt, out_date_fmt
-from utils import get_game_col, letter_to_number, number_to_letter
+from constants import in_date_fmt, out_date_fmt, SheetOffsetCols
+from utils import get_game_col, str_2_num, num_2_str
 
 logging_fmt = '%(asctime)s %(levelname)s %(message)s'
 logging.basicConfig(format=logging_fmt, level=logging.INFO, filename='log.txt')
@@ -18,12 +18,16 @@ class Event:
         self.sheet = GoogleSheet()
         self.test = test
 
-    def write_player_row(self, info, game_num, player_name):
-        player_row = self.sheet.players[player_name]['row']
+    def write_player_row(self, info, game_num, player):
+        player_row = self.sheet.players[player['name']]['row']
         col_start = get_game_col(game_num)
-        col_end = number_to_letter(letter_to_number(col_start) + len(info) - 1)
+        col_end = num_2_str(str_2_num(col_start) + len(info) - 1)
+        potm_offset = SheetOffsetCols.POTM.get_offset()
+        potm_col = num_2_str(str_2_num(col_start) + (potm_offset))
         if not self.test:
             self.sheet.update_row(player_row, col_start, col_end, [info])
+            if player.get('potm'):
+                self.sheet.write_cell_value(player_row, potm_col, 1)
 
     def check_players_matching(self):
         players = set()
@@ -48,12 +52,13 @@ class Event:
                 time.sleep(30)
                 match = Match(row['series_id'], row['match_id'])
                 for name in match.players.keys():
-                    player_info = match.get_player_info(name)
-                    team = match.players[name]['team']
+                    info = match.get_info(name)
+                    player = match.players[name]
+                    team = player['team']
                     game = row['game_1'] if team == row['team_1'] else row['game_2']
                     assert team in [row['team_1'], row['team_2']]
                     try:
-                        self.write_player_row(player_info, int(game), name)
+                        self.write_player_row(info, int(game), player)
                     except ValueError:
                         logging.error(f'Player not in sheet: {name}')
 
@@ -71,14 +76,15 @@ class Event:
                 match = Match(row['series_id'], row['match_id'])
                 matches_scraped.append(match)
                 for name in match.players.keys():
-                    player_info = match.get_player_info(name)
-                    team = match.players[name]['team']
-                    abbrev = match.players[name]['abbrev']
+                    info = match.get_player_info(name)
+                    player = match.players[name]
+                    team = player['team']
+                    abbrev = player['abbrev']
                     game = row['game_1'] if team == row['team_1'] else row['game_2']
                     try:
                         assert team in [row['team_1'], row['team_2']]
                         assert self.sheet.players[name]['abbrev'] == abbrev
-                        self.write_player_row(player_info, int(game), name)
+                        self.write_player_row(info, int(game), player)
                     except (ValueError, KeyError):
                         logging.error(f'Player not in sheet: {name}')
                     except AssertionError:
