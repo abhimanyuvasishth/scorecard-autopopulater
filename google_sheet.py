@@ -35,6 +35,9 @@ class GoogleSheet:
         col_num = str_2_num(col_str)
         return self.sheet.cell(row, col_num).value
 
+    def get_cell_values(self, start_row, start_str, end_row, end_str):
+        return self.sheet.get(f'{start_str}{start_row}:{end_str}{end_row}')
+
     def write_cell_value(self, row, col_str, value):
         col_num = str_2_num(col_str)
         self.sheet.update_cell(row, col_num, value)
