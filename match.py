@@ -24,7 +24,7 @@ class Match:
             self.squads = self.get_squads()
             if self.teams:
                 self.scrape_page()
-                assert len(self.players.keys()) >= 22
+                assert len(self.players.keys()) >= 11
         else:
             logging.info(f'{self.series_id}, {self.match_id}: no content')
 
@@ -46,8 +46,13 @@ class Match:
         if not containers:
             return teams
         for container in containers:
-            header = container.find(class_='header-title label').text
-            teams.append(header.split('INNINGS')[0].strip().title())
+            if not container:
+                continue
+            for header in container.find_all(class_='header-title label'):
+                team_text = header.text
+                team_text = header.text.split('INNINGS')[0].strip().title()
+                team_text = team_text.split('Team')[0].strip()
+                teams.append(team_text)
         return teams
 
     def get_squads(self):
@@ -73,6 +78,8 @@ class Match:
         for i in range(2):
             self.innings = i
             table = self.content[i].find(class_='table batsman')
+            if not table:
+                continue
             rows = table.find_all('tr')
             for row in rows:
                 try:
@@ -107,6 +114,8 @@ class Match:
         for i in range(2):
             self.innings = i
             table = self.content[i].find(class_='table bowler')
+            if not table:
+                continue
             rows = table.find_all('tr')
 
             for row in rows:
@@ -129,7 +138,11 @@ class Match:
                     }
 
                     if not self.players.get(name):
-                        self.players[name] = {'name': name}
+                        self.players[name] = {
+                            'name': name,
+                            'team': self.teams[not i],
+                            'abbrev': abbrev_lookup[self.teams[not i]],
+                        }
 
                     self.players[name].update(bowl_dict)
 
@@ -176,7 +189,7 @@ class Match:
                     'abbrev': abbrev_lookup[self.teams[not self.innings]]
                 }
                 self.players[player_name] = player
-                logging.info(f'Sub fielder added {player_name}')
+                logging.info(f'Sub/Live fielder added {player_name}')
         if not player.get('fielding'):
             player['fielding'] = 1
         else:

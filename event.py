@@ -6,7 +6,7 @@ from google_sheet import GoogleSheet
 from match import Match
 import time
 from constants import in_date_fmt, out_date_fmt, SheetOffsetCols
-from utils import get_game_col, str_2_num, num_2_str
+from utils import get_game_col, str_2_num, num_2_str, compare_info
 
 logging_fmt = '%(asctime)s %(levelname)s %(message)s'
 logging.basicConfig(format=logging_fmt, level=logging.INFO, filename='log.txt')
@@ -24,9 +24,12 @@ class Event:
         col_end = num_2_str(str_2_num(col_start) + len(info) - 1)
         potm_offset = SheetOffsetCols.POTM.get_offset()
         potm_col = num_2_str(str_2_num(col_start) + (potm_offset))
-        cur_info = self.sheet.get_cell_values(row, col_start, row, col_end)[0]
 
-        if self.test or cur_info in info:
+        if self.test:
+            return
+
+        cur_info = self.sheet.get_cell_values(row, col_start, row, col_end)
+        if compare_info(info, cur_info):
             return
 
         self.sheet.update_row(row, col_start, col_end, [info])
@@ -99,4 +102,4 @@ class Event:
 
 
 if __name__ == '__main__':
-    Event(test=True).populate_scores()
+    Event(test=False).populate_scores()

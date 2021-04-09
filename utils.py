@@ -1,4 +1,5 @@
 from constants import game1_col, SheetOffsetCols
+import itertools
 
 def safe_int(val):
     try:
@@ -48,3 +49,13 @@ def extract_fielder_name(name):
 def extract_name(name):
     new_name = name.replace(u'\xa0',' ').replace('†', '').replace('(c)', '')
     return new_name.strip()
+
+def flatten_list(list_elem):
+    try:
+        return list(itertools.chain(*list_elem))
+    except TypeError:
+        return list_elem
+
+def compare_info(first, second):
+    first, second = flatten_list(first), flatten_list(second)
+    return [float(num) for num in first] == [float(num) for num in second]
