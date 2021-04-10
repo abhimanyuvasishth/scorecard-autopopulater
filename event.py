@@ -28,13 +28,16 @@ class Event:
         if self.test:
             return
 
+        potm = player.get('potm')
+        cur_potm = self.sheet.get_cell_value(row, potm_col)
         cur_info = self.sheet.get_cell_values(row, col_start, row, col_end)
-        if compare_info(info, cur_info):
+
+        if compare_info(info, cur_info) and str(potm) == str(cur_potm):
             return
 
         self.sheet.update_row(row, col_start, col_end, [info])
-        if player.get('potm'):
-            self.sheet.write_cell_value(row, potm_col, 1)
+        if potm:
+            self.sheet.write_cell_value(row, potm_col, potm)
 
     def check_players_matching(self):
         players = set()
