@@ -237,7 +237,7 @@ class Match:
 
     def extract_player_of_the_match(self):
         try:
-            class_name = 'best-player-name'
+            class_name = 'playerofthematch-name'
             potm = self.soup.find(class_=class_name, recursive=True).text
             self.players[potm]['potm'] = 1
             logging.info(f'Player of the match: {potm}')
