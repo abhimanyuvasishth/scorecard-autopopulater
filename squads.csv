@@ -2,6 +2,7 @@ name,team,abbrev
 MS Dhoni,Chennai Super Kings,CSK
 Moeen Ali,Chennai Super Kings,CSK
 KM Asif,Chennai Super Kings,CSK
+Jason Behrendorff,Chennai Super Kings,CSK
 Bhagath Varma,Chennai Super Kings,CSK
 Dwayne Bravo,Chennai Super Kings,CSK
 Deepak Chahar,Chennai Super Kings,CSK
@@ -9,7 +10,8 @@ Sam Curran,Chennai Super Kings,CSK
 Faf du Plessis,Chennai Super Kings,CSK
 Ruturaj Gaikwad,Chennai Super Kings,CSK
 Krishnappa Gowtham,Chennai Super Kings,CSK
-C Hari Nishaanth,Chennai Super Kings,CSK
+Hari Nishaanth,Chennai Super Kings,CSK
+Josh Hazlewood,Chennai Super Kings,CSK
 Imran Tahir,Chennai Super Kings,CSK
 Ravindra Jadeja,Chennai Super Kings,CSK
 Narayan Jagadeesan,Chennai Super Kings,CSK
@@ -23,7 +25,6 @@ Mitchell Santner,Chennai Super Kings,CSK
 Karn Sharma,Chennai Super Kings,CSK
 Shardul Thakur,Chennai Super Kings,CSK
 Robin Uthappa,Chennai Super Kings,CSK
-Josh Hazlewood,Chennai Super Kings,CSK
 Rishabh Pant,Delhi Capitals,DC
 Ravichandran Ashwin,Delhi Capitals,DC
 Avesh Khan,Delhi Capitals,DC
@@ -31,7 +32,11 @@ Sam Billings,Delhi Capitals,DC
 Tom Curran,Delhi Capitals,DC
 Shikhar Dhawan,Delhi Capitals,DC
 Praveen Dubey,Delhi Capitals,DC
+Ben Dwarshuis,Delhi Capitals,DC
 Shimron Hetmyer,Delhi Capitals,DC
+Shreyas Iyer,Delhi Capitals,DC
+Kulwant Khejroliya,Delhi Capitals,DC
+Lalit Yadav,Delhi Capitals,DC
 Lukman Meriwala,Delhi Capitals,DC
 Amit Mishra,Delhi Capitals,DC
 Anrich Nortje,Delhi Capitals,DC
@@ -41,17 +46,16 @@ Kagiso Rabada,Delhi Capitals,DC
 Ajinkya Rahane,Delhi Capitals,DC
 Ishant Sharma,Delhi Capitals,DC
 Prithvi Shaw,Delhi Capitals,DC
-Manimaran Siddharth,Delhi Capitals,DC
 Steven Smith,Delhi Capitals,DC
 Marcus Stoinis,Delhi Capitals,DC
 Vishnu Vinod,Delhi Capitals,DC
-Chris Woakes,Delhi Capitals,DC
-Lalit Yadav,Delhi Capitals,DC
 Umesh Yadav,Delhi Capitals,DC
-Shreyas Iyer,Delhi Capitals,DC
+Aniruddha Joshi,Delhi Capitals,DC
+Shams Mulani,Delhi Capitals,DC
+Manimaran Siddharth,Delhi Capitals,DC
+Chris Woakes,Delhi Capitals,DC
 Eoin Morgan,Kolkata Knight Riders,KKR
 Vaibhav Arora,Kolkata Knight Riders,KKR
-Pat Cummins,Kolkata Knight Riders,KKR
 Ben Cutting,Kolkata Knight Riders,KKR
 Lockie Ferguson,Kolkata Knight Riders,KKR
 Gurkeerat Singh Mann,Kolkata Knight Riders,KKR
@@ -72,8 +76,10 @@ Tim Seifert,Kolkata Knight Riders,KKR
 Shakib Al Hasan,Kolkata Knight Riders,KKR
 Shivam Mavi,Kolkata Knight Riders,KKR
 Shubman Gill,Kolkata Knight Riders,KKR
+Tim Southee,Kolkata Knight Riders,KKR
 Rahul Tripathi,Kolkata Knight Riders,KKR
 Varun Chakravarthy,Kolkata Knight Riders,KKR
+Pat Cummins,Kolkata Knight Riders,KKR
 Rinku Singh,Kolkata Knight Riders,KKR
 Rohit Sharma,Mumbai Indians,MI
 Anmolpreet Singh,Mumbai Indians,MI
@@ -85,10 +91,10 @@ Nathan Coulter-Nile,Mumbai Indians,MI
 Quinton de Kock,Mumbai Indians,MI
 Ishan Kishan,Mumbai Indians,MI
 Marco Jansen,Mumbai Indians,MI
+Roosh Kalaria,Mumbai Indians,MI
 Dhawal Kulkarni,Mumbai Indians,MI
 Chris Lynn,Mumbai Indians,MI
 Adam Milne,Mumbai Indians,MI
-Mohsin Khan,Mumbai Indians,MI
 James Neesham,Mumbai Indians,MI
 Hardik Pandya,Mumbai Indians,MI
 Krunal Pandya,Mumbai Indians,MI
@@ -100,40 +106,44 @@ Saurabh Tiwary,Mumbai Indians,MI
 Jayant Yadav,Mumbai Indians,MI
 Suryakumar Yadav,Mumbai Indians,MI
 Yudhvir Singh,Mumbai Indians,MI
+Mohsin Khan,Mumbai Indians,MI
 KL Rahul,Punjab Kings,KXIP
 Mayank Agarwal,Punjab Kings,KXIP
 Fabian Allen,Punjab Kings,KXIP
 Arshdeep Singh,Punjab Kings,KXIP
 Murugan Ashwin,Punjab Kings,KXIP
+Nathan Ellis,Punjab Kings,KXIP
 Chris Gayle,Punjab Kings,KXIP
 Harpreet Brar,Punjab Kings,KXIP
 Moises Henriques,Punjab Kings,KXIP
 Deepak Hooda,Punjab Kings,KXIP
+Jalaj Saxena,Punjab Kings,KXIP
 Chris Jordan,Punjab Kings,KXIP
 Sarfaraz Khan,Punjab Kings,KXIP
-Dawid Malan,Punjab Kings,KXIP
 Mandeep Singh,Punjab Kings,KXIP
-Riley Meredith,Punjab Kings,KXIP
+Aiden Markram,Punjab Kings,KXIP
 Mohammed Shami,Punjab Kings,KXIP
 Darshan Nalkande,Punjab Kings,KXIP
 Nicholas Pooran,Punjab Kings,KXIP
 Ishan Porel,Punjab Kings,KXIP
 Prabhsimran Singh,Punjab Kings,KXIP
+Adil Rashid,Punjab Kings,KXIP
 Ravi Bishnoi,Punjab Kings,KXIP
-Jhye Richardson,Punjab Kings,KXIP
 Saurabh Kumar,Punjab Kings,KXIP
-Jalaj Saxena,Punjab Kings,KXIP
 Shahrukh Khan,Punjab Kings,KXIP
 Utkarsh Singh,Punjab Kings,KXIP
+Dawid Malan,Punjab Kings,KXIP
+Riley Meredith,Punjab Kings,KXIP
+Jhye Richardson,Punjab Kings,KXIP
+Sanju Samson,Rajasthan Royals,RR
 Akash Singh,Rajasthan Royals,RR
 Anuj Rawat,Rajasthan Royals,RR
-Jofra Archer,Rajasthan Royals,RR
-Jos Buttler,Rajasthan Royals,RR
 KC Cariappa,Rajasthan Royals,RR
 Shivam Dube,Rajasthan Royals,RR
 Shreyas Gopal,Rajasthan Royals,RR
 Yashasvi Jaiswal,Rajasthan Royals,RR
 Kartik Tyagi,Rajasthan Royals,RR
+Evin Lewis,Rajasthan Royals,RR
 Liam Livingstone,Rajasthan Royals,RR
 Mahipal Lomror,Rajasthan Royals,RR
 Mayank Markande,Rajasthan Royals,RR
@@ -141,21 +151,30 @@ David Miller,Rajasthan Royals,RR
 Chris Morris,Rajasthan Royals,RR
 Mustafizur Rahman,Rajasthan Royals,RR
 Riyan Parag,Rajasthan Royals,RR
+Glenn Phillips,Rajasthan Royals,RR
 Chetan Sakariya,Rajasthan Royals,RR
-Sanju Samson,Rajasthan Royals,RR
-Ben Stokes,Rajasthan Royals,RR
+Tabraiz Shamsi,Rajasthan Royals,RR
 Rahul Tewatia,Rajasthan Royals,RR
-Andrew Tye,Rajasthan Royals,RR
+Oshane Thomas,Rajasthan Royals,RR
 Jaydev Unadkat,Rajasthan Royals,RR
 Manan Vohra,Rajasthan Royals,RR
 Kuldip Yadav,Rajasthan Royals,RR
+Jofra Archer,Rajasthan Royals,RR
+Jos Buttler,Rajasthan Royals,RR
+Gerald Coetzee,Rajasthan Royals,RR
+Ben Stokes,Rajasthan Royals,RR
+Andrew Tye,Rajasthan Royals,RR
 Virat Kohli,Royal Challengers Bangalore,RCB
-Finn Allen,Royal Challengers Bangalore,RCB
+Akash Deep,Royal Challengers Bangalore,RCB
 Srikar Bharat,Royal Challengers Bangalore,RCB
 Yuzvendra Chahal,Royal Challengers Bangalore,RCB
+Dushmantha Chameera,Royal Challengers Bangalore,RCB
 Dan Christian,Royal Challengers Bangalore,RCB
-Pavan Deshpande,Royal Challengers Bangalore,RCB
+Tim David,Royal Challengers Bangalore,RCB
+Wanindu Hasaranga de Silva,Royal Challengers Bangalore,RCB
 AB de Villiers,Royal Challengers Bangalore,RCB
+Pavan Deshpande,Royal Challengers Bangalore,RCB
+George Garton,Royal Challengers Bangalore,RCB
 Kyle Jamieson,Royal Challengers Bangalore,RCB
 Glenn Maxwell,Royal Challengers Bangalore,RCB
 Mohammed Azharuddeen,Royal Challengers Bangalore,RCB
@@ -164,19 +183,20 @@ Devdutt Padikkal,Royal Challengers Bangalore,RCB
 Harshal Patel,Royal Challengers Bangalore,RCB
 Rajat Patidar,Royal Challengers Bangalore,RCB
 Suyash Prabhudessai,Royal Challengers Bangalore,RCB
-Kane Richardson,Royal Challengers Bangalore,RCB
 Sachin Baby,Royal Challengers Bangalore,RCB
-Shahbaz Ahmed,Royal Challengers Bangalore,RCB
 Navdeep Saini,Royal Challengers Bangalore,RCB
+Shahbaz Ahmed,Royal Challengers Bangalore,RCB
+Finn Allen,Royal Challengers Bangalore,RCB
+Scott Kuggeleijn,Royal Challengers Bangalore,RCB
+Josh Philippe,Royal Challengers Bangalore,RCB
+Kane Richardson,Royal Challengers Bangalore,RCB
 Daniel Sams,Royal Challengers Bangalore,RCB
 Washington Sundar,Royal Challengers Bangalore,RCB
 Adam Zampa,Royal Challengers Bangalore,RCB
-Josh Philippe,Royal Challengers Bangalore,RCB
-David Warner,Sunrisers Hyderabad,SRH
+Kane Williamson,Sunrisers Hyderabad,SRH
 Abdul Samad,Sunrisers Hyderabad,SRH
 Abhishek Sharma,Sunrisers Hyderabad,SRH
 Khaleel Ahmed,Sunrisers Hyderabad,SRH
-Jonny Bairstow,Sunrisers Hyderabad,SRH
 Basil Thampi,Sunrisers Hyderabad,SRH
 Priyam Garg,Sunrisers Hyderabad,SRH
 Shreevats Goswami,Sunrisers Hyderabad,SRH
@@ -191,10 +211,12 @@ T Natarajan,Sunrisers Hyderabad,SRH
 Manish Pandey,Sunrisers Hyderabad,SRH
 Rashid Khan,Sunrisers Hyderabad,SRH
 Jason Roy,Sunrisers Hyderabad,SRH
+Sherfane Rutherford,Sunrisers Hyderabad,SRH
 Wriddhiman Saha,Sunrisers Hyderabad,SRH
 Sandeep Sharma,Sunrisers Hyderabad,SRH
 Vijay Shankar,Sunrisers Hyderabad,SRH
 Jagadeesha Suchith,Sunrisers Hyderabad,SRH
 Virat Singh,Sunrisers Hyderabad,SRH
-Kane Williamson,Sunrisers Hyderabad,SRH
+David Warner,Sunrisers Hyderabad,SRH
+Jonny Bairstow,Sunrisers Hyderabad,SRH
 Mitchell Marsh,Sunrisers Hyderabad,SRH

@@ -105,4 +105,4 @@ class Event:
 
 
 if __name__ == '__main__':
-    Event(test=False).populate_scores()
+    Event(test=True).populate_scores()

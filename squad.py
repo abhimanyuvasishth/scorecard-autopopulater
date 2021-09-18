@@ -24,8 +24,11 @@ class Squad:
         return BeautifulSoup(page, 'html.parser')
 
     def get_content(self):
-        class_name = 'squads_list'
-        return self.soup.find(class_=class_name, recursive=True).find_all('a')
+        class_name = 'squad-row'
+        elems = []
+        for elem in self.soup.find_all(class_=class_name):
+            elems.append(elem.find_all('a')[0])
+        return elems
 
     def scrape_page(self):
         for i, elem in enumerate(self.content):
@@ -36,12 +39,10 @@ class Squad:
     def extract_players(self, team_url, team_name):
         page = urlopen(team_url)
         soup = BeautifulSoup(page, 'html.parser')
-        player_soups = soup.find(class_='squads_main').find_all('a')
+        player_soups = soup.find_all(class_='squad-player')
         abbrev = abbrev_lookup[team_name]
         for player_soup in player_soups:
-            name = player_soup.text.strip()
-            if not name:
-                continue
+            name = player_soup.find_all('a')[1].text.strip()
             player = {'name': name, 'team': team_name, 'abbrev': abbrev}
             self.players.append(player)
 
