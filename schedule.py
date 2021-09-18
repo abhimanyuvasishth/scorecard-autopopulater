@@ -1,7 +1,9 @@
 import csv
 from datetime import datetime
+from dateutil import parser
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import logging
 
 from constants import in_date_fmt, out_date_fmt, Teams, abbrev_lookup
 
@@ -16,9 +18,9 @@ class Schedule:
         self.content = self.get_content()
         self.team_counts = {}
         self.matches = []
+        self.start_index = 30
         if self.content:
             self.scrape_page()
-            assert len(self.matches) == 56
             self.convert_to_csv()
 
     def get_soup(self):
@@ -35,20 +37,25 @@ class Schedule:
             if 'TBA' in [team_1, team_2]:
                 continue
             url = f'{self.base_url}{self.extract_url(elem)}'
+            match_num = self.start_index + i
             self.matches.append({
-                'match_num': i + 1,
+                'match_num': match_num,
                 'team_1': team_1,
                 'abbrev_1': abbrev_lookup[team_1],
                 'game_1': self.get_and_update_game_count(team_1),
                 'team_2': team_2,
                 'abbrev_2': abbrev_lookup[team_2],
                 'game_2': self.get_and_update_game_count(team_2),
-                'start': self.extract_start(elem),
+                'start': self.extract_start(match_num, elem),
                 'series_id': self.series_id,
                 'match_id': self.extract_match_id(url),
                 'url': url,
                 'status': self.extract_status(elem)
             })
+
+    @staticmethod
+    def extract_match_num(elem):
+        return elem['href']
 
     @staticmethod
     def extract_url(elem):
@@ -63,9 +70,12 @@ class Schedule:
         return [team.text for team in elem.find_all('p')]
 
     @staticmethod
-    def extract_start(elem):
+    def extract_start(match_num, elem):
         raw_start = elem.find('span').text
-        return datetime.strptime(raw_start, in_date_fmt).strftime(out_date_fmt)
+        try:
+            return parser.parse(raw_start).strftime(out_date_fmt)
+        except:
+            logging.warning(f'{match_num} could not extract start: {raw_start}')
 
     @staticmethod
     def extract_status(elem):
