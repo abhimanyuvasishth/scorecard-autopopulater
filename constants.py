@@ -94,3 +94,4 @@ class Teams(Enum):
         return self.value[3]
 
 abbrev_lookup = {k.get_full_name(): k.get_abbrev() for k in Teams}
+safe_modes = {'not out', 'retired hurt'}

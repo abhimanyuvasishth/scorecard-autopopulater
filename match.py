@@ -5,7 +5,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import pandas as pd
 
-from constants import BatCols, BowlCols, FieldCols, abbrev_lookup
+from constants import BatCols, BowlCols, FieldCols, abbrev_lookup, safe_modes
 from utils import extract_name, extract_fielder_name, safe_int, safe_float
 
 class Match:
@@ -96,7 +96,7 @@ class Match:
                         BatCols.FOURS_SCORED.get_name(): safe_int(cols[5]),
                         BatCols.SIXES_SCORED.get_name(): safe_int(cols[6]),
                         BatCols.STRIKE_RATE.get_name(): safe_float(cols[7]),
-                        BatCols.NOT_OUT.get_name(): (cols[1] == 'not out') * 1
+                        BatCols.NOT_OUT.get_name(): (cols[1].lower() in safe_modes) * 1
                     }
 
                     if not self.players.get(name):
