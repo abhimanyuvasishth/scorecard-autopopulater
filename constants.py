@@ -80,6 +80,22 @@ class Teams(Enum):
     MUMBAI = (5, 'MI', 'Mumbai', 'Mumbai Indians')
     PUNJAB = (6, 'KXIP', 'Punjab', 'Punjab Kings')
     RAJASTHAN = (7, 'RR', 'Rajasthan', 'Rajasthan Royals')
+    AFGHANISTAN = (8, 'AFG', 'Afghanistan', 'Afghanistan')
+    AUSTRALIA = (9, 'AUS', 'Australia', 'Australia')
+    BANGLADESH = (10, 'BAN', 'Bangladesh', 'Bangladesh')
+    ENGLAND = (11, 'ENG', 'England', 'England')
+    INDIA = (12, 'INDIA', 'India', 'India')
+    IRELAND = (13, 'IRE', 'Ireland', 'Ireland')
+    NAMIBIA = (14, 'NAM', 'Namibia', 'Namibia')
+    NETHERLANDS = (15, 'NL', 'Netherlands', 'Netherlands')
+    NEW_ZEALAND = (16, 'NZ', 'New Zealand', 'New Zealand')
+    OMAN = (17, 'OMAN', 'Oman', 'Oman')
+    PAPUA_NEW_GUINEA = (18, 'PNG', 'Papua New Guinea', 'Papua New Guinea')
+    PAKISTAN = (19, 'PAK', 'Pakistan', 'Pakistan')
+    SCOTLAND = (20, 'SCOT', 'Scotland', 'Scotland')
+    SOUTH_AFRICA = (21, 'SA', 'South Africa', 'South Africa')
+    SRI_LANKA = (22, 'SL', 'Sri Lanka', 'Sri Lanka')
+    WEST_INDIES = (23, 'WI', 'West Indies', 'West Indies')
 
     def get_id(self):
         return self.value[0]

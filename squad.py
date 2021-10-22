@@ -8,12 +8,12 @@ from constants import in_date_fmt, out_date_fmt, Teams, abbrev_lookup
 class Squad:
 
     def __init__(self):
-        self.series_id = '1249214'
+        self.series_id = '1267897'
         self.base_url = 'https://www.espncricinfo.com'
         self.full_url = f'{self.base_url}/ci/content/squad/index.html?object={self.series_id}'
         self.soup = self.get_soup()
         self.content = self.get_content()
-        assert len(self.content) == 8
+        assert len(self.content) == 16
         self.players = []
         if self.content:
             self.scrape_page()
@@ -43,6 +43,9 @@ class Squad:
         abbrev = abbrev_lookup[team_name]
         for player_soup in player_soups:
             name = player_soup.find_all('a')[1].text.strip()
+            tag = player_soup.find(class_='tag')
+            if tag and tag.text == 'Withdrawn player':
+                continue
             player = {'name': name, 'team': team_name, 'abbrev': abbrev}
             self.players.append(player)
 

@@ -10,15 +10,18 @@ from constants import in_date_fmt, out_date_fmt, Teams, abbrev_lookup
 class Schedule:
 
     def __init__(self):
-        self.series_id = '1249214'
+        self.series_id = '1267897'
+        self.series_name = 'icc-men-s-t20-world-cup-2021-22'
+
         self.base_url = f'https://www.espncricinfo.com'
-        self.series_url = f'{self.base_url}/series/ipl-2021-{self.series_id}'
+        self.series_url = f'{self.base_url}/series/{self.series_name}-{self.series_id}'
         self.full_url = f'{self.series_url}/match-schedule-fixtures'
+
         self.soup = self.get_soup()
         self.content = self.get_content()
         self.team_counts = {}
         self.matches = []
-        self.start_index = 30
+        self.start_index = 0
         if self.content:
             self.scrape_page()
             self.convert_to_csv()
