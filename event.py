@@ -44,7 +44,7 @@ class Event:
         with open(f'squads.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                if row['team'] in ['Netherlands', 'Oman', 'Papua New Guinea']:
+                if row['team'] in ['Netherlands', 'Oman', 'Papua New Guinea', 'Ireland']:
                     continue
                 if row['name'] not in self.sheet.players:
                     logger.info(row)
@@ -109,5 +109,4 @@ class Event:
 
 
 if __name__ == '__main__':
-    # Event(test=True).populate_scores()
-    Event(test=True).check_players_matching()
+    Event(test=True).populate_scores()
