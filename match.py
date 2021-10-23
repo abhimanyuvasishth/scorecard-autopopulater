@@ -172,6 +172,10 @@ class Match:
                     if parts[1] in name.split(' '):
                         if name[0] == fielder[0] or fielder[0] == fielder[0].lower():
                             return name
+                elif num_parts == 3:
+                    if parts[2] in name.split(' '):
+                        if name[0] == fielder[0] or fielder[0] == fielder[0].lower():
+                            return name
         return None
 
     def update_fielding(self, fielder_name):
