@@ -1,6 +1,6 @@
 from enum import Enum
 
-game1_col = 'E'
+game1_col = 'F'
 
 in_date_fmt = '%d-%b-%Y, %I:%M %p'
 out_date_fmt = '%Y-%m-%d %H:%M:%S'
@@ -47,6 +47,13 @@ class FieldCols(Enum):
 
     def get_name(self):
         return self.value[1]
+
+class SheetIntroCols(Enum):
+    PLAYER = 1
+    GROUP = 2
+    PLAYING_TEAM = 3
+    AUCTION_TEAM = 4
+
 
 class SheetOffsetCols(Enum):
     RUNS_SCORED = (0, 'runs_scored')

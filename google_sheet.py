@@ -1,6 +1,7 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
+from constants import SheetIntroCols
 from utils import str_2_num, num_2_str
 
 class GoogleSheet:
@@ -23,8 +24,8 @@ class GoogleSheet:
 
     def get_all_players(self):
         players = {}
-        names = self.sheet.col_values(1)
-        abbrevs = self.sheet.col_values(2)
+        names = self.sheet.col_values(SheetIntroCols.PLAYER.value)
+        abbrevs = self.sheet.col_values(SheetIntroCols.PLAYING_TEAM.value)
         for i in range(len(names)):
             name, abbrev, row = names[i], abbrevs[i], i + 1
             if name:
