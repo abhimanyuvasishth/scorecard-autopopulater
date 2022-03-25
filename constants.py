@@ -1,9 +1,10 @@
 from enum import Enum
 
-game1_col = 'F'
+game1_col = 'E'
 
 in_date_fmt = '%d-%b-%Y, %I:%M %p'
 out_date_fmt = '%Y-%m-%d %H:%M:%S'
+
 
 class BatCols(Enum):
     DISMISSAL = (0, 'dismissal')
@@ -19,6 +20,7 @@ class BatCols(Enum):
 
     def get_name(self):
         return self.value[1]
+
 
 class BowlCols(Enum):
     OVERS = (0, 'overs')
@@ -39,6 +41,7 @@ class BowlCols(Enum):
     def get_name(self):
         return self.value[1]
 
+
 class FieldCols(Enum):
     FIELDING = (0, 'fielding')
 
@@ -48,11 +51,11 @@ class FieldCols(Enum):
     def get_name(self):
         return self.value[1]
 
+
 class SheetIntroCols(Enum):
     PLAYER = 1
-    GROUP = 2
-    PLAYING_TEAM = 3
-    AUCTION_TEAM = 4
+    PLAYING_TEAM = 2
+    AUCTION_TEAM = 3
 
 
 class SheetOffsetCols(Enum):
@@ -77,6 +80,7 @@ class SheetOffsetCols(Enum):
 
     def get_name(self):
         return self.value[1]
+
 
 class Teams(Enum):
     BANGALORE = (0, 'RCB', 'Bangalore', 'Royal Challengers Bangalore')
@@ -103,6 +107,8 @@ class Teams(Enum):
     SOUTH_AFRICA = (21, 'SA', 'South Africa', 'South Africa')
     SRI_LANKA = (22, 'SL', 'Sri Lanka', 'Sri Lanka')
     WEST_INDIES = (23, 'WI', 'West Indies', 'West Indies')
+    GUJARAT = (24, 'GT', 'Gujarat', 'Gujarat Titans')
+    LUCKNOW = (25, 'LSG', 'Lucknow', 'Lucknow Super Giants')
 
     def get_id(self):
         return self.value[0]
@@ -115,6 +121,7 @@ class Teams(Enum):
 
     def get_full_name(self):
         return self.value[3]
+
 
 abbrev_lookup = {k.get_full_name(): k.get_abbrev() for k in Teams}
 safe_modes = {'not out', 'retired hurt'}

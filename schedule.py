@@ -1,17 +1,17 @@
 import csv
-from datetime import datetime
 from dateutil import parser
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import logging
 
-from constants import in_date_fmt, out_date_fmt, Teams, abbrev_lookup
+from constants import out_date_fmt, abbrev_lookup
+
 
 class Schedule:
 
     def __init__(self):
-        self.series_id = '1267897'
-        self.series_name = 'icc-men-s-t20-world-cup-2021-22'
+        self.series_id = '1298423'
+        self.series_name = 'indian-premier-league-2022'
 
         self.base_url = f'https://www.espncricinfo.com'
         self.series_url = f'{self.base_url}/series/{self.series_name}-{self.series_id}'
@@ -74,7 +74,7 @@ class Schedule:
 
     @staticmethod
     def extract_start(match_num, elem):
-        raw_start = elem.find('span').text
+        raw_start = elem.find('span').text.replace('tues', 'tue')
         try:
             return parser.parse(raw_start).strftime(out_date_fmt)
         except:

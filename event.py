@@ -5,7 +5,7 @@ import pytz
 from google_sheet import GoogleSheet
 from match import Match
 import time
-from constants import in_date_fmt, out_date_fmt, SheetOffsetCols
+from constants import out_date_fmt, SheetOffsetCols
 from utils import get_game_col, str_2_num, num_2_str, compare_info
 
 logging_fmt = '%(asctime)s %(levelname)s %(message)s'
@@ -23,7 +23,7 @@ class Event:
         col_start = get_game_col(game_num)
         col_end = num_2_str(str_2_num(col_start) + len(info) - 1)
         potm_offset = SheetOffsetCols.POTM.get_offset()
-        potm_col = num_2_str(str_2_num(col_start) + (potm_offset))
+        potm_col = num_2_str(str_2_num(col_start) + potm_offset)
 
         if self.test:
             return
@@ -44,8 +44,6 @@ class Event:
         with open(f'squads.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                if row['team'] in ['Netherlands', 'Oman', 'Papua New Guinea', 'Ireland']:
-                    continue
                 if row['name'] not in self.sheet.players:
                     logger.info(row)
                 if row['name'] in players:
@@ -57,14 +55,14 @@ class Event:
                 logger.info(player)
 
     def simulate_last_ipl(self):
-        with open(f'schedule_2020.csv') as csvfile:
+        with open(f'schedule_2021.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 logger.info(row)
                 time.sleep(30)
                 match = Match(row['series_id'], row['match_id'])
                 for name in match.players.keys():
-                    info = match.get_info(name)
+                    info = match.get_player_info(name)
                     player = match.players[name]
                     team = player['team']
                     game = row['game_1'] if team == row['team_1'] else row['game_2']
@@ -109,4 +107,4 @@ class Event:
 
 
 if __name__ == '__main__':
-    Event(test=False).populate_scores()
+    Event(test=False).check_players_matching()

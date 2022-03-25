@@ -2,7 +2,8 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 from constants import SheetIntroCols
-from utils import str_2_num, num_2_str
+from utils import str_2_num
+
 
 class GoogleSheet:
 
@@ -14,7 +15,7 @@ class GoogleSheet:
         file = 'credentials.json'
         creds = ServiceAccountCredentials.from_json_keyfile_name(file, scope)
         self.client = gspread.authorize(creds)
-        self.doc_name = 'World Cup Auction'
+        self.doc_name = 'IPL 15 auction'
         self.sheet_name = 'Points Worksheet'
         self.sheet = self.get_sheet()
         self.players = self.get_all_players()

@@ -1,19 +1,20 @@
 import csv
-from datetime import datetime
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+from unicodedata import normalize
 
-from constants import in_date_fmt, out_date_fmt, Teams, abbrev_lookup
+from constants import abbrev_lookup
+
 
 class Squad:
 
     def __init__(self):
-        self.series_id = '1267897'
+        self.series_id = '1298423'
         self.base_url = 'https://www.espncricinfo.com'
         self.full_url = f'{self.base_url}/ci/content/squad/index.html?object={self.series_id}'
         self.soup = self.get_soup()
         self.content = self.get_content()
-        assert len(self.content) == 16
+        assert len(self.content) == 10
         self.players = []
         if self.content:
             self.scrape_page()
@@ -33,7 +34,7 @@ class Squad:
     def scrape_page(self):
         for i, elem in enumerate(self.content):
             team_url = f'{self.base_url}{elem["href"]}'
-            team_name = elem.text.replace('Squad', '').strip()
+            team_name = elem.text.replace('Squads', '').replace('Squad', '').strip()
             self.extract_players(team_url, team_name)
 
     def extract_players(self, team_url, team_name):
@@ -42,7 +43,7 @@ class Squad:
         player_soups = soup.find_all(class_='squad-player')
         abbrev = abbrev_lookup[team_name]
         for player_soup in player_soups:
-            name = player_soup.find_all('a')[1].text.strip()
+            name = player_soup.find_all('a')[1].text.replace(u'\xa0', u' ').strip()
             tag = player_soup.find(class_='tag')
             if tag and tag.text == 'Withdrawn player':
                 continue

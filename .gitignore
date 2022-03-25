@@ -4,3 +4,4 @@ data/
 credentials.json
 .DS_Store
 *log.txt
+.idea/
