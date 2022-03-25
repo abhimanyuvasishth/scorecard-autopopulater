@@ -69,7 +69,7 @@ class Event:
                     assert team in [row['team_1'], row['team_2']]
                     try:
                         self.write_player_row(info, int(game), player)
-                    except ValueError:
+                    except (ValueError, KeyError):
                         logging.error(f'Player not in sheet: {name}')
 
     def populate_scores(self):
@@ -107,4 +107,4 @@ class Event:
 
 
 if __name__ == '__main__':
-    Event(test=False).check_players_matching()
+    Event(test=False).populate_scores()
