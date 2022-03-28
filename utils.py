@@ -1,11 +1,13 @@
 from constants import game1_col, SheetOffsetCols
 import itertools
 
+
 def safe_int(val):
     try:
         return int(val)
     except ValueError:
         return 0
+
 
 def safe_float(val):
     try:
@@ -13,8 +15,10 @@ def safe_float(val):
     except ValueError:
         return 0.0
 
+
 def get_letters():
-    return [l for l in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ']
+    return [letter for letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ']
+
 
 def num_2_str(number):
     letters = get_letters()
@@ -28,6 +32,7 @@ def num_2_str(number):
 
     return result
 
+
 def str_2_num(column):
     letters = get_letters()
     number = 0
@@ -35,10 +40,12 @@ def str_2_num(column):
         number += (26 ** i) * (letters.index(char) + 1)
     return number
 
+
 def get_game_col(game_number):
     game1_col_num = str_2_num(game1_col)
     col = game1_col_num + (game_number - 1) * len([v for v in SheetOffsetCols])
     return num_2_str(col)
+
 
 def extract_fielder_name(name):
     name = name.replace('sub', '').strip()
@@ -46,15 +53,18 @@ def extract_fielder_name(name):
         name = name.replace(char, '')
     return extract_name(name)
 
+
 def extract_name(name):
-    new_name = name.replace(u'\xa0',' ').replace('†', '').replace('(c)', '')
+    new_name = name.replace(u'\xa0', ' ').replace('†', '').replace('(c)', '')
     return new_name.strip()
+
 
 def flatten_list(list_elem):
     try:
         return list(itertools.chain(*list_elem))
     except TypeError:
         return list_elem
+
 
 def compare_info(first, second):
     first, second = flatten_list(first), flatten_list(second)

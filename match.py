@@ -1,12 +1,11 @@
-import json
 import csv
 import logging
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import pandas as pd
 
 from constants import BatCols, BowlCols, FieldCols, abbrev_lookup, safe_modes
 from utils import extract_name, extract_fielder_name, safe_int, safe_float
+
 
 class Match:
 
@@ -159,7 +158,7 @@ class Match:
             }
 
     def name_to_player(self, fielder):
-        for name in list(self.players.keys()) + self.squads[not self.innings]:
+        for name in self.squads[not self.innings]:
             if fielder == name:
                 return name
             else:
