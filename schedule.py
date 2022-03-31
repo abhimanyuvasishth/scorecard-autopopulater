@@ -1,10 +1,11 @@
 import csv
-from dateutil import parser
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
 import logging
+from urllib.request import urlopen
 
-from constants import out_date_fmt, abbrev_lookup
+from bs4 import BeautifulSoup
+from dateutil import parser
+
+from constants import abbrev_lookup, out_date_fmt
 
 
 class Schedule:
@@ -13,7 +14,7 @@ class Schedule:
         self.series_id = '1298423'
         self.series_name = 'indian-premier-league-2022'
 
-        self.base_url = f'https://www.espncricinfo.com'
+        self.base_url = 'https://www.espncricinfo.com'
         self.series_url = f'{self.base_url}/series/{self.series_name}-{self.series_id}'
         self.full_url = f'{self.series_url}/match-schedule-fixtures'
 
@@ -77,7 +78,7 @@ class Schedule:
         raw_start = elem.find('span').text.replace('tues', 'tue')
         try:
             return parser.parse(raw_start).strftime(out_date_fmt)
-        except:
+        except Exception:
             logging.warning(f'{match_num} could not extract start: {raw_start}')
 
     @staticmethod
@@ -97,7 +98,7 @@ class Schedule:
             'match_num', 'team_1', 'abbrev_1', 'game_1', 'team_2', 'abbrev_2',
             'game_2', 'start', 'series_id', 'match_id', 'url', 'status'
         ]
-        with open(f'schedule.csv', 'w') as f:
+        with open('schedule.csv', 'w') as f:
             writer = csv.DictWriter(f, fieldnames=header)
             writer.writeheader()
             for match in self.matches:

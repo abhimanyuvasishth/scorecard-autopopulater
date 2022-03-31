@@ -1,7 +1,7 @@
 import csv
 from urllib.request import urlopen
+
 from bs4 import BeautifulSoup
-from unicodedata import normalize
 
 from constants import abbrev_lookup
 
@@ -52,7 +52,7 @@ class Squad:
 
     def convert_to_csv(self):
         header = ['name', 'team', 'abbrev']
-        with open(f'squads.csv', 'w') as f:
+        with open('squads.csv', 'w') as f:
             writer = csv.DictWriter(f, fieldnames=header)
             writer.writeheader()
             for player in self.players:

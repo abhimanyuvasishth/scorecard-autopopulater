@@ -1,5 +1,6 @@
-from constants import game1_col, SheetOffsetCols
 import itertools
+
+from constants import SheetOffsetCols, game1_col
 
 
 def safe_int(val):

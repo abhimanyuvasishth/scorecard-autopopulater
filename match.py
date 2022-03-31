@@ -1,10 +1,11 @@
 import csv
 import logging
 from urllib.request import urlopen
+
 from bs4 import BeautifulSoup
 
 from constants import BatCols, BowlCols, FieldCols, abbrev_lookup, safe_modes
-from utils import extract_name, extract_fielder_name, safe_int, safe_float
+from utils import extract_fielder_name, extract_name, safe_float, safe_int
 
 
 class Match:
@@ -56,7 +57,7 @@ class Match:
 
     def get_squads(self):
         squads = [[], []]
-        with open(f'squads.csv') as csvfile:
+        with open('squads.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 if row['team'] == self.teams[0]:
@@ -106,7 +107,7 @@ class Match:
                         }
 
                     self.players[name].update(bat_dict)
-                except IndexError as e:
+                except IndexError:
                     continue
 
     def extract_bowling_stats(self):
@@ -145,7 +146,7 @@ class Match:
 
                     self.players[name].update(bowl_dict)
 
-                except IndexError as e:
+                except IndexError:
                     continue
 
     def extract_did_not_bat(self, dnb_string):
@@ -163,16 +164,19 @@ class Match:
                 return name
             else:
                 parts = fielder.split(' ')
+                name_parts = name.split(' ')
                 num_parts = len(parts)
                 if num_parts == 1:
-                    if fielder in name.split(' '):
+                    if fielder in name_parts:
                         return name
                 elif num_parts == 2:
-                    if parts[1] in name.split(' '):
+                    if parts[1] in name_parts:
                         if name[0] == fielder[0] or fielder[0] == fielder[0].lower():
                             return name
+                        if parts[0] in name_parts:
+                            return name
                 elif num_parts == 3:
-                    if parts[2] in name.split(' '):
+                    if parts[2] in name_parts:
                         if name[0] == fielder[0] or fielder[0] == fielder[0].lower():
                             return name
         return None

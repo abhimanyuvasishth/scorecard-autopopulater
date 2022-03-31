@@ -1,12 +1,14 @@
 import csv
-from datetime import datetime
 import logging
+import time
+from datetime import datetime
+
 import pytz
+
+from constants import SheetOffsetCols, out_date_fmt
 from google_sheet import GoogleSheet
 from match import Match
-import time
-from constants import out_date_fmt, SheetOffsetCols
-from utils import get_game_col, str_2_num, num_2_str, compare_info
+from utils import compare_info, get_game_col, num_2_str, str_2_num
 
 logging_fmt = '%(asctime)s %(levelname)s %(message)s'
 logging.basicConfig(format=logging_fmt, level=logging.INFO, filename='log.txt')
@@ -41,7 +43,7 @@ class Event:
 
     def check_players_matching(self):
         players = set()
-        with open(f'squads.csv') as csvfile:
+        with open('squads.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 if row['name'] not in self.sheet.players:
@@ -55,7 +57,7 @@ class Event:
                 logger.info(player)
 
     def simulate_last_ipl(self):
-        with open(f'schedule_2021.csv') as csvfile:
+        with open('schedule_2021.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 logger.info(row)
@@ -75,7 +77,7 @@ class Event:
     def populate_scores(self):
         cur_time = datetime.now(pytz.timezone('UTC')).replace(tzinfo=None)
         matches_scraped = []
-        with open(f'schedule.csv') as csvfile:
+        with open('schedule.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 match_time = datetime.strptime(row['start'], out_date_fmt)
