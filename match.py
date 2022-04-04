@@ -33,7 +33,7 @@ class Match:
         return BeautifulSoup(page, 'html.parser')
 
     def get_content(self):
-        class_name = 'Collapsible__contentInner'
+        class_name = 'ReactCollapse--collapse'
         return self.soup.find_all(class_=class_name, recursive=True)
 
     def save_html(self):
@@ -42,17 +42,15 @@ class Match:
 
     def get_teams(self):
         teams = []
-        containers = self.soup.find_all(class_='Collapsible')
+        text = 'ci-team-score ds-flex ds-justify-between ds-items-center ds-text-typo-title ds-mb-2'
+        containers = self.soup.find_all(class_=text)
         if not containers:
             return teams
         for container in containers:
             if not container:
                 continue
-            for header in container.find_all(class_='header-title label'):
-                team_text = header.text
-                team_text = header.text.split('INNINGS')[0].strip().title()
-                team_text = team_text.split('Team')[0].strip()
-                teams.append(team_text)
+            team_text = container.text.split('(')[0].strip().title()
+            teams.append(team_text)
         return teams
 
     def get_squads(self):
@@ -77,7 +75,8 @@ class Match:
     def extract_batting_stats(self):
         for i in range(2):
             self.innings = i
-            table = self.content[i].find(class_='table batsman')
+            text = 'ds-w-full ds-table ds-table-xs ds-table-fixed ci-scorecard-table'
+            table = self.content[i].find(class_=text)
             if not table:
                 continue
             rows = table.find_all('tr')
@@ -113,7 +112,8 @@ class Match:
     def extract_bowling_stats(self):
         for i in range(2):
             self.innings = i
-            table = self.content[i].find(class_='table bowler')
+            text = 'ds-w-full ds-table ds-table-xs ds-table-fixed'
+            table = self.content[i].find(class_=text)
             if not table:
                 continue
             rows = table.find_all('tr')
