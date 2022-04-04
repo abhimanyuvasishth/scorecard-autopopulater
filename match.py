@@ -49,7 +49,7 @@ class Match:
         for container in containers:
             if not container:
                 continue
-            team_text = container.text.split('(')[0].strip().title()
+            team_text = container.find_all('span')[0].text.strip().title()
             teams.append(team_text)
         return teams
 
