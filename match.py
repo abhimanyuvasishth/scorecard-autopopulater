@@ -42,14 +42,14 @@ class Match:
 
     def get_teams(self):
         teams = []
-        text = 'ci-team-score ds-flex ds-justify-between ds-items-center ds-text-typo-title ds-mb-2'
-        containers = self.soup.find_all(class_=text)
+        text = 'ds-text-tight-s ds-font-bold ds-uppercase'
+        containers = self.soup.find_all('span', class_=text)
         if not containers:
             return teams
         for container in containers:
             if not container:
                 continue
-            team_text = container.find_all('span')[0].text.strip().title()
+            team_text = container.text.split('INNINGS')[0].strip().title()
             teams.append(team_text)
         return teams
 
@@ -244,8 +244,9 @@ class Match:
 
     def extract_player_of_the_match(self):
         try:
-            class_name = 'playerofthematch-name'
-            potm = self.soup.find(class_=class_name, recursive=True).text
+            class_name = 'ci-match-player-award-carousel'
+            potm_container = self.soup.find(class_=class_name, recursive=True)
+            potm = potm_container.find_all('span')[0].text.split(',')[0].strip()
             self.players[potm]['potm'] = 1
             logging.info(f'Player of the match: {potm}')
         except AttributeError:
