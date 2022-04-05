@@ -21,12 +21,15 @@ class Match:
         self.innings = 0
         if self.content:
             self.teams = self.get_teams()
-            self.squads = self.get_squads()
             if self.teams:
+                self.squads = self.get_squads()
                 self.scrape_page()
-                assert len(self.players.keys()) >= 11
+                if len(self.players.keys()) < 11:
+                    logging.error('Fewer players than expected')
+            else:
+                logging.error('No teams')
         else:
-            logging.info(f'{self.series_id}, {self.match_id}: no content')
+            logging.error(f'{self.series_id}, {self.match_id}: no content')
 
     def get_soup(self):
         page = urlopen(self.match_url)
@@ -44,13 +47,20 @@ class Match:
         teams = []
         text = 'ds-text-tight-s ds-font-bold ds-uppercase'
         containers = self.soup.find_all('span', class_=text)
+
+        div = 'ds-text-tight-s ds-font-bold ds-uppercase ds-p-4 ds-pb-2 ds-border-b ds-border-line'
+        if len(containers) == 1:
+            containers += self.soup.find_all(class_=div)
+
         if not containers:
             return teams
+
         for container in containers:
             if not container:
                 continue
-            team_text = container.text.split('INNINGS')[0].strip().title()
+            team_text = container.text.split('INNINGS')[0].split('Team')[0].strip().title()
             teams.append(team_text)
+
         return teams
 
     def get_squads(self):
