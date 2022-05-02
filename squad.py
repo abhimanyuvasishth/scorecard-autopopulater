@@ -25,7 +25,9 @@ class Squad:
         return BeautifulSoup(page, 'html.parser')
 
     def get_content(self):
-        class_name = 'squad-row'
+        class_name = 'ds-flex lg:ds-flex-row sm:ds-flex-col lg:ds-items-center ' \
+                     'lg:ds-justify-between ds-py-2 ds-px-4 ds-flex-wrap ' \
+                     'odd:ds-bg-fill-content-alternate'
         elems = []
         for elem in self.soup.find_all(class_=class_name):
             elems.append(elem.find_all('a')[0])
@@ -40,11 +42,12 @@ class Squad:
     def extract_players(self, team_url, team_name):
         page = urlopen(team_url)
         soup = BeautifulSoup(page, 'html.parser')
-        player_soups = soup.find_all(class_='squad-player')
+        class_name = 'ds-relative ds-flex ds-flex-row ds-space-x-4 ds-p-4 lg:ds-px-6'
+        player_soups = soup.find_all(class_=class_name)
         abbrev = abbrev_lookup[team_name]
         for player_soup in player_soups:
             name = player_soup.find_all('a')[1].text.replace(u'\xa0', u' ').strip()
-            tag = player_soup.find(class_='tag')
+            tag = player_soup.find(class_='ds-text-tight-s ds-font-regular')
             if tag and tag.text == 'Withdrawn player':
                 continue
             player = {'name': name, 'team': team_name, 'abbrev': abbrev}

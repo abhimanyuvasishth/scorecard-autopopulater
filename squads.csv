@@ -1,21 +1,20 @@
 name,team,abbrev
-Ravindra Jadeja,Chennai Super Kings,CSK
+MS Dhoni,Chennai Super Kings,CSK
 Moeen Ali,Chennai Super Kings,CSK
 KM Asif,Chennai Super Kings,CSK
 Bhagath Varma,Chennai Super Kings,CSK
 Dwayne Bravo,Chennai Super Kings,CSK
-Deepak Chahar,Chennai Super Kings,CSK
 Devon Conway,Chennai Super Kings,CSK
 Tushar Deshpande,Chennai Super Kings,CSK
-MS Dhoni,Chennai Super Kings,CSK
 Shivam Dube,Chennai Super Kings,CSK
 Ruturaj Gaikwad,Chennai Super Kings,CSK
 Rajvardhan Hangargekar,Chennai Super Kings,CSK
 Hari Nishaanth,Chennai Super Kings,CSK
+Ravindra Jadeja,Chennai Super Kings,CSK
 Narayan Jagadeesan,Chennai Super Kings,CSK
 Chris Jordan,Chennai Super Kings,CSK
-Adam Milne,Chennai Super Kings,CSK
 Mukesh Choudhary,Chennai Super Kings,CSK
+Matheesha Pathirana,Chennai Super Kings,CSK
 Dwaine Pretorius,Chennai Super Kings,CSK
 Ambati Rayudu,Chennai Super Kings,CSK
 Mitchell Santner,Chennai Super Kings,CSK
@@ -72,11 +71,12 @@ Matthew Wade,Gujarat Titans,GT
 Jayant Yadav,Gujarat Titans,GT
 Yash Dayal,Gujarat Titans,GT
 Shreyas Iyer,Kolkata Knight Riders,KKR
-Aman Khan,Kolkata Knight Riders,KKR
+Aman Hakim Khan,Kolkata Knight Riders,KKR
 Ashok Sharma,Kolkata Knight Riders,KKR
 Sam Billings,Kolkata Knight Riders,KKR
 Pat Cummins,Kolkata Knight Riders,KKR
 Aaron Finch,Kolkata Knight Riders,KKR
+Harshit Rana,Kolkata Knight Riders,KKR
 Baba Indrajith,Kolkata Knight Riders,KKR
 Venkatesh Iyer,Kolkata Knight Riders,KKR
 Sheldon Jackson,Kolkata Knight Riders,KKR
@@ -87,7 +87,6 @@ Pratham Singh,Kolkata Knight Riders,KKR
 Ajinkya Rahane,Kolkata Knight Riders,KKR
 Ramesh Kumar,Kolkata Knight Riders,KKR
 Nitish Rana,Kolkata Knight Riders,KKR
-Rasikh Salam,Kolkata Knight Riders,KKR
 Anukul Roy,Kolkata Knight Riders,KKR
 Andre Russell,Kolkata Knight Riders,KKR
 Shivam Mavi,Kolkata Knight Riders,KKR
@@ -121,7 +120,6 @@ Rohit Sharma,Mumbai Indians,MI
 Fabian Allen,Mumbai Indians,MI
 Anmolpreet Singh,Mumbai Indians,MI
 Jofra Archer,Mumbai Indians,MI
-Arshad Khan,Mumbai Indians,MI
 Murugan Ashwin,Mumbai Indians,MI
 Basil Thampi,Mumbai Indians,MI
 Dewald Brevis,Mumbai Indians,MI
@@ -130,6 +128,7 @@ Jasprit Bumrah,Mumbai Indians,MI
 Tim David,Mumbai Indians,MI
 Ishan Kishan,Mumbai Indians,MI
 Aryan Juyal,Mumbai Indians,MI
+Kumar Kartikeya,Mumbai Indians,MI
 Mayank Markande,Mumbai Indians,MI
 Riley Meredith,Mumbai Indians,MI
 Tymal Mills,Mumbai Indians,MI
@@ -207,11 +206,11 @@ Glenn Maxwell,Royal Challengers Bangalore,RCB
 Chama Milind,Royal Challengers Bangalore,RCB
 Mohammed Siraj,Royal Challengers Bangalore,RCB
 Harshal Patel,Royal Challengers Bangalore,RCB
+Rajat Patidar,Royal Challengers Bangalore,RCB
 Suyash Prabhudessai,Royal Challengers Bangalore,RCB
 Sherfane Rutherford,Royal Challengers Bangalore,RCB
 Shahbaz Ahmed,Royal Challengers Bangalore,RCB
 Karn Sharma,Royal Challengers Bangalore,RCB
-Luvnith Sisodia,Royal Challengers Bangalore,RCB
 David Willey,Royal Challengers Bangalore,RCB
 Kane Williamson,Sunrisers Hyderabad,SRH
 Sean Abbott,Sunrisers Hyderabad,SRH
