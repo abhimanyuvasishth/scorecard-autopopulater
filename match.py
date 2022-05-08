@@ -98,14 +98,21 @@ class Match:
                     if name.startswith('Did not bat') or name.startswith('Yet to bat'):
                         self.extract_did_not_bat(name)
 
+                    dismissal = cols[1]
+                    balls_faced = safe_int(cols[3])
+
+                    if dismissal.lower() not in safe_modes and balls_faced == 0:
+                        # diamond duck
+                        balls_faced = 1
+
                     bat_dict = {
-                        BatCols.DISMISSAL.get_name(): cols[1],
+                        BatCols.DISMISSAL.get_name(): dismissal,
                         BatCols.RUNS_SCORED.get_name(): safe_int(cols[2]),
-                        BatCols.BALLS_FACED.get_name(): safe_int(cols[3]),
+                        BatCols.BALLS_FACED.get_name(): balls_faced,
                         BatCols.FOURS_SCORED.get_name(): safe_int(cols[5]),
                         BatCols.SIXES_SCORED.get_name(): safe_int(cols[6]),
                         BatCols.STRIKE_RATE.get_name(): safe_float(cols[7]),
-                        BatCols.NOT_OUT.get_name(): (cols[1].lower() in safe_modes) * 1
+                        BatCols.NOT_OUT.get_name(): (dismissal.lower() in safe_modes) * 1
                     }
 
                     if not self.players.get(name):
