@@ -1,13 +1,13 @@
 name: scorecard-autopopulater
 
 dependencies:
-  - python=3.8
+  - beautifulsoup4
   - flake8
   - isort
   - pip
   - pytest
+  - python=3.8
   - requests
   - pip:
-    - beautifulsoup4
     - gspread
     - oauth2client
