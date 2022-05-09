@@ -82,7 +82,7 @@ class Event:
             for row in reader:
                 match_time = datetime.strptime(row['start'], out_date_fmt)
                 num_hours = (cur_time - match_time).total_seconds() / 3600
-                if num_hours < 0 or num_hours > 15:
+                if num_hours < 0 or num_hours > 5:
                     continue
                 logger.info(row)
                 match = Match(row['series_id'], row['match_id'])
@@ -109,4 +109,4 @@ class Event:
 
 
 if __name__ == '__main__':
-    Event(test=True).populate_scores()
+    Event(test=False).populate_scores()
