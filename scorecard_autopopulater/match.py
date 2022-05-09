@@ -4,8 +4,9 @@ from urllib.request import urlopen
 
 from bs4 import BeautifulSoup
 
-from constants import BatCols, BowlCols, FieldCols, abbrev_lookup, safe_modes
-from utils import extract_fielder_name, extract_name, safe_float, safe_int
+from scorecard_autopopulater.constants import (BatCols, BowlCols, FieldCols, abbrev_lookup,
+                                               safe_modes)
+from scorecard_autopopulater.utils import extract_fielder_name, extract_name, safe_float, safe_int
 
 
 class Match:
@@ -65,7 +66,7 @@ class Match:
 
     def get_squads(self):
         squads = [[], []]
-        with open('squads.csv') as csvfile:
+        with open('data/squads.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 if row['team'] == self.teams[0]:

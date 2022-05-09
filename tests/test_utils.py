@@ -1,6 +1,6 @@
-from match import Match
-from utils import (extract_fielder_name, extract_name, get_letters, num_2_str, safe_float, safe_int,
-                   str_2_num)
+from scorecard_autopopulater.match import Match
+from scorecard_autopopulater.utils import (extract_fielder_name, extract_name, get_letters,
+                                           num_2_str, safe_float, safe_int, str_2_num)
 
 
 def test_column_number_conversion():

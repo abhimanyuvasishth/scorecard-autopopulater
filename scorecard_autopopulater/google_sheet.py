@@ -1,8 +1,8 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-from constants import SheetIntroCols
-from utils import str_2_num
+from scorecard_autopopulater.constants import SheetIntroCols
+from scorecard_autopopulater.utils import str_2_num
 
 
 class GoogleSheet:

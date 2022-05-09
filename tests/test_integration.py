@@ -1,7 +1,7 @@
 import pytest
 
-from google_sheet import GoogleSheet
-from utils import get_game_col
+from scorecard_autopopulater.google_sheet import GoogleSheet
+from scorecard_autopopulater.utils import get_game_col
 
 
 @pytest.mark.integration

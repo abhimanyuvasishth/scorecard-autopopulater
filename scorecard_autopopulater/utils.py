@@ -1,6 +1,6 @@
 import itertools
 
-from constants import SheetOffsetCols, game1_col
+from scorecard_autopopulater.constants import SheetOffsetCols, game1_col
 
 
 def safe_int(val):

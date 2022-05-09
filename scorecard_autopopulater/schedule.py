@@ -5,7 +5,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from dateutil import parser
 
-from constants import abbrev_lookup, out_date_fmt
+from scorecard_autopopulater.constants import abbrev_lookup, out_date_fmt
 
 
 class Schedule:
@@ -98,7 +98,7 @@ class Schedule:
             'match_num', 'team_1', 'abbrev_1', 'game_1', 'team_2', 'abbrev_2',
             'game_2', 'start', 'series_id', 'match_id', 'url', 'status'
         ]
-        with open('schedule.csv', 'w') as f:
+        with open('data/schedule.csv', 'w') as f:
             writer = csv.DictWriter(f, fieldnames=header)
             writer.writeheader()
             for match in self.matches:

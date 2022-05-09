@@ -5,10 +5,10 @@ from datetime import datetime
 
 import pytz
 
-from constants import SheetOffsetCols, out_date_fmt
-from google_sheet import GoogleSheet
-from match import Match
-from utils import compare_info, get_game_col, num_2_str, str_2_num
+from scorecard_autopopulater.constants import SheetOffsetCols, out_date_fmt
+from scorecard_autopopulater.google_sheet import GoogleSheet
+from scorecard_autopopulater.match import Match
+from scorecard_autopopulater.utils import compare_info, get_game_col, num_2_str, str_2_num
 
 logging_fmt = '%(asctime)s %(levelname)s %(message)s'
 logging.basicConfig(format=logging_fmt, level=logging.INFO, filename='log.txt')
@@ -43,7 +43,7 @@ class Event:
 
     def check_players_matching(self):
         players = set()
-        with open('squads.csv') as csvfile:
+        with open('data/squads.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 if row['name'] not in self.sheet.players:
@@ -57,7 +57,7 @@ class Event:
                 logger.info(player)
 
     def simulate_last_ipl(self):
-        with open('schedule_2021.csv') as csvfile:
+        with open('data/schedule_2021.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 logger.info(row)
@@ -77,12 +77,12 @@ class Event:
     def populate_scores(self):
         cur_time = datetime.now(pytz.timezone('UTC')).replace(tzinfo=None)
         matches_scraped = []
-        with open('schedule.csv') as csvfile:
+        with open('data/schedule.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 match_time = datetime.strptime(row['start'], out_date_fmt)
                 num_hours = (cur_time - match_time).total_seconds() / 3600
-                if num_hours < 0 or num_hours > 5:
+                if num_hours < 0 or num_hours > 15:
                     continue
                 logger.info(row)
                 match = Match(row['series_id'], row['match_id'])
@@ -109,4 +109,4 @@ class Event:
 
 
 if __name__ == '__main__':
-    Event(test=False).populate_scores()
+    Event(test=True).populate_scores()
