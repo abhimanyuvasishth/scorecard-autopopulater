@@ -7,7 +7,7 @@ import pytz
 
 from scorecard_autopopulater.constants import SheetOffsetCols, out_date_fmt
 from scorecard_autopopulater.google_sheet import GoogleSheet
-from scorecard_autopopulater.match import Match
+from scorecard_autopopulater.scorecard import Scorecard
 from scorecard_autopopulater.utils import compare_info, get_game_col, num_2_str, str_2_num
 
 logging_fmt = '%(asctime)s %(levelname)s %(message)s'
@@ -62,10 +62,10 @@ class Event:
             for row in reader:
                 logger.info(row)
                 time.sleep(30)
-                match = Match(row['series_id'], row['match_id'])
-                for name in match.players.keys():
-                    info = match.get_player_info(name)
-                    player = match.players[name]
+                scorecard = Scorecard(row['series_id'], row['match_id'])
+                for name in scorecard.players.keys():
+                    info = scorecard.get_player_info(name)
+                    player = scorecard.players[name]
                     team = player['team']
                     game = row['game_1'] if team == row['team_1'] else row['game_2']
                     assert team in [row['team_1'], row['team_2']]
@@ -76,7 +76,7 @@ class Event:
 
     def populate_scores(self):
         cur_time = datetime.now(pytz.timezone('UTC')).replace(tzinfo=None)
-        matches_scraped = []
+        scorecards_scraped = []
         with open('data/schedule.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
@@ -85,11 +85,11 @@ class Event:
                 if num_hours < 0 or num_hours > 5:
                     continue
                 logger.info(row)
-                match = Match(row['series_id'], row['match_id'])
-                matches_scraped.append(match)
-                for name in match.players.keys():
-                    info = match.get_player_info(name)
-                    player = match.players[name]
+                scorecard = Scorecard(row['series_id'], row['match_id'])
+                scorecards_scraped.append(scorecard)
+                for name in scorecard.players.keys():
+                    info = scorecard.get_player_info(name)
+                    player = scorecard.players[name]
                     team = player['team']
                     abbrev = player['abbrev']
                     game = row['game_1'] if team == row['team_1'] else row['game_2']
@@ -104,7 +104,7 @@ class Event:
                 logger.info('Completed updating sheet')
                 time.sleep(60)
 
-        if not matches_scraped:
+        if not scorecards_scraped:
             logger.info('No matches to scrape')
 
 

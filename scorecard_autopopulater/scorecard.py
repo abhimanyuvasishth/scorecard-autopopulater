@@ -9,7 +9,7 @@ from scorecard_autopopulater.constants import (BatCols, BowlCols, FieldCols, abb
 from scorecard_autopopulater.utils import extract_fielder_name, extract_name, safe_float, safe_int
 
 
-class Match:
+class Scorecard:
 
     def __init__(self, series_id, match_id):
         self.base_url = 'https://www.espncricinfo.com/series'

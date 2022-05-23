@@ -4,6 +4,7 @@ game1_col = 'E'
 
 in_date_fmt = '%d-%b-%Y, %I:%M %p'
 out_date_fmt = '%Y-%m-%d %H:%M:%S'
+pure_date = '%Y-%m-%d'
 
 
 class BatCols(Enum):
@@ -86,10 +87,13 @@ class Teams(Enum):
     BANGALORE = (0, 'RCB', 'Bangalore', 'Royal Challengers Bangalore')
     CHENNAI = (1, 'CSK', 'Chennai', 'Chennai Super Kings')
     DELHI = (2, 'DC', 'Delhi', 'Delhi Capitals')
+    DELHI_OLD = (2, 'DD', 'Delhi', 'Delhi Daredevils')
     HYDERABAD = (3, 'SRH', 'Hyderabad', 'Sunrisers Hyderabad')
+    HYDERABAD_OLD = (3, 'DC', 'Hyderabad', 'Deccan Chargers')
     KOLKATA = (4, 'KKR', 'Kolkata', 'Kolkata Knight Riders')
     MUMBAI = (5, 'MI', 'Mumbai', 'Mumbai Indians')
-    PUNJAB = (6, 'KXIP', 'Punjab', 'Punjab Kings')
+    PUNJAB = (6, 'PBKS', 'Punjab', 'Punjab Kings')
+    PUNJAB_OLD = (6, 'KXIP', 'Punjab', 'Kings XI Punjab')
     RAJASTHAN = (7, 'RR', 'Rajasthan', 'Rajasthan Royals')
     AFGHANISTAN = (8, 'AFG', 'Afghanistan', 'Afghanistan')
     AUSTRALIA = (9, 'AUS', 'Australia', 'Australia')
@@ -107,8 +111,13 @@ class Teams(Enum):
     SOUTH_AFRICA = (21, 'SA', 'South Africa', 'South Africa')
     SRI_LANKA = (22, 'SL', 'Sri Lanka', 'Sri Lanka')
     WEST_INDIES = (23, 'WI', 'West Indies', 'West Indies')
+    GUJARAT_OLD = (24, 'GL', 'Gujarat', 'Gujarat Lions')
     GUJARAT = (24, 'GT', 'Gujarat', 'Gujarat Titans')
     LUCKNOW = (25, 'LSG', 'Lucknow', 'Lucknow Super Giants')
+    KOCHI = (26, 'KTK', 'Kochi', 'Kochi Tuskers Kerala')
+    PUNE_OLD = (27, 'PWI', 'Pune', 'Pune Warriors')
+    PUNE = (28, 'RPS', 'Pune', 'Rising Pune Supergiant')
+    PUNE_NEW = (28, 'RPS', 'Pune', 'Rising Pune Supergiants')
 
     def get_id(self):
         return self.value[0]
@@ -124,4 +133,5 @@ class Teams(Enum):
 
 
 abbrev_lookup = {k.get_full_name(): k.get_abbrev() for k in Teams}
+full_name_lookup = {k.get_abbrev(): k.get_full_name() for k in Teams}
 safe_modes = {'not out', 'retired hurt'}

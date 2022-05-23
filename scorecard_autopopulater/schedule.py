@@ -10,13 +10,16 @@ from scorecard_autopopulater.constants import abbrev_lookup, out_date_fmt
 
 class Schedule:
 
-    def __init__(self):
+    def __init__(self, year, url):
         self.series_id = '1298423'
         self.series_name = 'indian-premier-league-2022'
 
         self.base_url = 'https://www.espncricinfo.com'
         self.series_url = f'{self.base_url}/series/{self.series_name}-{self.series_id}'
-        self.full_url = f'{self.series_url}/match-schedule-fixtures'
+        # self.full_url = f'{self.series_url}/match-schedule-fixtures'
+
+        self.year = year
+        self.full_url = url
 
         self.soup = self.get_soup()
         self.content = self.get_content()
@@ -32,12 +35,12 @@ class Schedule:
         return BeautifulSoup(page, 'html.parser')
 
     def get_content(self):
-        class_name = 'match-info-link-FIXTURES'
+        class_name = 'ds-flex ds-flex-wrap'
         return self.soup.find_all(class_=class_name, recursive=True)
 
     def scrape_page(self):
-        for i, elem in enumerate(self.content):
-            team_1, team_2 = self.extract_teams(elem)
+        for i, elem in enumerate(list(self.content[0])[::-1]):
+            team_1, team_2, result = self.extract_teams(elem)
             if 'TBA' in [team_1, team_2]:
                 continue
             url = f'{self.base_url}{self.extract_url(elem)}'
@@ -63,7 +66,8 @@ class Schedule:
 
     @staticmethod
     def extract_url(elem):
-        return elem['href']
+        terms = elem.find('a')['href'].split('/')
+        return '/'.join(terms[:len(terms) - 1] + ['match-impact-player'])
 
     @staticmethod
     def extract_match_id(url):
@@ -75,7 +79,8 @@ class Schedule:
 
     @staticmethod
     def extract_start(match_num, elem):
-        raw_start = elem.find('span').text.replace('tues', 'tue')
+        class_name = 'ds-text-tight-xs ds-truncate ds-text-ui-typo-mid'
+        raw_start = ''.join(elem.find(class_=class_name).text.split(',')[2:4]).strip()
         try:
             return parser.parse(raw_start).strftime(out_date_fmt)
         except Exception:
@@ -83,7 +88,8 @@ class Schedule:
 
     @staticmethod
     def extract_status(elem):
-        return elem.find(class_='status-text').text
+        return ''
+        # return elem.find(class_='status-text').text
 
     def get_and_update_game_count(self, team):
         try:
@@ -98,7 +104,7 @@ class Schedule:
             'match_num', 'team_1', 'abbrev_1', 'game_1', 'team_2', 'abbrev_2',
             'game_2', 'start', 'series_id', 'match_id', 'url', 'status'
         ]
-        with open('data/schedule.csv', 'w') as f:
+        with open(f'data/raw/past_schedules/schedule_{self.year}.csv', 'w') as f:
             writer = csv.DictWriter(f, fieldnames=header)
             writer.writeheader()
             for match in self.matches:
@@ -106,4 +112,26 @@ class Schedule:
 
 
 if __name__ == '__main__':
-    Schedule()
+    import time
+    years = list(range(2008, 2023))
+    urls = [
+        'https://www.espncricinfo.com/series/indian-premier-league-2007-08-313494/match-results',
+        'https://www.espncricinfo.com/series/indian-premier-league-2009-374163/match-results',
+        'https://www.espncricinfo.com/series/indian-premier-league-2009-10-418064/match-results',
+        'https://www.espncricinfo.com/series/indian-premier-league-2011-466304/match-results',
+        'https://www.espncricinfo.com/series/indian-premier-league-2012-520932/match-results',
+        'https://www.espncricinfo.com/series/indian-premier-league-2013-586733/match-results',
+        'https://www.espncricinfo.com/series/pepsi-indian-premier-league-2014-695871/match-results',
+        'https://www.espncricinfo.com/series/pepsi-indian-premier-league-2015-791129/match-results',
+        'https://www.espncricinfo.com/series/ipl-2016-968923/match-results',
+        'https://www.espncricinfo.com/series/ipl-2017-1078425/match-results',
+        'https://www.espncricinfo.com/series/ipl-2018-1131611/match-results',
+        'https://www.espncricinfo.com/series/ipl-2019-1165643/match-results',
+        'https://www.espncricinfo.com/series/ipl-2020-21-1210595/match-results',
+        'https://www.espncricinfo.com/series/ipl-2021-1249214/match-results',
+        'https://www.espncricinfo.com/series/indian-premier-league-2022-1298423/match-results',
+    ]
+    for year, url in zip(years, urls):
+        print(year)
+        Schedule(year, url)
+        time.sleep(2)

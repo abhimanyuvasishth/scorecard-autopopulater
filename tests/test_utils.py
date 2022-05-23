@@ -1,4 +1,4 @@
-from scorecard_autopopulater.match import Match
+from scorecard_autopopulater.scorecard import Scorecard
 from scorecard_autopopulater.utils import (extract_fielder_name, extract_name, get_letters,
                                            num_2_str, safe_float, safe_int, str_2_num)
 
@@ -26,11 +26,11 @@ def test_extract_players():
 
 
 def test_extract_dismissal():
-    assert Match.extract_caught_or_stumped('c †Dickwella b Chameera') == 'Dickwella'
-    assert Match.extract_caught_or_stumped('c de Silva b Lakmal') == 'de Silva'
-    assert Match.extract_run_out('run out (Shankar)') == 'Shankar'
+    assert Scorecard.extract_caught_or_stumped('c †Dickwella b Chameera') == 'Dickwella'
+    assert Scorecard.extract_caught_or_stumped('c de Silva b Lakmal') == 'de Silva'
+    assert Scorecard.extract_run_out('run out (Shankar)') == 'Shankar'
 
 
 def test_extract_sub():
-    assert Match.extract_run_out('run out (sub (Shankar)/Dube)') == 'Shankar'
+    assert Scorecard.extract_run_out('run out (sub (Shankar)/Dube)') == 'Shankar'
     assert extract_fielder_name('sub (du Plessis)') == 'du Plessis'
