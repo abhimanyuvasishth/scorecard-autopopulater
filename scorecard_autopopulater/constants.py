@@ -6,52 +6,6 @@ in_date_fmt = '%d-%b-%Y, %I:%M %p'
 out_date_fmt = '%Y-%m-%d %H:%M:%S'
 
 
-class BatCols(Enum):
-    DISMISSAL = (0, 'dismissal')
-    RUNS_SCORED = (1, 'runs_scored')
-    BALLS_FACED = (2, 'balls_faced')
-    FOURS_SCORED = (3, 'fours_scored')
-    SIXES_SCORED = (4, 'sixed_scored')
-    STRIKE_RATE = (5, 'strike_rate')
-    NOT_OUT = (6, 'not_out')
-
-    def get_id(self):
-        return self.value[0]
-
-    def get_name(self):
-        return self.value[1]
-
-
-class BowlCols(Enum):
-    OVERS = (0, 'overs')
-    MAIDENS = (1, 'maidens')
-    RUNS_CONCEDED = (2, 'runs_conceded')
-    WICKETS = (3, 'wickets')
-    ECONOMY_RATE = (4, 'economy_rate')
-    DOTS_BOWLED = (5, 'dots_bowled')
-    FOURS_CONCEDED = (6, 'fours_conceded')
-    SIXES_CONCEDED = (7, 'sixes_conceded')
-    WIDES = (8, 'wides')
-    NO_BALLS = (9, 'no_balls')
-    HATTRICKS = (10, 'hattricks')
-
-    def get_id(self):
-        return self.value[0]
-
-    def get_name(self):
-        return self.value[1]
-
-
-class FieldCols(Enum):
-    FIELDING = (0, 'fielding')
-
-    def get_id(self):
-        return self.value[0]
-
-    def get_name(self):
-        return self.value[1]
-
-
 class SheetIntroCols(Enum):
     PLAYER = 1
     PLAYING_TEAM = 2

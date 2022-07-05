@@ -3,18 +3,12 @@ import itertools
 from scorecard_autopopulater.constants import SheetOffsetCols, game1_col
 
 
-def safe_int(val):
-    try:
-        return int(val)
-    except ValueError:
-        return 0
-
-
-def safe_float(val):
-    try:
-        return float(val)
-    except ValueError:
-        return 0.0
+def extract_name(name):
+    name = name.replace('sub', '').strip()
+    name = name.replace(u'\xa0', ' ').replace('†', '').replace('(c)', '').strip()
+    for char in '[]()':
+        name = name.replace(char, '')
+    return name.strip()
 
 
 def get_letters():
@@ -46,18 +40,6 @@ def get_game_col(game_number):
     game1_col_num = str_2_num(game1_col)
     col = game1_col_num + (game_number - 1) * len([v for v in SheetOffsetCols])
     return num_2_str(col)
-
-
-def extract_fielder_name(name):
-    name = name.replace('sub', '').strip()
-    for char in '[]()':
-        name = name.replace(char, '')
-    return extract_name(name)
-
-
-def extract_name(name):
-    new_name = name.replace(u'\xa0', ' ').replace('†', '').replace('(c)', '')
-    return new_name.strip()
 
 
 def flatten_list(list_elem):
