@@ -80,22 +80,18 @@ class Match:
             for name, player in team.active_players.items():
                 # update fielding statistics
                 dismissal = Dismissal(player.statistics[StatItems.DISMISSAL.name].value)
-                fielder = self.extract_fielder(dismissal.fielder, player.innings, dismissal.is_sub)
-                if not fielder:
-                    continue
-
                 fielding = StatItems.FIELDING.name
-                fielder.update_statistics({fielding: fielder.statistics[fielding].value + 1})
+
+                try:
+                    team = self.teams[not player.innings]
+                    fielder = team.find_player(dismissal.fielder, dismissal.is_sub)
+                    fielder.update_statistics({fielding: fielder.statistics[fielding].value + 1})
+                except (AttributeError, KeyError):
+                    continue
 
         # update potm statistics
         potm = self.extract_player_of_the_match()
         potm.update_statistics({StatItems.POTM.name: True})
-
-    def extract_fielder(self, fielder_name, innings, sub):
-        try:
-            return self.teams[not innings].find_player(fielder_name, sub)
-        except AttributeError:
-            return
 
     def extract_player_of_the_match(self):
         try:

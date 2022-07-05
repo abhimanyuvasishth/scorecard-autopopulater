@@ -5,6 +5,7 @@ from scorecard_autopopulater.constants import SheetIntroCols
 from scorecard_autopopulater.utils import str_2_num
 
 
+# TODO: add base class
 class GoogleSheet:
 
     def __init__(self):

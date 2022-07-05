@@ -102,5 +102,6 @@ class Event:
             logger.info('No matches to scrape')
 
 
+# TODO: add cli
 if __name__ == '__main__':
     Event(test=False).populate_scores()
