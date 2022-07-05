@@ -98,17 +98,12 @@ class Match:
             class_name = 'ci-match-player-award-carousel'
             potm_container = self.soup.find(class_=class_name, recursive=True)
             potm = potm_container.find_all('span')[0].text.split(',')[0].strip()
-            # logging.info(f'Player of the match: {potm}')
             if potm in self.teams[0].players:
                 return self.teams[0].players[potm]
             else:
                 return self.teams[1].players[potm]
-        except AttributeError:
+        except (AttributeError, KeyError):
             pass
-            # logging.info('No potm found')
-        except KeyError:
-            pass
-            # logging.error(f'Potm does not exist')
 
     def __repr__(self):
         return f'Match Id: {self.match_id}. Teams: {self.teams}'
