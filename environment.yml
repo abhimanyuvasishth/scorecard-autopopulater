@@ -11,4 +11,5 @@ dependencies:
   - pip:
     - gspread
     - oauth2client
+    - pytest-cov
     - pytz
