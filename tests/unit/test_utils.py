@@ -1,4 +1,4 @@
-from scorecard_autopopulater.utils import (get_letters, num_2_str, str_2_num)
+from scorecard_autopopulater.utils import get_letters, num_2_str, str_2_num
 
 
 def test_column_number_conversion():
