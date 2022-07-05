@@ -2,10 +2,38 @@
 
 Populates a google sheet with cricket match data
 
-## Testing
+## Installation
+
+Create the conda environment:
 
 ```
-pytest
+conda env create -f environment.yml
+```
+
+Activate the environment:
+
+```
+conda activate scorecard-autopopulater
+```
+
+## Testing
+
+for just unit tests:
+
+```
+pytest --cov=scorecard_autopopulater tests/unit
+```
+
+or for all tests:
+
+```
+pytest --cov=scorecard_autopopulater tests
+```
+
+## Linting
+
+```
+flake8 scorecard_autopopulater
 ```
 
 ### Caveats
