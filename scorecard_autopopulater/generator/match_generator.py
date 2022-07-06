@@ -3,11 +3,11 @@ from datetime import datetime
 import pytz
 
 from scorecard_autopopulater.match import Match
-from scorecard_autopopulater.reader.match_reader import MatchReader
+from scorecard_autopopulater.reader.data_row_reader import DataRowReader
 
 
 class MatchGenerator:
-    def __init__(self, match_reader: MatchReader, scraper_type, hours_before=0, hours_after=5,
+    def __init__(self, match_reader: DataRowReader, scraper_type, hours_before=0, hours_after=5,
                  limit=None):
         self.match_reader = match_reader
         self.scraper_type = scraper_type
@@ -17,7 +17,7 @@ class MatchGenerator:
 
     def generate_match_rows(self) -> list[Match]:
         cur_time = datetime.now(pytz.timezone('UTC')).replace(tzinfo=None)
-        for i, row in enumerate(self.match_reader.generate_match_rows()):
+        for i, row in enumerate(self.match_reader.generate_rows()):
             if i == self.limit:
                 return
 

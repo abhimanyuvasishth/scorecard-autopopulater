@@ -1,4 +1,4 @@
-from dataclasses import dataclass, fields
+from dataclasses import dataclass
 
 
 @dataclass(init=False)
@@ -9,7 +9,6 @@ class PlayerRow:
     withdrawn: bool = False
 
     def __init__(self, **kwargs):
-        names = set([field.name for field in fields(self)])
         for key, value in kwargs.items():
-            if key in names:
+            if key in self.__annotations__:
                 setattr(self, key, value)

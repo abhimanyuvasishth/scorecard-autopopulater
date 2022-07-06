@@ -20,7 +20,7 @@ class Team:
 
     def _generate_players(self):
         player_names = []
-        with open('data/squads.csv') as csvfile:
+        with open('data/squads/current_ipl_squad.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 if row['team'] == self.name:

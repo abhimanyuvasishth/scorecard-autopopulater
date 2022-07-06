@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 from dateutil import parser
 
@@ -46,7 +46,7 @@ class CricinfoScheduleScraper(ScheduleScraper):
             .replace('tues', 'tue')\
             .replace('today', date.today().isoformat())\
             .replace('tomorrow', (date.today() + timedelta(days=1)).isoformat())
-        return parser.parse(raw_start).strftime(out_date_fmt)
+        return datetime.fromisoformat(parser.parse(raw_start).strftime(out_date_fmt))
 
     def get_and_update_game_count(self, team):
         try:

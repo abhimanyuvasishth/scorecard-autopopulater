@@ -1,4 +1,4 @@
-from dataclasses import dataclass, fields
+from dataclasses import dataclass
 from datetime import datetime
 
 
@@ -13,7 +13,8 @@ class MatchRow:
     game_1: int = 0
 
     def __init__(self, **kwargs):
-        names = set([field.name for field in fields(self)])
         for key, value in kwargs.items():
-            if key in names:
+            if key in MatchRow.__annotations__:
+                if MatchRow.__annotations__[key] == datetime and type(value) == str:
+                    value = datetime.fromisoformat(value)
                 setattr(self, key, value)
