@@ -1,237 +1,248 @@
-name,team,abbrev
-MS Dhoni,Chennai Super Kings,CSK
-Moeen Ali,Chennai Super Kings,CSK
-KM Asif,Chennai Super Kings,CSK
-Bhagath Varma,Chennai Super Kings,CSK
-Dwayne Bravo,Chennai Super Kings,CSK
-Devon Conway,Chennai Super Kings,CSK
-Tushar Deshpande,Chennai Super Kings,CSK
-Shivam Dube,Chennai Super Kings,CSK
-Ruturaj Gaikwad,Chennai Super Kings,CSK
-Rajvardhan Hangargekar,Chennai Super Kings,CSK
-Hari Nishaanth,Chennai Super Kings,CSK
-Ravindra Jadeja,Chennai Super Kings,CSK
-Narayan Jagadeesan,Chennai Super Kings,CSK
-Chris Jordan,Chennai Super Kings,CSK
-Mukesh Choudhary,Chennai Super Kings,CSK
-Matheesha Pathirana,Chennai Super Kings,CSK
-Dwaine Pretorius,Chennai Super Kings,CSK
-Ambati Rayudu,Chennai Super Kings,CSK
-Mitchell Santner,Chennai Super Kings,CSK
-Subhranshu Senapati,Chennai Super Kings,CSK
-Simarjeet Singh,Chennai Super Kings,CSK
-Prashant Solanki,Chennai Super Kings,CSK
-Maheesh Theekshana,Chennai Super Kings,CSK
-Robin Uthappa,Chennai Super Kings,CSK
-Rishabh Pant,Delhi Capitals,DC
-Khaleel Ahmed,Delhi Capitals,DC
-Ashwin Hebbar,Delhi Capitals,DC
-Srikar Bharat,Delhi Capitals,DC
-Yash Dhull,Delhi Capitals,DC
-Praveen Dubey,Delhi Capitals,DC
-Sarfaraz Khan,Delhi Capitals,DC
-Kuldeep Yadav,Delhi Capitals,DC
-Lalit Yadav,Delhi Capitals,DC
-Mandeep Singh,Delhi Capitals,DC
-Mitchell Marsh,Delhi Capitals,DC
-Mustafizur Rahman,Delhi Capitals,DC
-Kamlesh Nagarkoti,Delhi Capitals,DC
-Lungi Ngidi,Delhi Capitals,DC
-Anrich Nortje,Delhi Capitals,DC
-Vicky Ostwal,Delhi Capitals,DC
-Ripal Patel,Delhi Capitals,DC
-Axar Patel,Delhi Capitals,DC
-Rovman Powell,Delhi Capitals,DC
-Chetan Sakariya,Delhi Capitals,DC
-Tim Seifert,Delhi Capitals,DC
-Prithvi Shaw,Delhi Capitals,DC
-Shardul Thakur,Delhi Capitals,DC
-David Warner,Delhi Capitals,DC
-Hardik Pandya,Gujarat Titans,GT
-Varun Aaron,Gujarat Titans,GT
-Dominic Drakes,Gujarat Titans,GT
-Lockie Ferguson,Gujarat Titans,GT
-Gurkeerat Singh Mann,Gujarat Titans,GT
-Alzarri Joseph,Gujarat Titans,GT
-Abhinav Manohar,Gujarat Titans,GT
-David Miller,Gujarat Titans,GT
-Mohammed Shami,Gujarat Titans,GT
-Darshan Nalkande,Gujarat Titans,GT
-Noor Ahmad,Gujarat Titans,GT
-Rahmanullah Gurbaz,Gujarat Titans,GT
-Rashid Khan,Gujarat Titans,GT
-Wriddhiman Saha,Gujarat Titans,GT
-Ravisrinivasan Sai Kishore,Gujarat Titans,GT
-Sai Sudharsan,Gujarat Titans,GT
-Pradeep Sangwan,Gujarat Titans,GT
-Vijay Shankar,Gujarat Titans,GT
-Shubman Gill,Gujarat Titans,GT
-Rahul Tewatia,Gujarat Titans,GT
-Matthew Wade,Gujarat Titans,GT
-Jayant Yadav,Gujarat Titans,GT
-Yash Dayal,Gujarat Titans,GT
-Shreyas Iyer,Kolkata Knight Riders,KKR
-Aman Hakim Khan,Kolkata Knight Riders,KKR
-Ashok Sharma,Kolkata Knight Riders,KKR
-Sam Billings,Kolkata Knight Riders,KKR
-Pat Cummins,Kolkata Knight Riders,KKR
-Aaron Finch,Kolkata Knight Riders,KKR
-Harshit Rana,Kolkata Knight Riders,KKR
-Baba Indrajith,Kolkata Knight Riders,KKR
-Venkatesh Iyer,Kolkata Knight Riders,KKR
-Sheldon Jackson,Kolkata Knight Riders,KKR
-Chamika Karunaratne,Kolkata Knight Riders,KKR
-Mohammad Nabi,Kolkata Knight Riders,KKR
-Sunil Narine,Kolkata Knight Riders,KKR
-Pratham Singh,Kolkata Knight Riders,KKR
-Ajinkya Rahane,Kolkata Knight Riders,KKR
-Ramesh Kumar,Kolkata Knight Riders,KKR
-Nitish Rana,Kolkata Knight Riders,KKR
-Anukul Roy,Kolkata Knight Riders,KKR
-Andre Russell,Kolkata Knight Riders,KKR
-Shivam Mavi,Kolkata Knight Riders,KKR
-Rinku Singh,Kolkata Knight Riders,KKR
-Tim Southee,Kolkata Knight Riders,KKR
-Abhijeet Tomar,Kolkata Knight Riders,KKR
-Varun Chakravarthy,Kolkata Knight Riders,KKR
-Umesh Yadav,Kolkata Knight Riders,KKR
-KL Rahul,Lucknow Super Giants,LSG
-Avesh Khan,Lucknow Super Giants,LSG
-Ayush Badoni,Lucknow Super Giants,LSG
-Dushmantha Chameera,Lucknow Super Giants,LSG
-Quinton de Kock,Lucknow Super Giants,LSG
-Krishnappa Gowtham,Lucknow Super Giants,LSG
-Jason Holder,Lucknow Super Giants,LSG
-Deepak Hooda,Lucknow Super Giants,LSG
-Evin Lewis,Lucknow Super Giants,LSG
-Kyle Mayers,Lucknow Super Giants,LSG
-Mohsin Khan,Lucknow Super Giants,LSG
-Shahbaz Nadeem,Lucknow Super Giants,LSG
-Manish Pandey,Lucknow Super Giants,LSG
-Krunal Pandya,Lucknow Super Giants,LSG
-Ankit Rajpoot,Lucknow Super Giants,LSG
-Ravi Bishnoi,Lucknow Super Giants,LSG
-Karan Sharma,Lucknow Super Giants,LSG
-Marcus Stoinis,Lucknow Super Giants,LSG
-Andrew Tye,Lucknow Super Giants,LSG
-Manan Vohra,Lucknow Super Giants,LSG
-Mayank Yadav,Lucknow Super Giants,LSG
-Rohit Sharma,Mumbai Indians,MI
-Fabian Allen,Mumbai Indians,MI
-Anmolpreet Singh,Mumbai Indians,MI
-Jofra Archer,Mumbai Indians,MI
-Murugan Ashwin,Mumbai Indians,MI
-Basil Thampi,Mumbai Indians,MI
-Dewald Brevis,Mumbai Indians,MI
-Rahul Buddhi,Mumbai Indians,MI
-Jasprit Bumrah,Mumbai Indians,MI
-Tim David,Mumbai Indians,MI
-Ishan Kishan,Mumbai Indians,MI
-Aryan Juyal,Mumbai Indians,MI
-Kumar Kartikeya,Mumbai Indians,MI
-Mayank Markande,Mumbai Indians,MI
-Riley Meredith,Mumbai Indians,MI
-Tymal Mills,Mumbai Indians,MI
-Kieron Pollard,Mumbai Indians,MI
-Ramandeep Singh,Mumbai Indians,MI
-Daniel Sams,Mumbai Indians,MI
-Sanjay Yadav,Mumbai Indians,MI
-Hrithik Shokeen,Mumbai Indians,MI
-Arjun Tendulkar,Mumbai Indians,MI
-Tilak Varma,Mumbai Indians,MI
-Jaydev Unadkat,Mumbai Indians,MI
-Suryakumar Yadav,Mumbai Indians,MI
-Mayank Agarwal,Punjab Kings,KXIP
-Vaibhav Arora,Punjab Kings,KXIP
-Arshdeep Singh,Punjab Kings,KXIP
-Jonny Bairstow,Punjab Kings,KXIP
-Baltej Singh,Punjab Kings,KXIP
-Raj Bawa,Punjab Kings,KXIP
-Rahul Chahar,Punjab Kings,KXIP
-Writtick Chatterjee,Punjab Kings,KXIP
-Rishi Dhawan,Punjab Kings,KXIP
-Shikhar Dhawan,Punjab Kings,KXIP
-Nathan Ellis,Punjab Kings,KXIP
-Harpreet Brar,Punjab Kings,KXIP
-Benny Howell,Punjab Kings,KXIP
-Liam Livingstone,Punjab Kings,KXIP
-Prerak Mankad,Punjab Kings,KXIP
-Ansh Patel,Punjab Kings,KXIP
-Ishan Porel,Punjab Kings,KXIP
-Prabhsimran Singh,Punjab Kings,KXIP
-Kagiso Rabada,Punjab Kings,KXIP
-Bhanuka Rajapaksa,Punjab Kings,KXIP
-Sandeep Sharma,Punjab Kings,KXIP
-M Shahrukh Khan,Punjab Kings,KXIP
-Jitesh Sharma,Punjab Kings,KXIP
-Odean Smith,Punjab Kings,KXIP
-Atharva Taide,Punjab Kings,KXIP
-Sanju Samson,Rajasthan Royals,RR
-Anunay Singh,Rajasthan Royals,RR
-Ravichandran Ashwin,Rajasthan Royals,RR
-Trent Boult,Rajasthan Royals,RR
-Jos Buttler,Rajasthan Royals,RR
-KC Cariappa,Rajasthan Royals,RR
-Yuzvendra Chahal,Rajasthan Royals,RR
-Nathan Coulter-Nile,Rajasthan Royals,RR
-Shubham Garhwal,Rajasthan Royals,RR
-Shimron Hetmyer,Rajasthan Royals,RR
-Yashasvi Jaiswal,Rajasthan Royals,RR
-Dhruv Jurel,Rajasthan Royals,RR
-Obed McCoy,Rajasthan Royals,RR
-Daryl Mitchell,Rajasthan Royals,RR
-Karun Nair,Rajasthan Royals,RR
-James Neesham,Rajasthan Royals,RR
-Devdutt Padikkal,Rajasthan Royals,RR
-Riyan Parag,Rajasthan Royals,RR
-Prasidh Krishna,Rajasthan Royals,RR
-Navdeep Saini,Rajasthan Royals,RR
-Kuldeep Sen,Rajasthan Royals,RR
-Tejas Baroka,Rajasthan Royals,RR
-Rassie van der Dussen,Rajasthan Royals,RR
-Kuldip Yadav,Rajasthan Royals,RR
-Faf du Plessis,Royal Challengers Bangalore,RCB
-Akash Deep,Royal Challengers Bangalore,RCB
-Finn Allen,Royal Challengers Bangalore,RCB
-Anuj Rawat,Royal Challengers Bangalore,RCB
-Jason Behrendorff,Royal Challengers Bangalore,RCB
-Wanindu Hasaranga de Silva,Royal Challengers Bangalore,RCB
-Aneeshwar Gautam,Royal Challengers Bangalore,RCB
-Josh Hazlewood,Royal Challengers Bangalore,RCB
-Dinesh Karthik,Royal Challengers Bangalore,RCB
-Siddarth Kaul,Royal Challengers Bangalore,RCB
-Virat Kohli,Royal Challengers Bangalore,RCB
-Mahipal Lomror,Royal Challengers Bangalore,RCB
-Glenn Maxwell,Royal Challengers Bangalore,RCB
-Chama Milind,Royal Challengers Bangalore,RCB
-Mohammed Siraj,Royal Challengers Bangalore,RCB
-Harshal Patel,Royal Challengers Bangalore,RCB
-Rajat Patidar,Royal Challengers Bangalore,RCB
-Suyash Prabhudessai,Royal Challengers Bangalore,RCB
-Sherfane Rutherford,Royal Challengers Bangalore,RCB
-Shahbaz Ahmed,Royal Challengers Bangalore,RCB
-Karn Sharma,Royal Challengers Bangalore,RCB
-David Willey,Royal Challengers Bangalore,RCB
-Kane Williamson,Sunrisers Hyderabad,SRH
-Sean Abbott,Sunrisers Hyderabad,SRH
-Abdul Samad,Sunrisers Hyderabad,SRH
-Abhishek Sharma,Sunrisers Hyderabad,SRH
-Saurabh Dubey,Sunrisers Hyderabad,SRH
-Fazalhaq Farooqi,Sunrisers Hyderabad,SRH
-Priyam Garg,Sunrisers Hyderabad,SRH
-Shreyas Gopal,Sunrisers Hyderabad,SRH
-Marco Jansen,Sunrisers Hyderabad,SRH
-Kartik Tyagi,Sunrisers Hyderabad,SRH
-Bhuvneshwar Kumar,Sunrisers Hyderabad,SRH
-Aiden Markram,Sunrisers Hyderabad,SRH
-T Natarajan,Sunrisers Hyderabad,SRH
-Glenn Phillips,Sunrisers Hyderabad,SRH
-Nicholas Pooran,Sunrisers Hyderabad,SRH
-Ravikumar Samarth,Sunrisers Hyderabad,SRH
-Shashank Singh,Sunrisers Hyderabad,SRH
-Romario Shepherd,Sunrisers Hyderabad,SRH
-Jagadeesha Suchith,Sunrisers Hyderabad,SRH
-Rahul Tripathi,Sunrisers Hyderabad,SRH
-Umran Malik,Sunrisers Hyderabad,SRH
-Vishnu Vinod,Sunrisers Hyderabad,SRH
-Washington Sundar,Sunrisers Hyderabad,SRH
+name,team,abbrev,withdrawn
+MS Dhoni,Chennai Super Kings,CSK,False
+Moeen Ali,Chennai Super Kings,CSK,False
+KM Asif,Chennai Super Kings,CSK,False
+Bhagath Varma,Chennai Super Kings,CSK,False
+Dwayne Bravo,Chennai Super Kings,CSK,False
+Devon Conway,Chennai Super Kings,CSK,False
+Tushar Deshpande,Chennai Super Kings,CSK,False
+Shivam Dube,Chennai Super Kings,CSK,False
+Ruturaj Gaikwad,Chennai Super Kings,CSK,False
+Rajvardhan Hangargekar,Chennai Super Kings,CSK,False
+Hari Nishaanth,Chennai Super Kings,CSK,False
+Narayan Jagadeesan,Chennai Super Kings,CSK,False
+Chris Jordan,Chennai Super Kings,CSK,False
+Mukesh Choudhary,Chennai Super Kings,CSK,False
+Matheesha Pathirana,Chennai Super Kings,CSK,False
+Dwaine Pretorius,Chennai Super Kings,CSK,False
+Ambati Rayudu,Chennai Super Kings,CSK,False
+Mitchell Santner,Chennai Super Kings,CSK,False
+Subhranshu Senapati,Chennai Super Kings,CSK,False
+Simarjeet Singh,Chennai Super Kings,CSK,False
+Prashant Solanki,Chennai Super Kings,CSK,False
+Maheesh Theekshana,Chennai Super Kings,CSK,False
+Robin Uthappa,Chennai Super Kings,CSK,False
+Deepak Chahar,Chennai Super Kings,CSK,True
+Ravindra Jadeja,Chennai Super Kings,CSK,True
+Adam Milne,Chennai Super Kings,CSK,True
+Rishabh Pant,Delhi Capitals,DC,False
+Khaleel Ahmed,Delhi Capitals,DC,False
+Ashwin Hebbar,Delhi Capitals,DC,False
+Srikar Bharat,Delhi Capitals,DC,False
+Yash Dhull,Delhi Capitals,DC,False
+Praveen Dubey,Delhi Capitals,DC,False
+Sarfaraz Khan,Delhi Capitals,DC,False
+Kuldeep Yadav,Delhi Capitals,DC,False
+Lalit Yadav,Delhi Capitals,DC,False
+Mandeep Singh,Delhi Capitals,DC,False
+Mitchell Marsh,Delhi Capitals,DC,False
+Mustafizur Rahman,Delhi Capitals,DC,False
+Kamlesh Nagarkoti,Delhi Capitals,DC,False
+Lungi Ngidi,Delhi Capitals,DC,False
+Anrich Nortje,Delhi Capitals,DC,False
+Vicky Ostwal,Delhi Capitals,DC,False
+Ripal Patel,Delhi Capitals,DC,False
+Axar Patel,Delhi Capitals,DC,False
+Rovman Powell,Delhi Capitals,DC,False
+Chetan Sakariya,Delhi Capitals,DC,False
+Tim Seifert,Delhi Capitals,DC,False
+Prithvi Shaw,Delhi Capitals,DC,False
+Shardul Thakur,Delhi Capitals,DC,False
+David Warner,Delhi Capitals,DC,False
+Hardik Pandya,Gujarat Titans,GT,False
+Varun Aaron,Gujarat Titans,GT,False
+Dominic Drakes,Gujarat Titans,GT,False
+Lockie Ferguson,Gujarat Titans,GT,False
+Gurkeerat Singh Mann,Gujarat Titans,GT,False
+Alzarri Joseph,Gujarat Titans,GT,False
+Abhinav Manohar,Gujarat Titans,GT,False
+David Miller,Gujarat Titans,GT,False
+Mohammed Shami,Gujarat Titans,GT,False
+Darshan Nalkande,Gujarat Titans,GT,False
+Noor Ahmad,Gujarat Titans,GT,False
+Rahmanullah Gurbaz,Gujarat Titans,GT,False
+Rashid Khan,Gujarat Titans,GT,False
+Wriddhiman Saha,Gujarat Titans,GT,False
+Ravisrinivasan Sai Kishore,Gujarat Titans,GT,False
+Sai Sudharsan,Gujarat Titans,GT,False
+Pradeep Sangwan,Gujarat Titans,GT,False
+Vijay Shankar,Gujarat Titans,GT,False
+Shubman Gill,Gujarat Titans,GT,False
+Rahul Tewatia,Gujarat Titans,GT,False
+Matthew Wade,Gujarat Titans,GT,False
+Jayant Yadav,Gujarat Titans,GT,False
+Yash Dayal,Gujarat Titans,GT,False
+Jason Roy,Gujarat Titans,GT,True
+Shreyas Iyer,Kolkata Knight Riders,KKR,False
+Aman Hakim Khan,Kolkata Knight Riders,KKR,False
+Ashok Sharma,Kolkata Knight Riders,KKR,False
+Sam Billings,Kolkata Knight Riders,KKR,False
+Aaron Finch,Kolkata Knight Riders,KKR,False
+Harshit Rana,Kolkata Knight Riders,KKR,False
+Baba Indrajith,Kolkata Knight Riders,KKR,False
+Venkatesh Iyer,Kolkata Knight Riders,KKR,False
+Sheldon Jackson,Kolkata Knight Riders,KKR,False
+Chamika Karunaratne,Kolkata Knight Riders,KKR,False
+Mohammad Nabi,Kolkata Knight Riders,KKR,False
+Sunil Narine,Kolkata Knight Riders,KKR,False
+Pratham Singh,Kolkata Knight Riders,KKR,False
+Ajinkya Rahane,Kolkata Knight Riders,KKR,False
+Ramesh Kumar,Kolkata Knight Riders,KKR,False
+Nitish Rana,Kolkata Knight Riders,KKR,False
+Anukul Roy,Kolkata Knight Riders,KKR,False
+Andre Russell,Kolkata Knight Riders,KKR,False
+Shivam Mavi,Kolkata Knight Riders,KKR,False
+Rinku Singh,Kolkata Knight Riders,KKR,False
+Tim Southee,Kolkata Knight Riders,KKR,False
+Abhijeet Tomar,Kolkata Knight Riders,KKR,False
+Varun Chakravarthy,Kolkata Knight Riders,KKR,False
+Umesh Yadav,Kolkata Knight Riders,KKR,False
+Pat Cummins,Kolkata Knight Riders,KKR,True
+Alex Hales,Kolkata Knight Riders,KKR,True
+Rasikh Salam,Kolkata Knight Riders,KKR,True
+KL Rahul,Lucknow Super Giants,LSG,False
+Avesh Khan,Lucknow Super Giants,LSG,False
+Ayush Badoni,Lucknow Super Giants,LSG,False
+Dushmantha Chameera,Lucknow Super Giants,LSG,False
+Quinton de Kock,Lucknow Super Giants,LSG,False
+Krishnappa Gowtham,Lucknow Super Giants,LSG,False
+Jason Holder,Lucknow Super Giants,LSG,False
+Deepak Hooda,Lucknow Super Giants,LSG,False
+Evin Lewis,Lucknow Super Giants,LSG,False
+Kyle Mayers,Lucknow Super Giants,LSG,False
+Mohsin Khan,Lucknow Super Giants,LSG,False
+Shahbaz Nadeem,Lucknow Super Giants,LSG,False
+Manish Pandey,Lucknow Super Giants,LSG,False
+Krunal Pandya,Lucknow Super Giants,LSG,False
+Ankit Rajpoot,Lucknow Super Giants,LSG,False
+Ravi Bishnoi,Lucknow Super Giants,LSG,False
+Karan Sharma,Lucknow Super Giants,LSG,False
+Marcus Stoinis,Lucknow Super Giants,LSG,False
+Andrew Tye,Lucknow Super Giants,LSG,False
+Manan Vohra,Lucknow Super Giants,LSG,False
+Mayank Yadav,Lucknow Super Giants,LSG,False
+Mark Wood,Lucknow Super Giants,LSG,True
+Rohit Sharma,Mumbai Indians,MI,False
+Fabian Allen,Mumbai Indians,MI,False
+Anmolpreet Singh,Mumbai Indians,MI,False
+Jofra Archer,Mumbai Indians,MI,False
+Murugan Ashwin,Mumbai Indians,MI,False
+Basil Thampi,Mumbai Indians,MI,False
+Dewald Brevis,Mumbai Indians,MI,False
+Rahul Buddhi,Mumbai Indians,MI,False
+Jasprit Bumrah,Mumbai Indians,MI,False
+Tim David,Mumbai Indians,MI,False
+Ishan Kishan,Mumbai Indians,MI,False
+Aryan Juyal,Mumbai Indians,MI,False
+Kumar Kartikeya,Mumbai Indians,MI,False
+Mayank Markande,Mumbai Indians,MI,False
+Riley Meredith,Mumbai Indians,MI,False
+Kieron Pollard,Mumbai Indians,MI,False
+Ramandeep Singh,Mumbai Indians,MI,False
+Daniel Sams,Mumbai Indians,MI,False
+Sanjay Yadav,Mumbai Indians,MI,False
+Hrithik Shokeen,Mumbai Indians,MI,False
+Tristan Stubbs,Mumbai Indians,MI,False
+Arjun Tendulkar,Mumbai Indians,MI,False
+Tilak Varma,Mumbai Indians,MI,False
+Jaydev Unadkat,Mumbai Indians,MI,False
+Arshad Khan,Mumbai Indians,MI,True
+Tymal Mills,Mumbai Indians,MI,True
+Suryakumar Yadav,Mumbai Indians,MI,True
+Mayank Agarwal,Punjab Kings,KXIP,False
+Vaibhav Arora,Punjab Kings,KXIP,False
+Arshdeep Singh,Punjab Kings,KXIP,False
+Jonny Bairstow,Punjab Kings,KXIP,False
+Baltej Singh,Punjab Kings,KXIP,False
+Raj Bawa,Punjab Kings,KXIP,False
+Rahul Chahar,Punjab Kings,KXIP,False
+Writtick Chatterjee,Punjab Kings,KXIP,False
+Rishi Dhawan,Punjab Kings,KXIP,False
+Shikhar Dhawan,Punjab Kings,KXIP,False
+Nathan Ellis,Punjab Kings,KXIP,False
+Harpreet Brar,Punjab Kings,KXIP,False
+Benny Howell,Punjab Kings,KXIP,False
+Liam Livingstone,Punjab Kings,KXIP,False
+Prerak Mankad,Punjab Kings,KXIP,False
+Ansh Patel,Punjab Kings,KXIP,False
+Ishan Porel,Punjab Kings,KXIP,False
+Prabhsimran Singh,Punjab Kings,KXIP,False
+Kagiso Rabada,Punjab Kings,KXIP,False
+Bhanuka Rajapaksa,Punjab Kings,KXIP,False
+Sandeep Sharma,Punjab Kings,KXIP,False
+M Shahrukh Khan,Punjab Kings,KXIP,False
+Jitesh Sharma,Punjab Kings,KXIP,False
+Odean Smith,Punjab Kings,KXIP,False
+Atharva Taide,Punjab Kings,KXIP,False
+Sanju Samson,Rajasthan Royals,RR,False
+Anunay Singh,Rajasthan Royals,RR,False
+Ravichandran Ashwin,Rajasthan Royals,RR,False
+Corbin Bosch,Rajasthan Royals,RR,False
+Trent Boult,Rajasthan Royals,RR,False
+Jos Buttler,Rajasthan Royals,RR,False
+KC Cariappa,Rajasthan Royals,RR,False
+Yuzvendra Chahal,Rajasthan Royals,RR,False
+Shubham Garhwal,Rajasthan Royals,RR,False
+Shimron Hetmyer,Rajasthan Royals,RR,False
+Yashasvi Jaiswal,Rajasthan Royals,RR,False
+Dhruv Jurel,Rajasthan Royals,RR,False
+Obed McCoy,Rajasthan Royals,RR,False
+Daryl Mitchell,Rajasthan Royals,RR,False
+Karun Nair,Rajasthan Royals,RR,False
+James Neesham,Rajasthan Royals,RR,False
+Devdutt Padikkal,Rajasthan Royals,RR,False
+Riyan Parag,Rajasthan Royals,RR,False
+Prasidh Krishna,Rajasthan Royals,RR,False
+Navdeep Saini,Rajasthan Royals,RR,False
+Kuldeep Sen,Rajasthan Royals,RR,False
+Tejas Baroka,Rajasthan Royals,RR,False
+Rassie van der Dussen,Rajasthan Royals,RR,False
+Kuldip Yadav,Rajasthan Royals,RR,False
+Nathan Coulter-Nile,Rajasthan Royals,RR,True
+Faf du Plessis,Royal Challengers Bangalore,RCB,False
+Akash Deep,Royal Challengers Bangalore,RCB,False
+Finn Allen,Royal Challengers Bangalore,RCB,False
+Anuj Rawat,Royal Challengers Bangalore,RCB,False
+Jason Behrendorff,Royal Challengers Bangalore,RCB,False
+Wanindu Hasaranga de Silva,Royal Challengers Bangalore,RCB,False
+Aneeshwar Gautam,Royal Challengers Bangalore,RCB,False
+Josh Hazlewood,Royal Challengers Bangalore,RCB,False
+Dinesh Karthik,Royal Challengers Bangalore,RCB,False
+Siddarth Kaul,Royal Challengers Bangalore,RCB,False
+Virat Kohli,Royal Challengers Bangalore,RCB,False
+Mahipal Lomror,Royal Challengers Bangalore,RCB,False
+Glenn Maxwell,Royal Challengers Bangalore,RCB,False
+Chama Milind,Royal Challengers Bangalore,RCB,False
+Mohammed Siraj,Royal Challengers Bangalore,RCB,False
+Harshal Patel,Royal Challengers Bangalore,RCB,False
+Rajat Patidar,Royal Challengers Bangalore,RCB,False
+Suyash Prabhudessai,Royal Challengers Bangalore,RCB,False
+Sherfane Rutherford,Royal Challengers Bangalore,RCB,False
+Shahbaz Ahmed,Royal Challengers Bangalore,RCB,False
+Karn Sharma,Royal Challengers Bangalore,RCB,False
+David Willey,Royal Challengers Bangalore,RCB,False
+Luvnith Sisodia,Royal Challengers Bangalore,RCB,True
+Sean Abbott,Sunrisers Hyderabad,SRH,False
+Abdul Samad,Sunrisers Hyderabad,SRH,False
+Abhishek Sharma,Sunrisers Hyderabad,SRH,False
+Fazalhaq Farooqi,Sunrisers Hyderabad,SRH,False
+Priyam Garg,Sunrisers Hyderabad,SRH,False
+Shreyas Gopal,Sunrisers Hyderabad,SRH,False
+Marco Jansen,Sunrisers Hyderabad,SRH,False
+Kartik Tyagi,Sunrisers Hyderabad,SRH,False
+Bhuvneshwar Kumar,Sunrisers Hyderabad,SRH,False
+Aiden Markram,Sunrisers Hyderabad,SRH,False
+Sushant Mishra,Sunrisers Hyderabad,SRH,False
+T Natarajan,Sunrisers Hyderabad,SRH,False
+Glenn Phillips,Sunrisers Hyderabad,SRH,False
+Nicholas Pooran,Sunrisers Hyderabad,SRH,False
+Ravikumar Samarth,Sunrisers Hyderabad,SRH,False
+Shashank Singh,Sunrisers Hyderabad,SRH,False
+Romario Shepherd,Sunrisers Hyderabad,SRH,False
+Jagadeesha Suchith,Sunrisers Hyderabad,SRH,False
+Rahul Tripathi,Sunrisers Hyderabad,SRH,False
+Umran Malik,Sunrisers Hyderabad,SRH,False
+Vishnu Vinod,Sunrisers Hyderabad,SRH,False
+Washington Sundar,Sunrisers Hyderabad,SRH,False
+Saurabh Dubey,Sunrisers Hyderabad,SRH,True
+Kane Williamson,Sunrisers Hyderabad,SRH,True
