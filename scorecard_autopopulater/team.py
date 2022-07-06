@@ -4,9 +4,10 @@ from scorecard_autopopulater.player import Player
 
 
 class Team:
-    def __init__(self, name, innings):
+    def __init__(self, name, innings, game_number=0):
         self.name = name
         self.innings = innings
+        self.game_number = game_number
         self.players = self._generate_players()
 
     @property
