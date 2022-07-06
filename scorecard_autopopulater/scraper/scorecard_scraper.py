@@ -1,20 +1,9 @@
-from abc import ABC, abstractmethod
-from urllib.request import urlopen
+from abc import abstractmethod
 
-from bs4 import BeautifulSoup
+from scorecard_autopopulater.scraper.scraper import Scraper
 
 
-class ScorecardScraper(ABC):
-    def __init__(self, url):
-        self.url = url
-        self.page = urlopen(self.url)
-        self.soup = BeautifulSoup(self.page, 'html.parser')
-
-    @property
-    @abstractmethod
-    def content(self):
-        ...
-
+class ScorecardScraper(Scraper):
     @property
     @abstractmethod
     def potm_name(self):
