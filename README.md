@@ -16,6 +16,14 @@ Activate the environment:
 conda activate scorecard-autopopulater
 ```
 
+## Usage
+
+Use the CLI like so:
+
+```
+python cli/squad_cli.py write_squads_to_csv -u YOUR_URL -f YOUR_FILE_NAME
+```
+
 ## Testing
 
 for just unit tests:
