@@ -6,8 +6,7 @@ from scorecard_autopopulater.constants import SheetOffsetCols
 from scorecard_autopopulater.generator.match_generator import MatchGenerator
 from scorecard_autopopulater.google_sheet import GoogleSheet
 from scorecard_autopopulater.reader.csv_file_match_reader import CSVFileMatchReader
-from scorecard_autopopulater.scraper.cricinfo_scorecard_scraper import \
-    CricinfoScorecardScraper
+from scorecard_autopopulater.scraper.cricinfo_scorecard_scraper import CricinfoScorecardScraper
 from scorecard_autopopulater.utils import compare_info, get_game_col, num_2_str, str_2_num
 
 logging_fmt = '%(asctime)s %(levelname)s %(message)s'

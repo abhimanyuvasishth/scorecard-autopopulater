@@ -2,8 +2,7 @@ import pytest
 
 from scorecard_autopopulater.match import Match
 from scorecard_autopopulater.player import Player
-from scorecard_autopopulater.scraper.cricinfo_scorecard_scraper import \
-    CricinfoScorecardScraper
+from scorecard_autopopulater.scraper.cricinfo_scorecard_scraper import CricinfoScorecardScraper
 from scorecard_autopopulater.stat_items import StatItems
 from scorecard_autopopulater.team import Team
 
@@ -36,8 +35,7 @@ def test_initialization(match, teams):
 
 def test_statistics(match, teams, player):
     match.update_statistics()
-    # assert match == player
     assert match.teams[0].players[player.name].statistics[StatItems.WICKETS.name].value == 4
-#     assert match.teams[0].players[player.name].statistics[StatItems.RUNS_SCORED.name].value == 3
-#     assert match.teams[0].players[player.name].statistics[StatItems.FIELDING.name].value == 0
-#     assert match.teams[0].players[player.name].statistics[StatItems.POTM.name].value
+    assert match.teams[0].players[player.name].statistics[StatItems.RUNS_SCORED.name].value == 3
+    assert match.teams[0].players[player.name].statistics[StatItems.FIELDING.name].value == 0
+    assert match.teams[0].players[player.name].statistics[StatItems.POTM.name].value
