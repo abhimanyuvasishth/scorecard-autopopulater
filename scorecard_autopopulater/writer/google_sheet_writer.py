@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from scorecard_autopopulater.google_sheet import GoogleSheet
 from scorecard_autopopulater.writer.writer import Writer
 
@@ -10,5 +12,8 @@ class GoogleSheetWriter(Writer):
         for row_num, row in enumerate(data):
             for col_num, item in enumerate(row.items()):
                 key, value = item
+                if isinstance(value, datetime):
+                    value = datetime.isoformat(value)
+
                 self.google_sheet.update_cell(row_num + 1, 2 * col_num + 1, key)
                 self.google_sheet.update_cell(row_num + 1, 2 * col_num + 2, value)

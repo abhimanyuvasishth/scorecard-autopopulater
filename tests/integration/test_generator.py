@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 import pytest
 
@@ -35,7 +35,7 @@ def test_match_generator(monkeypatch, match_generator, teams):
             'match_num': 4,
             'url': 'https://www.espncricinfo.com/series/indian-premier-league-2022-1298423'
                    '/chennai-super-kings-vs-kolkata-knight-riders-1st-match-1304047/full-scorecard',
-            'start_time': datetime.datetime(2022, 1, 20, 20, 0, 0),
+            'start_time': datetime(2022, 1, 20, 20, 0, 0),
         })
 
     monkeypatch.setattr(match_generator.match_reader, 'generate_rows', mock_generate_rows)
