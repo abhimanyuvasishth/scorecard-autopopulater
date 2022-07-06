@@ -2,8 +2,8 @@ import csv
 from datetime import datetime
 
 from scorecard_autopopulater.constants import out_date_fmt
-from scorecard_autopopulater.schema.match_row import MatchRow
 from scorecard_autopopulater.reader.match_reader import MatchReader
+from scorecard_autopopulater.schema.match_row import MatchRow
 
 
 class CSVFileMatchReader(MatchReader):
