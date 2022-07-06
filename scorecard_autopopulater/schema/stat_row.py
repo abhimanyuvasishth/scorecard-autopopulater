@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass(init=False)
-class StatItem:
+class StatRow:
     def __init__(self, role, name, data_type, default_value, sheet_order):
         self.role = role
         self.name = name

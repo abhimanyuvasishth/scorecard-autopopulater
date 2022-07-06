@@ -1,4 +1,4 @@
-from scorecard_autopopulater.stat_item import StatItem
+from scorecard_autopopulater.schema.stat_row import StatRow
 from scorecard_autopopulater.stat_items import StatItems, sheet_order
 
 
@@ -7,7 +7,7 @@ class Player:
         self.name = name
         self.team = team
         self.innings = innings
-        self.statistics = {stat.name: StatItem(*stat.value) for stat in StatItems}
+        self.statistics = {stat.name: StatRow(*stat.value) for stat in StatItems}
         self.active = False
 
     def update_statistics(self, statistics):
