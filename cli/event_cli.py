@@ -3,7 +3,8 @@ import logging
 import click
 
 from scorecard_autopopulater.generator.match_generator import MatchGenerator
-from scorecard_autopopulater.reader.csv_file_match_reader import CSVFileMatchReader
+from scorecard_autopopulater.reader.csv_data_row_reader import CSVDataRowReader
+from scorecard_autopopulater.schema.match_row import MatchRow
 from scorecard_autopopulater.scraper.cricinfo_scorecard_scraper import CricinfoScorecardScraper
 
 logging_fmt = '%(asctime)s %(levelname)s %(message)s'
@@ -21,9 +22,9 @@ def event_cli():
     name='process_current_matches',
 )
 def process_current_matches():
-    file_name = 'data/schedule.csv'
+    file_name = 'data/schedule/schedule.csv'
     match_generator = MatchGenerator(
-        match_reader=CSVFileMatchReader(file_name),
+        match_reader=CSVDataRowReader(file_name, MatchRow),
         scraper_type=CricinfoScorecardScraper,
     )
     for match in match_generator.generate_match_rows():

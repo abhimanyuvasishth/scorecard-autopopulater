@@ -17,7 +17,7 @@ def schedule_cli():
 )
 @click.option('-u', '--url', type=str, required=True, help='url with schedule list')
 @click.option('-f', '--file_name', type=click.Path(), required=False, help='file to write to',
-              default='data/schedule.csv')
+              default='data/schedule/schedule.csv')
 def write_schedule_to_csv(url, file_name):
     scraper = CricinfoScheduleScraper(url)
     CsvWriter(file_name).write_data([asdict(row) for row in scraper.generate_match_rows()])
