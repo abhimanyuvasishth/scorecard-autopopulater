@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from scorecard_autopopulater.match_row import MatchRow
+from scorecard_autopopulater.schema.match_row import MatchRow
 
 
 class MatchReader(ABC):

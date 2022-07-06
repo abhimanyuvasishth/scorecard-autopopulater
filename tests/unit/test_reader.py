@@ -1,4 +1,4 @@
-from scorecard_autopopulater.match_row import MatchRow
+from scorecard_autopopulater.schema.match_row import MatchRow
 from scorecard_autopopulater.reader.csv_file_match_reader import CSVFileMatchReader
 
 

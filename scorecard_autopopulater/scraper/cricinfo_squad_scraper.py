@@ -3,7 +3,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 from scorecard_autopopulater.constants import abbrev_lookup
-from scorecard_autopopulater.player_row import PlayerRow
+from scorecard_autopopulater.schema.player_row import PlayerRow
 from scorecard_autopopulater.scraper.squad_scraper import SquadScraper
 
 

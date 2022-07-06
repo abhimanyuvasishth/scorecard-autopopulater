@@ -1,6 +1,6 @@
 from abc import abstractmethod
 
-from scorecard_autopopulater.player_row import PlayerRow
+from scorecard_autopopulater.schema.player_row import PlayerRow
 from scorecard_autopopulater.scraper.scraper import Scraper
 
 

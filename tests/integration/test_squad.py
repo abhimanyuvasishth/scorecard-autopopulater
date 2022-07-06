@@ -1,6 +1,6 @@
 import pytest
 
-from scorecard_autopopulater.player_row import PlayerRow
+from scorecard_autopopulater.schema.player_row import PlayerRow
 from scorecard_autopopulater.scraper.cricinfo_squad_scraper import CricinfoSquadScraper
 
 
