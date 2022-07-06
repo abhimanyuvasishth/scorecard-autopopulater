@@ -15,7 +15,7 @@ class MatchGenerator:
         self.hours_after = hours_after
         self.limit = limit
 
-    def generate_match_rows(self):
+    def generate_match_rows(self) -> list[Match]:
         cur_time = datetime.now(pytz.timezone('UTC')).replace(tzinfo=None)
         for i, row in enumerate(self.match_reader.generate_match_rows()):
             if i == self.limit:
