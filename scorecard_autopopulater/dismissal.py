@@ -18,7 +18,7 @@ class Dismissal:
         self.dismissal = dismissal
         self.dismissal_type = self.extract_dismissal_type()
         self.fielder, self.bowler = self.extract_fielder_bowler()
-        self.is_sub = 'sub (' in self.dismissal
+        self.is_sub = 'sub (' in self.dismissal or 'sub [' in self.dismissal
 
     def extract_dismissal_type(self) -> DismissalType:
         try:
@@ -47,3 +47,6 @@ class Dismissal:
             return fielders.split('/')[0], None
         else:
             return None, None
+
+    def __repr__(self):
+        return f'{self.dismissal}, {self.dismissal_type}'

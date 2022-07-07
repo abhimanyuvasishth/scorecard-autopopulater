@@ -1,7 +1,7 @@
 from scorecard_autopopulater.scraper.scorecard_scraper import ScorecardScraper
 
 
-class CricinfoScorecardScraper(ScorecardScraper):
+class CricketScorecardScraper(ScorecardScraper):
     @property
     def content(self):
         class_name = 'ReactCollapse--collapse'
@@ -10,8 +10,11 @@ class CricinfoScorecardScraper(ScorecardScraper):
     @property
     def potm_name(self):
         try:
-            class_name = 'ci-match-player-award-carousel'
-            potm_container = self.soup.find(class_=class_name, recursive=True)
+            classes = [
+                'ds-flex ds-justify-between ds-items-center',
+                'ds-px-4 ds-py-2 ds-self-stretch ds-w-full ds-border-line ds-border-none',
+            ]
+            potm_container = self.soup.find_all(True, {'class': classes})[0]
             return potm_container.find_all('span')[0].text.split(',')[0].strip()
         except AttributeError:
             pass
@@ -28,28 +31,28 @@ class CricinfoScorecardScraper(ScorecardScraper):
             if not container:
                 continue
 
-            team_text = container.text.split('INNINGS')[0].split('Team')[0].strip().title()
+            text = container.text.replace(' 1st', '').replace(' 2nd', '')
+            team_text = text.split('INNINGS')[0].split('Team')[0].strip().title()
             yield team_text
 
-    def generate_batting_rows(self):
+    def generate_rows(self, div_id):
+        innings = 0
         for order, content in enumerate(self.content):
-            div_id = 'ds-w-full ds-table ds-table-xs ds-table-fixed ci-scorecard-table'
             table = content.find(class_=div_id)
+            innings += 1
 
             if not table:
                 continue
 
             for row in table.find_all('tr'):
-                yield order, [x.text.strip() for x in row.find_all('td')]
+                yield innings - 1, [x.text.strip() for x in row.find_all('td')]
+
+    def generate_batting_rows(self):
+        div_id = 'ds-w-full ds-table ds-table-xs ds-table-fixed ci-scorecard-table'
+        for row in self.generate_rows(div_id):
+            yield row
 
     def generate_bowling_rows(self):
-        for order, content in enumerate(self.content):
-            div_id = 'ds-w-full ds-table ds-table-xs ds-table-fixed'
-
-            table = content.find(class_=div_id)
-
-            if not table:
-                continue
-
-            for row in table.find_all('tr'):
-                yield order, [x.text.strip() for x in row.find_all('td')]
+        div_id = 'ds-w-full ds-table ds-table-xs ds-table-fixed'
+        for row in self.generate_rows(div_id):
+            yield row

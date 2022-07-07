@@ -5,7 +5,7 @@ from dataclasses import asdict
 import click
 
 from scorecard_autopopulater.google_sheet import GoogleSheet
-from scorecard_autopopulater.scraper.cricinfo_squad_scraper import CricinfoSquadScraper
+from scorecard_autopopulater.scraper.cricket_squad_scraper import CricketSquadScraper
 from scorecard_autopopulater.writer.csv_writer import CsvWriter
 
 
@@ -22,7 +22,7 @@ def squad_cli():
 @click.option('-f', '--file_name', type=click.Path(), required=False, help='file to write to',
               default='data/squads/squads.csv')
 def write_squads_to_csv(url, file_name):
-    scraper = CricinfoSquadScraper(url)
+    scraper = CricketSquadScraper(url)
     CsvWriter(file_name).write_data_bulk([asdict(row) for row in scraper.generate_player_rows()])
 
 

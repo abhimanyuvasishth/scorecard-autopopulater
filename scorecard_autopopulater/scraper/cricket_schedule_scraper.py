@@ -7,7 +7,7 @@ from scorecard_autopopulater.schema.match_row import MatchRow
 from scorecard_autopopulater.scraper.schedule_scraper import ScheduleScraper
 
 
-class CricinfoScheduleScraper(ScheduleScraper):
+class CricketScheduleScraper(ScheduleScraper):
     def __init__(self, url):
         self.base_url = 'https://www.espncricinfo.com'
         self.team_counts = {}

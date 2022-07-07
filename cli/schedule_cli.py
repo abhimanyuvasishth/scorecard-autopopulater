@@ -2,7 +2,7 @@ from dataclasses import asdict
 
 import click
 
-from scorecard_autopopulater.scraper.cricinfo_schedule_scraper import CricinfoScheduleScraper
+from scorecard_autopopulater.scraper.cricket_schedule_scraper import CricketScheduleScraper
 from scorecard_autopopulater.writer.csv_writer import CsvWriter
 
 
@@ -19,7 +19,7 @@ def schedule_cli():
 @click.option('-f', '--file_name', type=click.Path(), required=False, help='file to write to',
               default='data/schedule/schedule.csv')
 def write_schedule_to_csv(url, file_name):
-    scraper = CricinfoScheduleScraper(url)
+    scraper = CricketScheduleScraper(url)
     CsvWriter(file_name).write_data_bulk([asdict(row) for row in scraper.generate_match_rows()])
 
 

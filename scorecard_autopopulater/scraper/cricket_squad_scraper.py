@@ -6,7 +6,7 @@ from scorecard_autopopulater.schema.player_row import PlayerRow
 from scorecard_autopopulater.scraper.squad_scraper import SquadScraper
 
 
-class CricinfoSquadScraper(SquadScraper):
+class CricketSquadScraper(SquadScraper):
     def __init__(self, url):
         self.base_url = 'https://www.espncricinfo.com'
         super().__init__(url)
