@@ -20,7 +20,7 @@ def schedule_cli():
               default='data/schedule/schedule.csv')
 def write_schedule_to_csv(url, file_name):
     scraper = CricinfoScheduleScraper(url)
-    CsvWriter(file_name).write_data([asdict(row) for row in scraper.generate_match_rows()])
+    CsvWriter(file_name).write_data_bulk([asdict(row) for row in scraper.generate_match_rows()])
 
 
 if __name__ == '__main__':
