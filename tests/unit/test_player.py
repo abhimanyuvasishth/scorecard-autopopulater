@@ -1,12 +1,12 @@
 import pytest
 
-from scorecard_autopopulater.player import Player
+from scorecard_autopopulater.player.cricket_player import CricketPlayer
 from scorecard_autopopulater.stat_items import StatItems, sheet_order
 
 
 @pytest.fixture
 def player():
-    return Player('Rohit Sharma', 'Mumbai Indians', 1)
+    return CricketPlayer('Rohit Sharma', 'Mumbai Indians', 1)
 
 
 def test_player_initialization(player):

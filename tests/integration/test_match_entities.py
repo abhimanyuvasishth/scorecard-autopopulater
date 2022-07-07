@@ -2,18 +2,18 @@ from datetime import datetime
 
 import pytest
 
+from scorecard_autopopulater.factory.cricket_factory import CricketFactory
 from scorecard_autopopulater.generator.match_generator import MatchGenerator
-from scorecard_autopopulater.match import Match
-from scorecard_autopopulater.player import Player
+from scorecard_autopopulater.match.cricket_match import CricketMatch
+from scorecard_autopopulater.player.cricket_player import CricketPlayer
 from scorecard_autopopulater.reader.csv_data_row_reader import CSVDataRowReader
 from scorecard_autopopulater.schema.match_row import MatchRow
 from scorecard_autopopulater.schema.player_row import PlayerRow
-from scorecard_autopopulater.scraper.cricinfo_scorecard_scraper import CricinfoScorecardScraper
 from scorecard_autopopulater.stat_items import StatItems
-from scorecard_autopopulater.team import Team
+from scorecard_autopopulater.team.cricket_team import CricketTeam
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture
 def squad_reader():
     return CSVDataRowReader('data/squads/current_ipl_squad.csv', PlayerRow)
 
@@ -23,7 +23,7 @@ def match_generator(squad_reader):
     return MatchGenerator(
         match_reader=CSVDataRowReader('foo.csv', MatchRow),
         squad_reader=squad_reader,
-        scraper_type=CricinfoScorecardScraper,
+        factory=CricketFactory(),
         hours_after=100000,
         limit=1
     )
@@ -55,19 +55,19 @@ def matches(monkeypatch, match_generator, match_row):
 @pytest.fixture
 def teams(squad_reader):
     return [
-        Team(name='Chennai Super Kings', innings=0, game_number=3, squad_reader=squad_reader),
-        Team(name='Kolkata Knight Riders', innings=1, game_number=4, squad_reader=squad_reader),
+        CricketTeam('Chennai Super Kings', order=0, game_number=3, squad_reader=squad_reader),
+        CricketTeam('Kolkata Knight Riders', order=1, game_number=4, squad_reader=squad_reader),
     ]
 
 
 @pytest.fixture
 def player(teams):
-    return Player('Ravindra Jadeja', teams[0].name, teams[0].innings)
+    return CricketPlayer('Ravindra Jadeja', teams[0].name, teams[0].order)
 
 
 def test_match_generator(matches, teams):
     assert len(matches) == 1
-    assert isinstance(matches[0], Match)
+    assert isinstance(matches[0], CricketMatch)
     assert matches[0].teams == teams
 
 
