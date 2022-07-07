@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import Enum, auto
 
 game1_col = 'E'
 
@@ -34,6 +34,12 @@ class SheetOffsetCols(Enum):
 
     def get_name(self):
         return self.value[1]
+
+
+class Sports(Enum):
+    CRICKET = auto()
+    SOCCER = auto()
+    TENNIS = auto()
 
 
 class Teams(Enum):

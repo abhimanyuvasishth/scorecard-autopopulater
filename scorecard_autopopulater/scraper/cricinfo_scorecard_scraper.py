@@ -32,7 +32,7 @@ class CricinfoScorecardScraper(ScorecardScraper):
             yield team_text
 
     def generate_batting_rows(self):
-        for innings, content in enumerate(self.content):
+        for order, content in enumerate(self.content):
             div_id = 'ds-w-full ds-table ds-table-xs ds-table-fixed ci-scorecard-table'
             table = content.find(class_=div_id)
 
@@ -40,10 +40,10 @@ class CricinfoScorecardScraper(ScorecardScraper):
                 continue
 
             for row in table.find_all('tr'):
-                yield innings, [x.text.strip() for x in row.find_all('td')]
+                yield order, [x.text.strip() for x in row.find_all('td')]
 
     def generate_bowling_rows(self):
-        for innings, content in enumerate(self.content):
+        for order, content in enumerate(self.content):
             div_id = 'ds-w-full ds-table ds-table-xs ds-table-fixed'
 
             table = content.find(class_=div_id)
@@ -52,4 +52,4 @@ class CricinfoScorecardScraper(ScorecardScraper):
                 continue
 
             for row in table.find_all('tr'):
-                yield innings, [x.text.strip() for x in row.find_all('td')]
+                yield order, [x.text.strip() for x in row.find_all('td')]
