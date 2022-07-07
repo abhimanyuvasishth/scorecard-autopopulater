@@ -1,14 +1,14 @@
-import csv
-
 from scorecard_autopopulater.player import Player
+from scorecard_autopopulater.reader.data_row_reader import DataRowReader
 
 
 class Team:
-    def __init__(self, name, innings, game_number=1):
+    def __init__(self, name, innings, squad_reader: DataRowReader, game_number=1):
         self.name = name
         self.innings = innings
+        self.squad_reader = squad_reader
         self.game_number = int(game_number or 1)
-        self.players = self._generate_players()
+        self.players = self.generate_players()
 
     @property
     def active_players(self):
@@ -18,16 +18,9 @@ class Team:
     def subs(self):
         return {name: player for name, player in self.players.items() if not player.active}
 
-    def _generate_players(self):
-        player_names = []
-        with open('data/squads/current_ipl_squad.csv') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                if row['team'] == self.name:
-                    player_names.append(row['name'])
-
-        players = {name: Player(name, self.name, self.innings) for name in player_names}
-        return players
+    def generate_players(self) -> dict[str, Player]:
+        player_rows = [row for row in self.squad_reader.generate_rows() if row.team == self.name]
+        return {row.name: Player(row.name, self.name, self.innings) for row in player_rows}
 
     def find_player(self, player_name, sub=False):
         relevant_players = self.subs if sub else self.active_players

@@ -7,9 +7,10 @@ from scorecard_autopopulater.reader.data_row_reader import DataRowReader
 
 
 class MatchGenerator:
-    def __init__(self, match_reader: DataRowReader, scraper_type, hours_before=0, hours_after=5,
-                 limit=None):
+    def __init__(self, match_reader: DataRowReader, squad_reader: DataRowReader, scraper_type,
+                 hours_before=0, hours_after=5, limit=None):
         self.match_reader = match_reader
+        self.squad_reader = squad_reader
         self.scraper_type = scraper_type
         self.hours_before = hours_before
         self.hours_after = hours_after
@@ -26,4 +27,8 @@ class MatchGenerator:
                 continue
 
             team_games = {row.team_0: row.game_0, row.team_1: row.game_1}
-            yield Match(self.scraper_type(row.url), team_games)
+            yield Match(
+                scraper=self.scraper_type(row.url),
+                team_games=team_games,
+                squad_reader=self.squad_reader
+            )

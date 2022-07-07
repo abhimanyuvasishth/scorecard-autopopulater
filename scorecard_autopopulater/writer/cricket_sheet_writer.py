@@ -1,6 +1,6 @@
 from scorecard_autopopulater.constants import SheetIntroCols, SheetOffsetCols
 from scorecard_autopopulater.google_sheet import GoogleSheet
-from scorecard_autopopulater.utils import get_game_col, num_2_str, str_2_num, compare_info
+from scorecard_autopopulater.utils import compare_info, get_game_col, num_2_str, str_2_num
 from scorecard_autopopulater.writer.google_sheet_writer import GoogleSheetWriter
 
 

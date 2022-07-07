@@ -1,4 +1,5 @@
 from scorecard_autopopulater.dismissal import Dismissal
+from scorecard_autopopulater.reader.data_row_reader import DataRowReader
 from scorecard_autopopulater.scraper.scorecard_scraper import ScorecardScraper
 from scorecard_autopopulater.stat_items import StatItems, batting_row, bowling_row
 from scorecard_autopopulater.team import Team
@@ -6,8 +7,9 @@ from scorecard_autopopulater.utils import extract_name
 
 
 class Match:
-    def __init__(self, scraper: ScorecardScraper, team_games=None):
+    def __init__(self, scraper: ScorecardScraper, squad_reader: DataRowReader, team_games=None):
         self.scraper = scraper
+        self.squad_reader = squad_reader
         self.team_names = scraper.generate_team_names()
         self.team_games = team_games or {}
         self.teams = self.generate_teams()
@@ -15,7 +17,8 @@ class Match:
     def generate_teams(self):
         teams = []
         for innings, team_name in enumerate(self.team_names):
-            teams.append(Team(team_name, innings, self.team_games.get(team_name)))
+            team_game = self.team_games.get(team_name)
+            teams.append(Team(team_name, innings, self.squad_reader, team_game))
         return teams
 
     def update_statistics(self):

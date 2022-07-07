@@ -6,6 +6,7 @@ from scorecard_autopopulater.generator.match_generator import MatchGenerator
 from scorecard_autopopulater.google_sheet import GoogleSheet
 from scorecard_autopopulater.reader.csv_data_row_reader import CSVDataRowReader
 from scorecard_autopopulater.schema.match_row import MatchRow
+from scorecard_autopopulater.schema.player_row import PlayerRow
 from scorecard_autopopulater.scraper.cricinfo_scorecard_scraper import CricinfoScorecardScraper
 from scorecard_autopopulater.writer.cricket_sheet_writer import CricketSheetWriter
 
@@ -23,9 +24,9 @@ def event_cli():
     name='process_current_matches',
 )
 def process_current_matches():
-    file_name = 'data/schedule/schedule.csv'
     match_generator = MatchGenerator(
-        match_reader=CSVDataRowReader(file_name, MatchRow),
+        match_reader=CSVDataRowReader('data/schedule/schedule.csv', MatchRow),
+        squad_reader=CSVDataRowReader('data/squads/current_ipl_squad.csv', PlayerRow),
         scraper_type=CricinfoScorecardScraper,
         hours_after=24,
         limit=1

@@ -20,7 +20,6 @@ class Dismissal:
         self.fielder, self.bowler = self.extract_fielder_bowler()
         self.is_sub = 'sub (' in self.dismissal
 
-    # TODO: add dismissals without fielder as well
     def extract_dismissal_type(self) -> DismissalType:
         try:
             raw_fielder, raw_bowler = self.dismissal.split(' b ')
