@@ -5,7 +5,6 @@ from dataclasses import dataclass
 class PlayerRow:
     name: str
     team: str
-    abbrev: str
     withdrawn: bool = False
 
     def __init__(self, **kwargs):

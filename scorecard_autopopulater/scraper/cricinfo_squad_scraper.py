@@ -2,7 +2,6 @@ from urllib.request import urlopen
 
 from bs4 import BeautifulSoup
 
-from scorecard_autopopulater.constants import abbrev_lookup
 from scorecard_autopopulater.schema.player_row import PlayerRow
 from scorecard_autopopulater.scraper.squad_scraper import SquadScraper
 
@@ -33,10 +32,10 @@ class CricinfoSquadScraper(SquadScraper):
         for i, elem in enumerate(self.content):
             team_url = f"{self.base_url}{elem['href']}"
             team_name = elem.text.replace('Squads', '').replace('Squad', '').strip()
-            abbrev = abbrev_lookup[team_name]
+            team_name = team_name.replace(' T20I', '').replace(' ODI', '').strip()
 
             for player_soup in self.generate_player_soups(team_url):
                 name = player_soup.find_all('a')[1].text.replace(u'\xa0', u' ').strip()
                 tag = player_soup.find(class_='ds-text-tight-s ds-font-regular')
                 withdrawn = (tag is not None and tag.text == 'Withdrawn player')
-                yield PlayerRow(name=name, team=team_name, abbrev=abbrev, withdrawn=withdrawn)
+                yield PlayerRow(name=name, team=team_name, withdrawn=withdrawn)

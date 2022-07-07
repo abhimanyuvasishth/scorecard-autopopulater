@@ -26,7 +26,7 @@ class Player(ABC):
         ...
 
     def __repr__(self):
-        return f'{self.name} | {self.team}'
+        return f'{self.name} | {self.team} | {self.info}'
 
     def __eq__(self, other):
         return self.team == other.team and self.name == other.name

@@ -40,7 +40,7 @@ def data(match_rows):
 
 def test_csv_writer(data):
     with NamedTemporaryFile() as fp:
-        CsvWriter(fp.name).write_data(data)
+        CsvWriter(fp.name).write_data_bulk(data)
         read_rows = [row for row in CSVDataRowReader(fp.name, MatchRow).generate_rows()]
         assert len(read_rows) == 2
         assert isinstance(read_rows[0], MatchRow)

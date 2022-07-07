@@ -46,7 +46,11 @@ class CricinfoScheduleScraper(ScheduleScraper):
             .replace('tues', 'tue')\
             .replace('today', date.today().isoformat())\
             .replace('tomorrow', (date.today() + timedelta(days=1)).isoformat())
-        return datetime.fromisoformat(parser.parse(raw_start).strftime(out_date_fmt))
+
+        try:
+            return datetime.fromisoformat(parser.parse(raw_start).strftime(out_date_fmt))
+        except parser.ParserError:
+            return datetime.now().isoformat()
 
     def get_and_update_game_count(self, team):
         try:

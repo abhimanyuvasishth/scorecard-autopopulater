@@ -3,6 +3,7 @@ credentials.json
 .DS_Store
 *log.txt
 raw/
+data/output/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
