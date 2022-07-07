@@ -15,8 +15,7 @@ class Match:
     def generate_teams(self):
         teams = []
         for innings, team_name in enumerate(self.team_names):
-            team_game = self.team_games.get(team_name)
-            teams.append(Team(team_name, innings, team_game))
+            teams.append(Team(team_name, innings, self.team_games.get(team_name)))
         return teams
 
     def update_statistics(self):

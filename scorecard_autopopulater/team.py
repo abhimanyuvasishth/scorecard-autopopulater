@@ -7,7 +7,7 @@ class Team:
     def __init__(self, name, innings, game_number=1):
         self.name = name
         self.innings = innings
-        self.game_number = game_number
+        self.game_number = int(game_number or 1)
         self.players = self._generate_players()
 
     @property

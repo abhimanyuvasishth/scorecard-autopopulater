@@ -22,7 +22,7 @@ def match_generator():
 
 @pytest.fixture
 def teams():
-    return [Team('Chennai Super Kings', 0), Team('Kolkata Knight Riders', 1)]
+    return [Team('Chennai Super Kings', 0, 3), Team('Kolkata Knight Riders', 1, 4)]
 
 
 def test_match_generator(monkeypatch, match_generator, teams):
@@ -30,8 +30,8 @@ def test_match_generator(monkeypatch, match_generator, teams):
         yield MatchRow(**{
             'team_0': 'Chennai Super Kings',
             'team_1': 'Kolkata Knight Riders',
-            'game_0': 2,
-            'game_1': 1,
+            'game_0': 3,
+            'game_1': 4,
             'match_num': 4,
             'url': 'https://www.espncricinfo.com/series/indian-premier-league-2022-1298423'
                    '/chennai-super-kings-vs-kolkata-knight-riders-1st-match-1304047/full-scorecard',

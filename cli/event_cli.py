@@ -7,7 +7,7 @@ from scorecard_autopopulater.google_sheet import GoogleSheet
 from scorecard_autopopulater.reader.csv_data_row_reader import CSVDataRowReader
 from scorecard_autopopulater.schema.match_row import MatchRow
 from scorecard_autopopulater.scraper.cricinfo_scorecard_scraper import CricinfoScorecardScraper
-from scorecard_autopopulater.writer.google_sheet_writer import GoogleSheetWriter
+from scorecard_autopopulater.writer.cricket_sheet_writer import CricketSheetWriter
 
 logging_fmt = '%(asctime)s %(levelname)s %(message)s'
 logging.basicConfig(format=logging_fmt, level=logging.INFO, filename='log.txt')
@@ -27,14 +27,19 @@ def process_current_matches():
     match_generator = MatchGenerator(
         match_reader=CSVDataRowReader(file_name, MatchRow),
         scraper_type=CricinfoScorecardScraper,
+        hours_after=24,
+        limit=1
     )
     sheet = GoogleSheet(doc_name='IPL 15 auction', sheet_name='Points Worksheet')
-    writer = GoogleSheetWriter(sheet)
+    writer = CricketSheetWriter(sheet)
     for match in match_generator.generate_match_rows():
         match.update_statistics()
         for team in match.teams:
             for player_name, player in team.active_players.items():
-                writer.write_player_row(player, team.game_number)
+                writer.write_data({
+                    'player': player,
+                    'game_number': team.game_number
+                })
     logger.info('Completed updating sheet')
 
 
