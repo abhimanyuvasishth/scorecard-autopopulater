@@ -1,17 +1,11 @@
+from scorecard_autopopulater.player.player import Player
 from scorecard_autopopulater.schema.stat_row import StatRow
 from scorecard_autopopulater.stat_items import StatItems, sheet_order
 
 
-class CricketPlayer:
-    def __init__(self, name, team, order):
-        self.name = name
-        self.team = team
-        self.order = order
-        self.statistics = self.generate_statistics()
-        self.active = False
-
+class CricketPlayer(Player):
     @staticmethod
-    def generate_statistics() -> dict[str, StatItems]:
+    def initialize_statistics() -> dict[str, StatItems]:
         return {stat.name: StatRow(*stat.value) for stat in StatItems}
 
     def update_statistics(self, statistics):

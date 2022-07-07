@@ -1,26 +1,30 @@
-from scorecard_autopopulater.player import Player
+from abc import ABC, abstractmethod
+
+from scorecard_autopopulater.player.player import Player
 from scorecard_autopopulater.reader.data_row_reader import DataRowReader
 
 
-class Team:
-    def __init__(self, name, innings, squad_reader: DataRowReader, game_number=1):
+class Team(ABC):
+    def __init__(self, name, order, squad_reader: DataRowReader, game_number=1):
         self.name = name
-        self.innings = innings
+        self.order = order
         self.squad_reader = squad_reader
         self.game_number = int(game_number or 1)
         self.players = self.generate_players()
 
     @property
+    @abstractmethod
     def active_players(self):
         return {name: player for name, player in self.players.items() if player.active}
 
     @property
+    @abstractmethod
     def subs(self):
         return {name: player for name, player in self.players.items() if not player.active}
 
+    @abstractmethod
     def generate_players(self) -> dict[str, Player]:
-        player_rows = [row for row in self.squad_reader.generate_rows() if row.team == self.name]
-        return {row.name: Player(row.name, self.name, self.innings) for row in player_rows}
+        ...
 
     def find_player(self, player_name, sub=False):
         relevant_players = self.subs if sub else self.active_players
@@ -50,4 +54,4 @@ class Team:
         return self.name
 
     def __eq__(self, other):
-        return self.name == other.name and self.innings == other.innings
+        return self.name == other.name and self.order == other.order
