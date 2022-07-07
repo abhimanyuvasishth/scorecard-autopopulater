@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from urllib.request import urlopen
+import requests
 
 from bs4 import BeautifulSoup
 
@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 class Scraper(ABC):
     def __init__(self, url):
         self.url = url
-        self.page = urlopen(self.url)
+        self.page = requests.get(self.url).text
         self.soup = BeautifulSoup(self.page, 'html.parser')
 
     @property
