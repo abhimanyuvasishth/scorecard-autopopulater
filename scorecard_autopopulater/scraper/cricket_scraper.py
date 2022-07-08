@@ -1,10 +1,8 @@
 from collections import Counter
 
-import requests
-
 from scorecard_autopopulater.schema.player import Player
 from scorecard_autopopulater.schema.team import Team
-from scorecard_autopopulater.utils import tracing
+from scorecard_autopopulater.utils import get_json_from_url, tracing
 
 
 class CricketScraper:
@@ -22,17 +20,11 @@ class CricketScraper:
         self.api_schedule_url = f'{self.api_base_url}/series/schedule?lang=en'
         self.schedule_url = f'{self.api_schedule_url}&seriesId={self.series_id}&fixtures=false'
 
-        self.content = self.get_json(self.content_url)
-
-    @tracing(requests.exceptions.HTTPError, message='get_json failed')
-    def get_json(self, url):
-        response = requests.get(url)
-        response.raise_for_status()
-        return response.json()
+        self.content = get_json_from_url(self.content_url)
 
     def add_match_numbers(self, teams):
         team_lookup = {team.id: team for team in teams}
-        fixtures = self.get_json(self.schedule_url)
+        fixtures = get_json_from_url(self.schedule_url)
         teams_played = []
 
         for match in sorted(fixtures['content']['matches'], key=lambda game: game['startTime']):

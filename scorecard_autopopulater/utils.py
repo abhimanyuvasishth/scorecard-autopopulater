@@ -1,6 +1,8 @@
 import functools
 import logging
 
+import requests
+
 from scorecard_autopopulater.constants import SheetOffsetCols, game1_col
 
 
@@ -47,3 +49,10 @@ def tracing(errors, message, raises=False):
                     raise
         return wrapper
     return decorator
+
+
+@tracing(requests.exceptions.HTTPError, message='get_json failed')
+def get_json_from_url(url):
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.json()
