@@ -11,9 +11,7 @@ def event_cli():
     pass
 
 
-@event_cli.command(
-    name='process_current_matches',
-)
+@event_cli.command(name='process_current_matches',)
 @click.option('--dry-run', type=bool, is_flag=True, help='dry run updates')
 def process_current_matches(dry_run):
     writer = CricketSheetWriter(GoogleSheet('IPL 15 auction', 'Points Worksheet'))
