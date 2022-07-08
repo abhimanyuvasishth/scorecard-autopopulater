@@ -14,14 +14,15 @@ def event_cli():
 @event_cli.command(name='process_current_matches',)
 @click.option('--dry-run', type=bool, is_flag=True, help='dry run updates')
 def process_current_matches(dry_run):
-    writer = CricketSheetWriter(GoogleSheet('IPL 15 auction', 'Points Worksheet'))
-    for match in MatchGenerator().generate_matches():
-        logger.info(f'Started logging {match.id}')
+    writer = CricketSheetWriter(GoogleSheet('Sandbox', 'Sandbox'))
+    for match in MatchGenerator().generate_matches(limit=10):
+        logger.info({'match': [match.id, match.series_id, match.stage, match.format]})
         for team in match.teams:
+            logger.info({'team': [team.id, team.long_name]})
             for player in team.players:
                 if not dry_run:
                     writer.write_data_item(player, team)
-                logger.info({'match_id': match.id, 'team_name': team.long_name, 'player': player})
+                logger.info({'player': player})
         logger.info(f'Completed logging {match.id}')
 
 

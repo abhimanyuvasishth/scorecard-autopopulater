@@ -21,7 +21,7 @@ conda activate scorecard-autopopulater
 Use the CLI like so:
 
 ```
-python cli/squad_cli.py write_squads_to_csv -u YOUR_URL -f YOUR_FILE_NAME
+python cli/event_cli.py process_current_matches --dry-run
 ```
 
 ## Testing
