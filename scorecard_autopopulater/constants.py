@@ -6,6 +6,13 @@ in_date_fmt = '%d-%b-%Y, %I:%M %p'
 out_date_fmt = '%Y-%m-%d %H:%M:%S'
 
 
+class Format(Enum):
+    T2OI = auto()
+    ODI = auto()
+    T20 = auto()
+    TEST = auto()
+
+
 class SheetIntroCols(Enum):
     PLAYER = 1
     PLAYING_TEAM = 2
@@ -34,6 +41,12 @@ class SheetOffsetCols(Enum):
 
     def get_name(self):
         return self.value[1]
+
+
+class Stages(Enum):
+    FINISHED = auto()
+    RUNNING = auto()
+    SCHEDULED = auto()
 
 
 class Sports(Enum):
