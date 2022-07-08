@@ -3,14 +3,6 @@ import itertools
 from scorecard_autopopulater.constants import SheetOffsetCols, game1_col
 
 
-def extract_name(name):
-    name = name.replace('sub', '').strip()
-    name = name.replace(u'\xa0', ' ').replace('†', '').replace('(c)', '').strip()
-    for char in '[]()':
-        name = name.replace(char, '')
-    return name.strip()
-
-
 def get_letters():
     return [letter for letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ']
 
