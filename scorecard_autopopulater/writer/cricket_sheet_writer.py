@@ -1,6 +1,5 @@
 from scorecard_autopopulater.constants import SheetIntroCols, SheetOffsetCols
 from scorecard_autopopulater.schema.player import Player
-from scorecard_autopopulater.schema.statistics import Statistics
 from scorecard_autopopulater.schema.team import Team
 from scorecard_autopopulater.utils import get_game_col, num_2_str, str_2_num
 from scorecard_autopopulater.writer.google_sheet_writer import GoogleSheetWriter
@@ -22,26 +21,8 @@ class CricketSheetWriter(GoogleSheetWriter):
 
         return players
 
-    @staticmethod
-    def create_info(statistics: Statistics):
-        return (
-            [
-                statistics.runs_scored,
-                statistics.balls_faced,
-                statistics.strike_rate,
-                int(statistics.not_out),
-                statistics.overs,
-                statistics.economy_rate,
-                statistics.wickets,
-                statistics.maidens,
-                statistics.hat_tricks,
-                statistics.fielding_primary,
-            ],
-            int(statistics.potm)
-        )
-
     def write_data_item(self, player: Player, team: Team):
-        data_row, potm = self.create_info(player.statistics[0])
+        data_row, potm = player.stat_row
 
         # finding row and column
         row_number = self.players[player.long_name]['row']
