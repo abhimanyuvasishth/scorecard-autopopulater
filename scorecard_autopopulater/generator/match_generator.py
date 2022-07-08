@@ -1,34 +1,30 @@
-import logging
-
 import requests
 
+from scorecard_autopopulater.constants import Format, Stages
 from scorecard_autopopulater.schema.match import Match
+from scorecard_autopopulater.utils import tracing
 
 
 class MatchGenerator:
-    def __init__(self, limit=10):
-        self.limit = limit
-
-    @staticmethod
-    def scrape_matches() -> list[(int, int)]:
+    @tracing(requests.exceptions.HTTPError, message='Scraping live matches failed')
+    def generate_matches(self, limit=10) -> list[Match]:
+        count = 0
         base_api_url = 'https://hs-consumer-api.espncricinfo.com/v1/pages'
         url = f'{base_api_url}/matches/current?lang=en&latest=true'
 
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-        except requests.exceptions.HTTPError as e:
-            logging.exception(e)
-            return
-
+        response = requests.get(url)
+        response.raise_for_status()
         content = response.json()
         matches = content['matches']
-        for match in matches:
-            yield match['objectId'], match['series']['objectId'], match['startTime']
 
-    def generate_matches(self) -> list[Match]:
-        for i, (match_id, series_id, start_time) in enumerate(self.scrape_matches()):
-            if i == self.limit:
+        for raw_match in matches:
+            yield Match(
+                raw_match['objectId'],
+                raw_match['series']['objectId'],
+                raw_match['startTime'],
+                Stages[raw_match['stage']],
+                Format[raw_match['format']]
+            )
+            count += 1
+            if count == limit:
                 break
-
-            yield Match(match_id, series_id, start_time)

@@ -1,18 +1,15 @@
 import pytest
 
-from scorecard_autopopulater.generator.match_generator import MatchGenerator
+from scorecard_autopopulater.constants import Format, Stages
 from scorecard_autopopulater.schema.match import Match
 from scorecard_autopopulater.schema.player import Player
 
 
 @pytest.fixture
-def matches(monkeypatch):
-    def mock_scrape_matches():
-        yield 1304111, 1298423, '2022-05-17T14:00:00.000Z'
-
-    match_generator = MatchGenerator()
-    monkeypatch.setattr(match_generator, 'scrape_matches', mock_scrape_matches)
-    return [match for match in match_generator.generate_matches()]
+def matches():
+    return [
+        Match(1304111, 1298423, '2022-05-17T14:00:00.000Z', Stages.FINISHED, Format.T2OI)
+    ]
 
 
 def test_match_generator(matches):
