@@ -1,12 +1,14 @@
 from scorecard_autopopulater.constants import SheetIntroCols, SheetOffsetCols
-from scorecard_autopopulater.google_sheet import GoogleSheet
-from scorecard_autopopulater.utils import compare_info, get_game_col, num_2_str, str_2_num
+from scorecard_autopopulater.schema.player import Player
+from scorecard_autopopulater.schema.statistics import Statistics
+from scorecard_autopopulater.schema.team import Team
+from scorecard_autopopulater.utils import get_game_col, num_2_str, str_2_num
 from scorecard_autopopulater.writer.google_sheet_writer import GoogleSheetWriter
 
 
 class CricketSheetWriter(GoogleSheetWriter):
-    def __init__(self, google_sheet: GoogleSheet):
-        super().__init__(google_sheet)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.players = self.get_players()
 
     def get_players(self):
@@ -20,21 +22,34 @@ class CricketSheetWriter(GoogleSheetWriter):
 
         return players
 
-    def write_data_item(self, data_item: dict):
-        row = self.players[data_item['player'].name]['row']
-        col_start = get_game_col(data_item['game_number'])
-        col_end = num_2_str(str_2_num(col_start) + len(data_item['player'].info) - 2)
-        potm_offset = SheetOffsetCols.POTM.get_offset()
-        potm_col = num_2_str(str_2_num(col_start) + potm_offset)
-        stats = data_item['player'].info[:-1]
+    @staticmethod
+    def create_info(statistics: Statistics):
+        return (
+            [
+                statistics.runs_scored,
+                statistics.balls_faced,
+                statistics.strike_rate,
+                int(statistics.not_out),
+                statistics.overs,
+                statistics.economy_rate,
+                statistics.wickets,
+                statistics.maidens,
+                statistics.hat_tricks,
+                statistics.fielding_primary,
+            ],
+            int(statistics.potm)
+        )
 
-        potm = data_item['player'].info[-1]
-        cur_potm = self.google_sheet.cell(row, str_2_num(potm_col)).value
-        cur_info = self.google_sheet.get(f'{col_start}{row}:{col_end}{row}')
+    def write_data_item(self, player: Player, team: Team):
+        data_row, potm = self.create_info(player.statistics)
 
-        if compare_info(stats, cur_info) and potm == cur_potm:
-            return
+        # finding row and column
+        row_number = self.players[player.long_name]['row']
+        col_start = get_game_col(team.match_number)
+        col_end = num_2_str(str_2_num(col_start) + len(data_row) - 1)
+        potm_col = num_2_str(str_2_num(col_start) + SheetOffsetCols.POTM.get_offset())
 
-        self.google_sheet.update(f'{col_start}{row}:{col_end}{row}', [stats])
-        if potm:
-            self.google_sheet.update_cell(row, str_2_num(potm_col), potm)
+        # writing information
+        write_range = f'{col_start}{row_number}:{col_end}{row_number}'
+        self.google_sheet.update(write_range, [data_row])
+        self.google_sheet.update_cell(row_number, str_2_num(potm_col), potm)
