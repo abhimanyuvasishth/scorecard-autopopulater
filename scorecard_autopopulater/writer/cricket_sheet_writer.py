@@ -41,7 +41,7 @@ class CricketSheetWriter(GoogleSheetWriter):
         )
 
     def write_data_item(self, player: Player, team: Team):
-        data_row, potm = self.create_info(player.statistics)
+        data_row, potm = self.create_info(player.statistics[0])
 
         # finding row and column
         row_number = self.players[player.long_name]['row']

@@ -6,12 +6,6 @@ in_date_fmt = '%d-%b-%Y, %I:%M %p'
 out_date_fmt = '%Y-%m-%d %H:%M:%S'
 
 
-class MatchFormats(Enum):
-    TEST = auto()
-    ODI = auto()
-    T20 = auto()
-
-
 class SheetIntroCols(Enum):
     PLAYER = 1
     PLAYING_TEAM = 2
