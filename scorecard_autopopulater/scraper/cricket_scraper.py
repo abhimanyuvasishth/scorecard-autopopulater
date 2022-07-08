@@ -4,9 +4,11 @@ import requests
 
 from scorecard_autopopulater.schema.player import Player
 from scorecard_autopopulater.schema.team import Team
+from scorecard_autopopulater.utils import tracing
 
 
 class CricketScraper:
+
     def __init__(self, match_id=None, series_id=None):
         self.match_id = match_id
         self.series_id = series_id
@@ -20,16 +22,20 @@ class CricketScraper:
         self.api_schedule_url = f'{self.api_base_url}/series/schedule?lang=en'
         self.schedule_url = f'{self.api_schedule_url}&seriesId={self.series_id}&fixtures=false'
 
-    @property
-    def content(self):
-        return requests.get(self.content_url).json()
+        self.content = self.get_json(self.content_url)
+
+    @tracing(requests.exceptions.HTTPError, message='get_json failed')
+    def get_json(self, url):
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.json()
 
     def add_match_numbers(self, teams):
         team_lookup = {team.id: team for team in teams}
-        data = requests.get(self.schedule_url).json()
+        fixtures = self.get_json(self.schedule_url)
         teams_played = []
 
-        for match in sorted(data['content']['matches'], key=lambda game: game['startTime']):
+        for match in sorted(fixtures['content']['matches'], key=lambda game: game['startTime']):
             for team_played in match['teams']:
                 teams_played.append(team_played['team']['objectId'])
 
@@ -58,16 +64,23 @@ class CricketScraper:
             player['player']['fieldingName']
         )
 
+    @tracing(errors=TypeError, message='no players to add')
     def add_players(self, teams):
         for index, team in enumerate(teams):
-            try:
-                for player in self.content['matchPlayers']['teamPlayers'][index]['players']:
-                    team.add_player(self.create_player(player))
-            except TypeError:
-                pass
+            for player in self.content['matchPlayers']['teamPlayers'][index]['players']:
+                team.add_player(self.create_player(player))
+
+    @tracing(errors=TypeError, message='no scorecard')
+    def get_innings_scorecard(self):
+        return self.content['scorecard']['innings']
+
+    @staticmethod
+    @tracing(errors=KeyError, message='Creating Sub Fielder', raises=True)
+    def get_fielder(fielding_team, fielder_id):
+        return fielding_team.get_player(fielder_id)
 
     def add_statistics(self, teams, team_lookup):
-        for i, scorecard in enumerate(self.content['scorecard']['innings']):
+        for i, scorecard in enumerate(self.get_innings_scorecard() or []):
             batting_team = team_lookup[scorecard['team']['objectId']]
             fielding_team = teams[not teams.index(batting_team)]
             innings = i // 2
@@ -104,7 +117,8 @@ class CricketScraper:
             for wicket in scorecard['inningWickets']:
                 for fielder_number, fielder in enumerate(wicket['dismissalFielders']):
                     try:
-                        player = fielding_team.get_player(fielder['player']['objectId'])
+                        fielder_id = fielder['player']['objectId']
+                        player = self.get_fielder(fielding_team, fielder_id)
                     except TypeError:
                         continue
                     except KeyError:
@@ -116,9 +130,8 @@ class CricketScraper:
                     else:
                         player.statistics[innings].fielding_secondary += 1
 
-    def add_potm_statistics(self):
-        try:
-            for potm in self.content['supportInfo']['playersOfTheMatch']:
-                yield potm['team']['objectId'], potm['player']['objectId']
-        except (KeyError, TypeError):
-            pass
+    @tracing(errors=TypeError, message='No POTM')
+    def add_potm_statistics(self, team_lookup):
+        for potm in self.content['supportInfo'].get('playersOfTheMatch', []):
+            team_id, player_id = potm['team']['objectId'], potm['player']['objectId']
+            team_lookup[team_id].get_player(player_id).statistics[0].potm = 1

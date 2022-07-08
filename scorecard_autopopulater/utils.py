@@ -1,3 +1,6 @@
+import functools
+import logging
+
 from scorecard_autopopulater.constants import SheetOffsetCols, game1_col
 
 
@@ -30,3 +33,17 @@ def get_game_col(game_number):
     game1_col_num = str_2_num(game1_col)
     col = game1_col_num + (game_number - 1) * len([v for v in SheetOffsetCols])
     return num_2_str(col)
+
+
+def tracing(errors, message, raises=False):
+    def decorator(function):
+        @functools.wraps(function)
+        def wrapper(*args, **kwargs):
+            try:
+                return function(*args, **kwargs)
+            except errors as e:
+                logging.error(f'{message}: {function.__name__} returned {e}')
+                if raises:
+                    raise
+        return wrapper
+    return decorator
