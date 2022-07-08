@@ -9,4 +9,7 @@ class Player:
     name: str
     long_name: str
     fielding_name: str
-    statistics: Statistics = field(default_factory=Statistics)
+    statistics: list[Statistics] = field(default_factory=list[Statistics])
+
+    def __post_init__(self):
+        setattr(self, 'statistics', [Statistics(), Statistics()])

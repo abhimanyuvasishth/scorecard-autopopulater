@@ -9,7 +9,6 @@ class Team:
     name: str
     long_name: str
     abbreviation: str
-    inning_numbers: list[int]
     match_number: int = 0
     players: list[Player] = field(default_factory=list[Player])
     player_lookup: dict[int, Player] = field(default_factory=dict[int, Player])
