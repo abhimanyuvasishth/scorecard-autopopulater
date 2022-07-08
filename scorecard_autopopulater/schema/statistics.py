@@ -25,3 +25,21 @@ class Statistics:
     fielding_primary: int = 0
     fielding_secondary: int = 0
     potm: int = 0
+
+    @property
+    def stat_row(self):
+        return (
+            [
+                self.runs_scored,
+                self.balls_faced,
+                self.strike_rate,
+                int(self.not_out),
+                self.overs,
+                self.economy_rate,
+                self.wickets,
+                self.maidens,
+                self.hat_tricks,
+                self.fielding_primary,
+            ],
+            int(self.potm)
+        )

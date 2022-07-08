@@ -13,3 +13,7 @@ class Player:
 
     def __post_init__(self):
         setattr(self, 'statistics', [Statistics(), Statistics()])
+
+    @property
+    def stat_row(self):
+        return self.statistics[0].stat_row
