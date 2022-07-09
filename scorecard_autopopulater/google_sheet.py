@@ -2,8 +2,8 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 from scorecard_autopopulater.constants import SheetIntroCols, SheetOffsetCols
-from scorecard_autopopulater.schema.player import Player
-from scorecard_autopopulater.schema.team import Team
+from scorecard_autopopulater.player.player import Player
+from scorecard_autopopulater.team.team import Team
 from scorecard_autopopulater.utils import get_game_col, num_2_str, str_2_num
 
 

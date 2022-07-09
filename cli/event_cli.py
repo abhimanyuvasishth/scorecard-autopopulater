@@ -1,7 +1,7 @@
 import click
 
 from cli import logger
-from scorecard_autopopulater.generator.match_generator import MatchGenerator
+from scorecard_autopopulater.generator.cricket_match_generator import CricketMatchGenerator
 from scorecard_autopopulater.google_sheet import GoogleSheet
 
 
@@ -14,14 +14,14 @@ def event_cli():
 @click.option('--dry-run', type=bool, is_flag=True, help='dry run updates')
 def process_current_matches(dry_run):
     sheet = GoogleSheet('Sandbox', 'Sandbox')
-    for match in MatchGenerator().generate_matches(limit=10):
-        logger.info({'match': [match.id, match.series_id, match.stage, match.format]})
+    for match in CricketMatchGenerator(limit=10).generate_matches():
+        logger.info(match)
         for team in match.teams:
-            logger.info({'team': [team.id, team.long_name]})
+            logger.info(team)
             for player in team.players:
+                logger.info(player)
                 if not dry_run:
                     sheet.write_data_item(player, team)
-                logger.info({'player': player})
         logger.info(f'Completed logging {match.id}')
 
 
