@@ -1,7 +1,7 @@
 import pytest
 
 from scorecard_autopopulater.google_sheet import GoogleSheet
-from scorecard_autopopulater.schema.player import Statistics
+from scorecard_autopopulater.player_stats.player_stats import PlayerStats
 from scorecard_autopopulater.utils import get_game_col, str_2_num
 
 
@@ -33,5 +33,5 @@ def test_players(sheet, players):
 
 
 def test_write_row(sheet):
-    data_row, _ = Statistics().stat_row
+    data_row, _ = PlayerStats().stat_row
     assert sheet.get_row_cols('Shivam Dube', 13, data_row) == (10, 'GC', 'GL', 'GO')

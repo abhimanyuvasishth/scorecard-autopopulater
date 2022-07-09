@@ -1,7 +1,8 @@
 import pytest
 
-from scorecard_autopopulater.constants import Format, Stages
-from scorecard_autopopulater.generator.cricket_match_generator import CricketMatchGenerator
+from scorecard_autopopulater.generator.cricket_match_generator import (CricketMatchFormat,
+                                                                       CricketMatchGenerator,
+                                                                       CricketMatchStages)
 from scorecard_autopopulater.match.cricket_match import CricketMatch
 from scorecard_autopopulater.player.player import Player
 
@@ -11,9 +12,8 @@ def match() -> CricketMatch:
     return CricketMatch(
         id=1304111,
         tournament_id=1298423,
-        start_time='2022-05-17T14:00:00.000Z',
-        stage=Stages.FINISHED,
-        format=Format.T2OI
+        stage=CricketMatchStages.FINISHED,
+        format=CricketMatchFormat.T2OI
     )
 
 
