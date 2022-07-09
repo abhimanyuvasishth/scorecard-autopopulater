@@ -1,11 +1,12 @@
 from collections import Counter
 
-from scorecard_autopopulater.schema.player import Player
-from scorecard_autopopulater.schema.team import Team
+from scorecard_autopopulater.player.player import Player
+from scorecard_autopopulater.scraper.scraper import Scraper
+from scorecard_autopopulater.team.team import Team
 from scorecard_autopopulater.utils import get_json_from_url, tracing
 
 
-class CricketScraper:
+class CricketScraper(Scraper):
 
     def __init__(self, match_id=None, series_id=None):
         self.match_id = match_id
@@ -41,19 +42,19 @@ class CricketScraper:
     def generate_teams(self):
         for index, team in enumerate(self.content['match']['teams']):
             yield Team(
-                team['team']['objectId'],
-                team['team']['name'],
-                team['team']['longName'],
-                team['team']['abbreviation']
+                id=team['team']['objectId'],
+                name=team['team']['name'],
+                long_name=team['team']['longName'],
+                abbreviation=team['team']['abbreviation']
             )
 
     @staticmethod
     def create_player(player):
         return Player(
-            player['player']['objectId'],
-            player['player']['name'],
-            player['player']['longName'],
-            player['player']['fieldingName']
+            id=player['player']['objectId'],
+            name=player['player']['name'],
+            long_name=player['player']['longName'],
+            fielding_name=player['player']['fieldingName']
         )
 
     @tracing(errors=TypeError, message='no players to add')
@@ -82,29 +83,29 @@ class CricketScraper:
                     continue
 
                 player = batting_team.get_player(batter['player']['objectId'])
-                player.statistics[innings].dismissal = batter['dismissalText']['long'].strip()
-                player.statistics[innings].runs_scored = batter['runs']
-                player.statistics[innings].balls_faced = batter['balls']
-                player.statistics[innings].minutes = batter['minutes']
-                player.statistics[innings].fours_scored = batter['fours']
-                player.statistics[innings].sixes_scored = batter['sixes']
-                player.statistics[innings].strike_rate = batter['strikerate']
-                player.statistics[innings].not_out = not batter['isOut']
+                player.player_stats[innings].dismissal = batter['dismissalText']['long'].strip()
+                player.player_stats[innings].runs_scored = batter['runs']
+                player.player_stats[innings].balls_faced = batter['balls']
+                player.player_stats[innings].minutes = batter['minutes']
+                player.player_stats[innings].fours_scored = batter['fours']
+                player.player_stats[innings].sixes_scored = batter['sixes']
+                player.player_stats[innings].strike_rate = batter['strikerate']
+                player.player_stats[innings].not_out = not batter['isOut']
 
             for bowler in scorecard['inningBowlers']:
                 if bowler['bowledType'] != 'yes':
                     continue
 
                 player = fielding_team.get_player(bowler['player']['objectId'])
-                player.statistics[innings].overs = bowler['overs']
-                player.statistics[innings].maidens = bowler['maidens']
-                player.statistics[innings].runs_conceded = bowler['conceded']
-                player.statistics[innings].wickets = bowler['wickets']
-                player.statistics[innings].fours_conceded = bowler['fours']
-                player.statistics[innings].sixes_conceded = bowler['sixes']
-                player.statistics[innings].wides = bowler['wides']
-                player.statistics[innings].no_balls = bowler['noballs']
-                player.statistics[innings].economy_rate = bowler['economy']
+                player.player_stats[innings].overs = bowler['overs']
+                player.player_stats[innings].maidens = bowler['maidens']
+                player.player_stats[innings].runs_conceded = bowler['conceded']
+                player.player_stats[innings].wickets = bowler['wickets']
+                player.player_stats[innings].fours_conceded = bowler['fours']
+                player.player_stats[innings].sixes_conceded = bowler['sixes']
+                player.player_stats[innings].wides = bowler['wides']
+                player.player_stats[innings].no_balls = bowler['noballs']
+                player.player_stats[innings].economy_rate = bowler['economy']
 
             for wicket in scorecard['inningWickets']:
                 for fielder_number, fielder in enumerate(wicket['dismissalFielders']):
@@ -118,12 +119,12 @@ class CricketScraper:
                         fielding_team.add_player(player)
 
                     if fielder_number == 0:
-                        player.statistics[innings].fielding_primary += 1
+                        player.player_stats[innings].fielding_primary += 1
                     else:
-                        player.statistics[innings].fielding_secondary += 1
+                        player.player_stats[innings].fielding_secondary += 1
 
     @tracing(errors=TypeError, message='No POTM')
     def add_potm_statistics(self, team_lookup):
         for potm in self.content['supportInfo'].get('playersOfTheMatch', []):
             team_id, player_id = potm['team']['objectId'], potm['player']['objectId']
-            team_lookup[team_id].get_player(player_id).statistics[0].potm = 1
+            team_lookup[team_id].get_player(player_id).player_stats[0].potm = 1
