@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
 
-@dataclass
-class Statistics:
+@dataclass(kw_only=True)
+class PlayerStats:
     dismissal: str = 'not out'
     runs_scored: int = 0
     balls_faced: int = 0
