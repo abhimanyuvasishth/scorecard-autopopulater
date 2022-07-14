@@ -29,7 +29,7 @@ def potm(match) -> Player:
 
 def test_generator():
     limit = 1
-    live_matches = [match for match in CricketMatchGenerator(limit=limit).generate_matches()]
+    live_matches = [match for match in CricketMatchGenerator().generate_matches(limit=limit)]
     assert len(live_matches) == limit
     assert isinstance(live_matches[0], CricketMatch)
 

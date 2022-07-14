@@ -1,3 +1,5 @@
+from time import sleep
+
 import click
 
 from cli import logger
@@ -14,7 +16,7 @@ def event_cli():
 @click.option('--dry-run', type=bool, is_flag=True, help='dry run updates')
 def process_current_matches(dry_run):
     sheet = GoogleSheet('Sandbox', 'Sandbox')
-    for match in CricketMatchGenerator(limit=10).generate_matches():
+    for match in CricketMatchGenerator().generate_matches(limit=5):
         logger.info(match)
         for team in match.teams:
             logger.info(team)
@@ -23,6 +25,7 @@ def process_current_matches(dry_run):
                 if not dry_run:
                     sheet.write_data_item(player, team)
         logger.info(f'Completed logging {match.id}')
+        sleep(60)  # to avoid rate limit issues on google sheets write
 
 
 if __name__ == '__main__':

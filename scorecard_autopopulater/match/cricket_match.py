@@ -25,7 +25,7 @@ class CricketMatch(Match):
 
     def __post_init__(self):
         self.scraper = CricketScraper(self.id, self.tournament_id)
-        for inning, team in enumerate(self.scraper.generate_teams()):
+        for team in self.scraper.generate_teams():
             self.add_team(team)
 
         self.scraper.add_players(self.teams)

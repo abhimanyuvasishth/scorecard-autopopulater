@@ -40,7 +40,7 @@ class CricketScraper(Scraper):
             team.match_number = counter[team_id]
 
     def generate_teams(self):
-        for index, team in enumerate(self.content['match']['teams']):
+        for team in self.content['match']['teams']:
             yield Team(
                 id=team['team']['objectId'],
                 name=team['team']['name'],

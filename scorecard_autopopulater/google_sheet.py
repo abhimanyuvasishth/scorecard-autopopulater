@@ -1,24 +1,36 @@
 import gspread
+from gspread.exceptions import APIError
 from oauth2client.service_account import ServiceAccountCredentials
 
 from scorecard_autopopulater.constants import SheetIntroCols, SheetOffsetCols
 from scorecard_autopopulater.player.player import Player
 from scorecard_autopopulater.team.team import Team
-from scorecard_autopopulater.utils import get_game_col, num_2_str, str_2_num
+from scorecard_autopopulater.utils import get_game_col, num_2_str, str_2_num, tracing
 
 
 class GoogleSheet:
     def __init__(self, doc_name, sheet_name):
-        scope = [
+        self.doc_name = doc_name
+        self.sheet_name = sheet_name
+        self.client = self.get_client()
+        self.sheet = self.get_sheet()
+        self.players = self.get_players()
+
+    @tracing(errors=FileNotFoundError, message='credentials file does not exist', raises=True)
+    def get_client(self):
+        file_name = 'credentials.json'
+        scopes = [
             'https://www.googleapis.com/auth/drive',
             'https://www.googleapis.com/auth/drive.file'
         ]
-        file = 'credentials.json'
-        creds = ServiceAccountCredentials.from_json_keyfile_name(file, scope)
-        client = gspread.authorize(creds)
-        self.sheet = client.open(doc_name).worksheet(sheet_name)
-        self.players = self.get_players()
+        creds = ServiceAccountCredentials.from_json_keyfile_name(file_name, scopes)
+        return gspread.authorize(creds)
 
+    @tracing(errors=APIError, message='read API requests exhausted', raises=True)
+    def get_sheet(self):
+        return self.client.open(self.doc_name).worksheet(self.sheet_name)
+
+    @tracing(errors=APIError, message='read API requests exhausted', raises=True)
     def get_players(self):
         players = {}
         names = self.sheet.col_values(SheetIntroCols.PLAYER.value)
@@ -37,6 +49,7 @@ class GoogleSheet:
         potm_col = num_2_str(str_2_num(start) + SheetOffsetCols.POTM.get_offset())
         return row, start, end, potm_col
 
+    @tracing(errors=APIError, message='write API requests exhausted', raises=True)
     def write_data_item(self, player: Player, team: Team):
         data_row, potm = player.stat_row
         row, start, end, potm_col = self.get_row_cols(player.long_name, team.match_number, data_row)

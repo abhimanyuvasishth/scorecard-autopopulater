@@ -5,11 +5,11 @@ from scorecard_autopopulater.utils import get_json_from_url
 
 
 class CricketMatchGenerator(MatchGenerator):
-    def generate_matches(self) -> list[CricketMatch]:
+    def generate_matches(self, limit=10) -> list[CricketMatch]:
         base_api_url = 'https://hs-consumer-api.espncricinfo.com/v1/pages'
         url = f'{base_api_url}/matches/current?lang=en&latest=true'
 
-        for raw_match in get_json_from_url(url)['matches'][:self.limit]:
+        for raw_match in get_json_from_url(url)['matches'][:limit]:
             yield CricketMatch(
                 id=raw_match['objectId'],
                 tournament_id=raw_match['series']['objectId'],
