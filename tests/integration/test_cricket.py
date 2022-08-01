@@ -1,20 +1,21 @@
 import pytest
 
-from scorecard_autopopulater.generator.cricket_match_generator import (CricketMatchFormat,
-                                                                       CricketMatchGenerator,
-                                                                       CricketMatchStages)
-from scorecard_autopopulater.match.cricket_match import CricketMatch
+from scorecard_autopopulater.cricket_match_generator import generate_matches
+from scorecard_autopopulater.match.cricket_match import (CricketMatch, CricketMatchFormat,
+                                                         CricketMatchStages)
 from scorecard_autopopulater.player.player import Player
 
 
 @pytest.fixture
 def match() -> CricketMatch:
-    return CricketMatch(
+    match = CricketMatch(
         id=1304111,
         tournament_id=1298423,
         stage=CricketMatchStages.FINISHED,
         format=CricketMatchFormat.T2OI
     )
+    match.populate()
+    return match
 
 
 @pytest.fixture
@@ -28,9 +29,7 @@ def potm(match) -> Player:
 
 
 def test_generator():
-    limit = 1
-    live_matches = [match for match in CricketMatchGenerator().generate_matches(limit=limit)]
-    assert len(live_matches) == limit
+    live_matches = [match for match in generate_matches()]
     assert isinstance(live_matches[0], CricketMatch)
 
 

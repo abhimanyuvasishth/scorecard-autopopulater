@@ -23,7 +23,7 @@ class CricketMatch(Match):
     stage: CricketMatchStages = CricketMatchStages.FINISHED
     format: CricketMatchFormat = CricketMatchFormat.T20
 
-    def __post_init__(self):
+    def populate(self):
         self.scraper = CricketScraper(self.id, self.tournament_id)
         for team in self.scraper.generate_teams():
             self.add_team(team)
