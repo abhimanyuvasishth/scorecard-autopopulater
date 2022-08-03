@@ -27,9 +27,7 @@ def test_game_cols(sheet):
 
 def test_players(sheet, players):
     for test_player in players:
-        player = sheet.players[test_player['name']]
-        for key, value in player.items():
-            assert player[key] == test_player[key]
+        assert sheet.get_player_row(test_player['name']) == test_player['row']
 
 
 def test_write_row(sheet):

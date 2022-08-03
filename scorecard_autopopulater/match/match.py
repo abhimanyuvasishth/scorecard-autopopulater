@@ -8,6 +8,7 @@ from scorecard_autopopulater.team.team import Team
 class Match:
     id: int
     tournament_id: int
+    start_time: str
     teams: list[Team] = field(default_factory=list[Team], repr=False)
     team_lookup: dict[int, Team] = field(default_factory=dict[int, Team], repr=False)
 

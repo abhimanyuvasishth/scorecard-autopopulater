@@ -3,7 +3,7 @@ from time import sleep
 import click
 
 from cli import logger
-from scorecard_autopopulater.cricket_match_generator import generate_matches
+from scorecard_autopopulater.cricket_match_generator import generate_live_matches
 from scorecard_autopopulater.google_sheet import GoogleSheet
 from scorecard_autopopulater.scraper.squad import Squad
 
@@ -40,7 +40,7 @@ def initialize_squad():
 def process_current_matches(dry_run):
     sheet = GoogleSheet(CONFIG['doc_name'], CONFIG['sheet_name'])
     tournament_id = CONFIG['tournament_id']
-    for match in generate_matches():
+    for match in generate_live_matches():
         if tournament_id and match.tournament_id != tournament_id:
             continue
         logger.info(match)

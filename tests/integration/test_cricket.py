@@ -1,6 +1,6 @@
 import pytest
 
-from scorecard_autopopulater.cricket_match_generator import generate_matches
+from scorecard_autopopulater.cricket_match_generator import generate_live_matches
 from scorecard_autopopulater.match.cricket_match import (CricketMatch, CricketMatchFormat,
                                                          CricketMatchStages)
 from scorecard_autopopulater.player.player import Player
@@ -12,7 +12,8 @@ def match() -> CricketMatch:
         id=1304111,
         tournament_id=1298423,
         stage=CricketMatchStages.FINISHED,
-        format=CricketMatchFormat.T2OI
+        format=CricketMatchFormat.T2OI,
+        start_time='2022-08-03T00:00:00.000Z'
     )
     match.populate()
     return match
@@ -29,7 +30,7 @@ def potm(match) -> Player:
 
 
 def test_generator():
-    live_matches = [match for match in generate_matches()]
+    live_matches = [match for match in generate_live_matches()]
     assert isinstance(live_matches[0], CricketMatch)
 
 
