@@ -31,9 +31,9 @@ class Squad:
     def scrape_page(self):
         for elem in self.content:
             team_url = f'{self.base_url}{elem["href"]}'
-            team_name = elem.text.replace('Squads', '').replace('Squad', '').strip()
-            self.players[team_name] = []
-            self.extract_players(team_url, team_name)
+            team = elem.text.replace('Squads', '').replace('Squad', '').replace('squad', '').strip()
+            self.players[team] = []
+            self.extract_players(team_url, team)
 
     def extract_players(self, team_url, team_name):
         page = urlopen(team_url)
