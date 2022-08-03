@@ -8,8 +8,8 @@ from scorecard_autopopulater.google_sheet import GoogleSheet
 from scorecard_autopopulater.scraper.squad import Squad
 
 CONFIG = {
-    'tournament_id': 1299141,
-    'doc_name': 'The Hundred 2022',
+    'tournament_id': 1289194,
+    'doc_name': 'CWG 2022',
     'sheet_name': 'Points Worksheet',
     'start_row': 3,
     'team_gap': 6

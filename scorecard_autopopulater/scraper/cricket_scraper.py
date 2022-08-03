@@ -1,9 +1,12 @@
 from collections import Counter
+from itertools import chain
 
 from scorecard_autopopulater.player.player import Player
 from scorecard_autopopulater.scraper.scraper import Scraper
 from scorecard_autopopulater.team.team import Team
 from scorecard_autopopulater.utils import get_json_from_url, tracing
+
+URL = 'https://hs-consumer-api.espncricinfo.com/v1/pages'
 
 
 class CricketScraper(Scraper):
@@ -12,27 +15,27 @@ class CricketScraper(Scraper):
         self.match_id = match_id
         self.series_id = series_id
 
-        self.base_url = 'https://www.espncricinfo.com'
-        self.api_base_url = 'https://hs-consumer-api.espncricinfo.com/v1/pages'
-
-        self.api_match_url = f'{self.api_base_url}/match/details?lang=en'
+        self.api_match_url = f'{URL}/match/details?lang=en'
         self.content_url = f'{self.api_match_url}&seriesId={self.series_id}&matchId={self.match_id}'
-
-        self.api_schedule_url = f'{self.api_base_url}/series/schedule?lang=en'
-        self.schedule_url = f'{self.api_schedule_url}&seriesId={self.series_id}&fixtures=false'
-
         self.content = get_json_from_url(self.content_url)
+
+        self.api_schedule_url = f'{URL}/series/schedule?lang=en&seriesId={self.series_id}'
 
     def add_match_numbers(self, teams):
         team_lookup = {team.id: team for team in teams}
-        fixtures = get_json_from_url(self.schedule_url)
-        teams_played = []
+        fixtures = get_json_from_url(self.api_schedule_url, params={'fixtures': True})
+        results = get_json_from_url(self.api_schedule_url, params={'fixtures': False})
 
-        for match in sorted(fixtures['content']['matches'], key=lambda game: game['startTime']):
+        all_matches = {}
+        for match in chain(fixtures['content']['matches'], results['content']['matches']):
+            all_matches[match['objectId']] = match
+
+        teams_played = []
+        for match_id, match in sorted(all_matches.items(), key=lambda game: game[1]['startTime']):
             for team_played in match['teams']:
                 teams_played.append(team_played['team']['objectId'])
 
-            if match['objectId'] == self.match_id:
+            if match_id == self.match_id:
                 break
 
         counter = Counter(teams_played)

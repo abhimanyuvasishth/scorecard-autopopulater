@@ -52,7 +52,7 @@ def tracing(errors, message, raises=False):
 
 
 @tracing(requests.exceptions.HTTPError, message='get_json failed')
-def get_json_from_url(url):
-    response = requests.get(url)
+def get_json_from_url(url, params=None):
+    response = requests.get(url, params=params)
     response.raise_for_status()
     return response.json()

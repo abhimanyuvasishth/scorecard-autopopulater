@@ -10,6 +10,7 @@ class CricketMatchFormat(Enum):
     ODI = auto()
     T20 = auto()
     TEST = auto()
+    HUNDRED_BALL = auto()
 
 
 class CricketMatchStages(Enum):
@@ -27,6 +28,9 @@ class CricketMatch(Match):
         self.scraper = CricketScraper(self.id, self.tournament_id)
         for team in self.scraper.generate_teams():
             self.add_team(team)
+
+        if self.stage == CricketMatchStages.SCHEDULED:
+            return
 
         self.scraper.add_players(self.teams)
         self.scraper.add_match_numbers(self.teams)
