@@ -54,6 +54,7 @@ def process_current_matches(dry_run):
         logger.info(f'Completed logging {match.id}')
         if not dry_run:
             sleep(60)  # to avoid rate limit issues on google sheets write
+    logger.info('Completed processing current matches')
 
 
 if __name__ == '__main__':
