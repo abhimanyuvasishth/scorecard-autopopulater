@@ -11,7 +11,7 @@ URL = 'https://hs-consumer-api.espncricinfo.com/v1/pages'
 
 class CricketScraper(Scraper):
 
-    def __init__(self, match_id=None, series_id=None):
+    def __init__(self, match_id, series_id):
         self.match_id = match_id
         self.series_id = series_id
 
@@ -131,3 +131,8 @@ class CricketScraper(Scraper):
         for potm in self.content['supportInfo'].get('playersOfTheMatch', []):
             team_id, player_id = potm['team']['objectId'], potm['player']['objectId']
             team_lookup[team_id].get_player(player_id).player_stats[0].potm = 1
+
+
+def find_series_id(match_id):
+    json = get_json_from_url(f'https://www.espncricinfo.com/matches/engine/match/{match_id}.json')
+    return json['series'][0]['object_id']

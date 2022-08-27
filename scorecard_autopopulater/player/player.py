@@ -17,3 +17,7 @@ class Player:
     @property
     def stat_row(self):
         return self.player_stats[0].stat_row
+
+    @property
+    def points(self):
+        return self.player_stats[0].points

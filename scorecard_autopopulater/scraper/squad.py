@@ -32,6 +32,7 @@ class Squad:
         for elem in self.content:
             team_url = f'{self.base_url}{elem["href"]}'
             team = elem.text.replace('Squads', '').replace('Squad', '').replace('squad', '').strip()
+            team = team.replace('T20I', '').replace('T20', '').strip()
             self.players[team] = []
             self.extract_players(team_url, team)
 
@@ -45,4 +46,7 @@ class Squad:
             tag = player_soup.find(class_='ds-text-tight-s ds-font-regular')
             if tag and tag.text == 'Withdrawn player':
                 continue
-            self.players[team_name].append(name)
+            self.players[team_name].append({
+                'name': name,
+                'id': player_soup.find('a')['href'].split('-')[-1]
+            })

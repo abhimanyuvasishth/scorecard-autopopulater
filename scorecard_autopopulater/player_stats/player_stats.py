@@ -43,3 +43,23 @@ class PlayerStats:
             ],
             int(self.potm)
         )
+
+    @property
+    def points(self):
+        batting_points = self.runs_scored
+        if (200 > self.strike_rate >= 150) and self.balls_faced >= 7:
+            batting_points = 1.2 * batting_points
+        elif (200 > self.strike_rate >= 175) and self.balls_faced >= 7:
+            batting_points = 1.5 * batting_points
+        elif (self.strike_rate >= 200) and self.balls_faced >= 7:
+            batting_points = 1.75 * batting_points
+        bowling_points = self.wickets * 25 + self.maidens * 25
+        fielding_points = self.fielding_primary * 10
+        potm_points = 25 * self.potm
+        if (self.runs_scored < 5 or self.strike_rate < 90) and not self.not_out:
+            batting_points -= 25
+        if self.economy_rate > 10:
+            bowling_points -= 25
+        elif self.economy_rate < 6.5 and self.overs > 3:
+            bowling_points += 25
+        return batting_points + bowling_points + fielding_points + potm_points
