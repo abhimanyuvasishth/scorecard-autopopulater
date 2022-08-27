@@ -1,10 +1,12 @@
 import csv
+import json
 from time import perf_counter, sleep
 
 import click
 
 from cli import logger
-from scorecard_autopopulater.cricket_match_generator import generate_live_matches
+from scorecard_autopopulater.cricket_match_generator import (generate_live_matches,
+                                                             generate_matches_by_tournament)
 from scorecard_autopopulater.google_sheet import GoogleSheet
 from scorecard_autopopulater.match.cricket_match import CricketMatch
 from scorecard_autopopulater.scraper.cricket_scraper import find_series_id
@@ -23,6 +25,22 @@ CONFIG = {
 @click.group(name='event_cli')
 def event_cli():
     pass
+
+
+@event_cli.command(name='get_matches')
+def get_matches():
+    match_configs = []
+    for match in generate_matches_by_tournament(tournament_id=CONFIG['tournament_id']):
+        match.populate()
+        match_configs.append({
+            'team_1': match.teams[0].name,
+            'team_1_num': match.teams[0].match_number,
+            'team_2': match.teams[1].name,
+            'team_2_num': match.teams[1].match_number,
+            'start_timestamp': match.start_time,
+            'object_id': match.id
+        })
+    print(json.dumps(match_configs))
 
 
 @event_cli.command(name='get_points')
