@@ -29,11 +29,11 @@ class CricketMatch(Match):
         for team in self.scraper.generate_teams():
             self.add_team(team)
 
+        self.scraper.add_match_numbers(self.teams)
         if self.stage == CricketMatchStages.SCHEDULED:
             return
 
         self.scraper.add_players(self.teams)
-        self.scraper.add_match_numbers(self.teams)
         self.scraper.add_statistics(self.teams, self.team_lookup)
 
         if self.stage == CricketMatchStages.FINISHED:
