@@ -14,8 +14,8 @@ from scorecard_autopopulater.scraper.squad import Squad
 from scorecard_autopopulater.scraper.stats import Stats
 
 CONFIG = {
-    'tournament_id': 1327237,
-    'doc_name': 'Asia Cup 2022',
+    'tournament_id': 1298134,
+    'doc_name': 'World Cup 2022',
     'sheet_name': 'Points Worksheet',
     'start_row': 3,
     'team_gap': 5
@@ -48,7 +48,13 @@ def get_points():
     squad = Squad(CONFIG['tournament_id'])
     start_time = perf_counter()
     player_points = {}
+    allowed_teams = [
+        'India', 'Australia', 'Pakistan', 'Sri Lanka', 'South Africa',
+        'Ireland', 'New Zealand', 'Afghanistan', 'Bangladesh', 'England', 'Zimbabwe', 'Netherlands'
+    ]
     for team in squad.players:
+        if team not in allowed_teams:
+            continue
         print(team)
         for player in squad.players[team]:
             all_points = []
@@ -60,8 +66,12 @@ def get_points():
                 series_id = find_series_id(match_id)
                 match = CricketMatch(id=match_id, tournament_id=series_id)
                 match.populate()
-                match_team = next(filter(lambda x: x.name == team, match.teams))
-                all_points.append(int(match_team.get_player(int(player['id'])).points))
+                try:
+                    match_team = next(filter(lambda x: x.name == team, match.teams))
+                    all_points.append(int(match_team.get_player(int(player['id'])).points))
+                except Exception as e:
+                    print(e)
+                    continue
 
             avg = sum(all_points) / max(len(all_points), 1)
             player_points[player['name']] = {
@@ -71,19 +81,20 @@ def get_points():
                 'url': url,
             }
             elapsed = perf_counter() - start_time
-            print(f'{elapsed:0.02f}', player['name'], all_points, f'{avg:0.02f}')
-
-    with open('data.csv', 'w') as csvfile:
-        wr = csv.writer(csvfile)
-        wr.writerow(['name', 'average', 'total', 'max'])
-        for player, data in player_points.items():
-            wr.writerow([
-                player,
-                data['average'],
-                data['total_games'],
-                data['url'],
-                max(data['all_points'] or [0])
-            ])
+            print(elapsed, player)
+            with open('results.csv', 'a') as csvfile:
+                wr = csv.writer(csvfile)
+                wr.writerow([
+                    player['id'],
+                    player['name'],
+                    team,
+                    avg,
+                    len(all_points),
+                    url,
+                    all_points,
+                    min(all_points or [0]),
+                    max(all_points or [0])
+                ])
 
 
 @event_cli.command(name='initialize_squad')
