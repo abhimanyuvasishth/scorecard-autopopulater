@@ -119,6 +119,9 @@ def process_current_matches(dry_run):
     for match in generate_live_matches():
         if tournament_id and match.tournament_id != tournament_id:
             continue
+        # ignoring qualifiers
+        if match.id < 1298147:
+            continue
         logger.info(match)
         match.populate()
         for team in match.teams:
