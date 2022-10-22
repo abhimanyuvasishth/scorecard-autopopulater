@@ -28,7 +28,9 @@ class CricketScraper(Scraper):
 
         all_matches = {}
         for match in chain(fixtures['content']['matches'], results['content']['matches']):
-            all_matches[match['objectId']] = match
+            # ignore qualifiers
+            if int(match['objectId']) >= 1298147:
+                all_matches[match['objectId']] = match
 
         teams_played = []
         for match_id, match in sorted(all_matches.items(), key=lambda game: game[1]['startTime']):
