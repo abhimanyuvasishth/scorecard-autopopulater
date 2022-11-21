@@ -56,3 +56,6 @@ class GoogleSheet:
         write_range = f'{start}{row}:{end}{row}'
         self.sheet.update(write_range, [data_row])
         self.sheet.update_cell(row, str_2_num(potm_col), potm)
+
+    def write_data_value(self, row, col, value):
+        self.sheet.update_cell(row, col, value)

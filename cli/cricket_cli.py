@@ -22,12 +22,12 @@ CONFIG = {
 }
 
 
-@click.group(name='event_cli')
-def event_cli():
+@click.group(name='cricket_cli')
+def cricket_cli():
     pass
 
 
-@event_cli.command(name='get_matches')
+@cricket_cli.command(name='get_matches')
 def get_matches():
     match_configs = []
     for match in generate_matches_by_tournament(tournament_id=CONFIG['tournament_id']):
@@ -43,7 +43,7 @@ def get_matches():
     print(json.dumps(match_configs))
 
 
-@event_cli.command(name='get_points')
+@cricket_cli.command(name='get_points')
 def get_points():
     squad = Squad(CONFIG['tournament_id'])
     start_time = perf_counter()
@@ -97,7 +97,7 @@ def get_points():
                 ])
 
 
-@event_cli.command(name='initialize_squad')
+@cricket_cli.command(name='initialize_squad')
 def initialize_squad():
     squad = Squad(CONFIG['tournament_id'])
     sheet = GoogleSheet(CONFIG['doc_name'], CONFIG['sheet_name'])
@@ -111,7 +111,7 @@ def initialize_squad():
         sleep(60)
 
 
-@event_cli.command(name='process_current_matches')
+@cricket_cli.command(name='process_current_matches')
 @click.option('--dry-run', type=bool, is_flag=True, help='dry run updates')
 def process_current_matches(dry_run):
     sheet = GoogleSheet(CONFIG['doc_name'], CONFIG['sheet_name'])
@@ -137,4 +137,4 @@ def process_current_matches(dry_run):
 
 
 if __name__ == '__main__':
-    event_cli()
+    cricket_cli()
