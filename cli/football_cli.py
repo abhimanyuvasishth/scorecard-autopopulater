@@ -40,13 +40,14 @@ def process_current_matches(dry_run):
         try:
             if player['status'] != 'available':
                 continue
-            if player['matchDayPoints']['1'] is not None:
+            if player['stats']['roundScores'] is not None:
+                points = int(player['stats']['roundScores']['1'])
                 sheet.write_data_value(
                     row=sheet.get_player_row(player['name']),
                     col=6,
-                    value=int(player['matchDayPoints']['1'])
+                    value=points
                 )
-                logger.info([player['name'], player['matchDayPoints']['1']])
+                logger.info([player['name'], points])
                 count += 1
         except Exception:
             print(player['name'])
