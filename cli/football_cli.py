@@ -38,14 +38,14 @@ def process_current_matches(dry_run):
             sleep(60)
         try:
             if player['stats']['roundScores'] is not None:
-                points = int(player['stats']['roundScores']['1'])
-                sheet.write_data_value(
-                    row=sheet.get_player_row(player['name']),
-                    col=6,
-                    value=points
-                )
-                logger.info([count, player['name'], points])
-                count += 1
+                for match, points in player['stats']['roundScores'].items():
+                    sheet.write_data_value(
+                        row=sheet.get_player_row(player['name']),
+                        col=3 + 3 * int(match),
+                        value=int(points)
+                    )
+                    logger.info([count, player['name'], points])
+                    count += 1
         except Exception as e:
             logger.error(f'{player["name"]} failed with {e}')
 
