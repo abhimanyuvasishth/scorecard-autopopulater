@@ -34,12 +34,9 @@ def process_current_matches(dry_run):
     count = 0
 
     for player in player_data:
-        if count == 50:
-            count = 0
+        if count and count % 50 == 0:
             sleep(60)
         try:
-            if player['status'] != 'available':
-                continue
             if player['stats']['roundScores'] is not None:
                 points = int(player['stats']['roundScores']['1'])
                 sheet.write_data_value(
@@ -47,10 +44,10 @@ def process_current_matches(dry_run):
                     col=6,
                     value=points
                 )
-                logger.info([player['name'], points])
+                logger.info([count, player['name'], points])
                 count += 1
-        except Exception:
-            print(player['name'])
+        except Exception as e:
+            logger.error(f'{player["name"]} failed with {e}')
 
 
 if __name__ == '__main__':
