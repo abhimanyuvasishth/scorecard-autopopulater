@@ -38,6 +38,8 @@ def process_current_matches(dry_run):
             sleep(60)
         try:
             if player['stats']['roundScores'] is not None:
+                if player['id'] in [336505]:
+                    continue
                 for match, points in player['stats']['roundScores'].items():
                     sheet.write_data_value(
                         row=sheet.get_player_row(player['name']),
