@@ -41,6 +41,8 @@ def process_current_matches(dry_run):
                 if player['id'] in [336505]:
                     continue
                 for match, points in player['stats']['roundScores'].items():
+                    if match <= 1:
+                        continue
                     sheet.write_data_value(
                         row=sheet.get_player_row(player['name']),
                         col=3 + 3 * int(match),
