@@ -1,15 +1,9 @@
 from enum import Enum, auto
 
-game1_col = 'E'
+game1_col = 'F'
 
 in_date_fmt = '%d-%b-%Y, %I:%M %p'
 out_date_fmt = '%Y-%m-%d %H:%M:%S'
-
-
-class SheetIntroCols(Enum):
-    PLAYER = 1
-    PLAYING_TEAM = 2
-    AUCTION_TEAM = 3
 
 
 class SheetOffsetCols(Enum):
