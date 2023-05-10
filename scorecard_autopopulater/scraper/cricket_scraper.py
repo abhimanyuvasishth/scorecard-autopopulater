@@ -88,7 +88,8 @@ class CricketScraper(Scraper):
                     continue
 
                 player = batting_team.get_player(batter['player']['objectId'])
-                player.player_stats[innings].dismissal = batter['dismissalText']['long'].strip()
+                dismissal_text = batter['dismissalText'] or {'long': 'not out'}
+                player.player_stats[innings].dismissal = dismissal_text['long'].strip()
                 player.player_stats[innings].runs_scored = batter['runs']
                 player.player_stats[innings].balls_faced = batter['balls']
                 player.player_stats[innings].minutes = batter['minutes']
