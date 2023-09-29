@@ -14,11 +14,12 @@ from scorecard_autopopulater.scraper.squad import Squad
 from scorecard_autopopulater.scraper.stats import Stats
 
 CONFIG = {
-    'tournament_id': 1345038,
-    'doc_name': 'IPL 16 Auction',
+    'tournament_id': 1367856,
+    'doc_name': 'World Cup 2023 Auction',
     'sheet_name': 'Points Worksheet',
     'start_row': 3,
-    'team_gap': 5
+    'team_gap': 5,
+    'match_class': 2,
 }
 
 
@@ -32,14 +33,22 @@ def get_matches():
     match_configs = []
     for match in generate_matches_by_tournament(tournament_id=CONFIG['tournament_id']):
         match.populate()
-        match_configs.append({
+        match_config = {
             'team_1': match.teams[0].name,
             'team_1_num': match.teams[0].match_number,
             'team_2': match.teams[1].name,
             'team_2_num': match.teams[1].match_number,
             'start_timestamp': match.start_time,
-            'object_id': match.id
-        })
+            'object_id': match.id,
+            'location': match.location,
+        }
+        match_configs.append(match_config)
+
+    with open('raw/fixtures.csv', 'w') as f:
+        writer = csv.DictWriter(f, fieldnames=match_configs[0].keys())
+        writer.writeheader()
+        writer.writerows(match_configs)
+
     print(json.dumps(match_configs))
 
 
@@ -49,8 +58,16 @@ def get_points():
     start_time = perf_counter()
     player_points = {}
     allowed_teams = [
-        'India', 'Australia', 'Pakistan', 'Sri Lanka', 'South Africa',
-        'Ireland', 'New Zealand', 'Afghanistan', 'Bangladesh', 'England', 'Zimbabwe', 'Netherlands'
+        'Afghanistan',
+        'Australia',
+        'Bangladesh',
+        'England',
+        'India',
+        'Netherlands',
+        'New Zealand',
+        'Pakistan',
+        'South Africa',
+        'Sri Lanka'
     ]
     for team in squad.players:
         if team not in allowed_teams:
@@ -59,7 +76,7 @@ def get_points():
         for player in squad.players[team]:
             all_points = []
             base_url = 'https://stats.espncricinfo.com/ci/engine/player'
-            params = 'class=3;template=results;type=allround;view=match'
+            params = f'class={CONFIG["match_class"]};template=results;type=allround;view=match'
             url = f"{base_url}/{player['id']}.html?{params}"
             match_ids = Stats(url).content
             for match_id in match_ids[::-1][:25]:
@@ -82,7 +99,7 @@ def get_points():
             }
             elapsed = perf_counter() - start_time
             print(elapsed, player)
-            with open('results.csv', 'a') as csvfile:
+            with open('raw/results.csv', 'a') as csvfile:
                 wr = csv.writer(csvfile)
                 wr.writerow([
                     player['id'],

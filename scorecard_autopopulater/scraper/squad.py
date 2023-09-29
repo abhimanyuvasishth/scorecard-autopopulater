@@ -39,10 +39,10 @@ class Squad:
     def extract_players(self, team_url, team_name):
         page = urlopen(team_url)
         soup = BeautifulSoup(page, 'html.parser')
-        class_name = 'ds-relative ds-flex ds-flex-row ds-space-x-4 ds-p-4 lg:ds-px-6'
+        class_name = 'ds-flex ds-flex-row ds-items-center ds-justify-between'
         player_soups = soup.find_all(class_=class_name)
         for player_soup in player_soups:
-            name = player_soup.find_all('a')[1].text.replace(u'\xa0', u' ').strip()
+            name = player_soup.find_all('a')[0].text.replace(u'\xa0', u' ').strip()
             tag = player_soup.find(class_='ds-text-tight-s ds-font-regular')
             if tag and tag.text == 'Withdrawn player':
                 continue

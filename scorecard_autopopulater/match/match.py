@@ -11,6 +11,7 @@ class Match:
     start_time: str = ''
     teams: list[Team] = field(default_factory=list[Team], repr=False)
     team_lookup: dict[int, Team] = field(default_factory=dict[int, Team], repr=False)
+    location: str = ''
 
     @abstractmethod
     def populate(self):

@@ -31,7 +31,8 @@ def generate_matches_by_tournament(tournament_id: str) -> list[CricketMatch]:
             tournament_id=raw_match['series']['objectId'],
             stage=CricketMatchStages[raw_match['stage']],
             format=CricketMatchFormat[raw_match['format']],
-            start_time=raw_match['startTime']
+            start_time=raw_match['startTime'],
+            location=raw_match['ground']['name'],
         )
         all_matches[match.id] = match
 
