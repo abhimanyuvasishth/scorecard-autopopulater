@@ -8,7 +8,7 @@ URL = 'https://hs-consumer-api.espncricinfo.com/v1/pages'
 LIVE_URL = f'{URL}/matches/current?lang=en&latest=true'
 
 
-def generate_live_matches() -> list[CricketMatch]:
+def generate_live_matches():
     for raw_match in get_json_from_url(LIVE_URL)['matches']:
         yield CricketMatch(
             id=raw_match['objectId'],
@@ -19,7 +19,7 @@ def generate_live_matches() -> list[CricketMatch]:
         )
 
 
-def generate_matches_by_tournament(tournament_id: str) -> list[CricketMatch]:
+def generate_matches_by_tournament(tournament_id: str):
     schedule_url = f'{URL}/series/schedule?lang=en&seriesId={tournament_id}'
     fixtures = get_json_from_url(schedule_url, params={'fixtures': True})
     results = get_json_from_url(schedule_url, params={'fixtures': False})
