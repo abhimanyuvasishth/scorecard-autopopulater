@@ -14,8 +14,8 @@ from scorecard_autopopulater.scraper.squad import Squad
 from scorecard_autopopulater.scraper.stats import Stats
 
 CONFIG = {
-    'tournament_id': 1367856,
-    'doc_name': 'World Cup 2023 Auction',
+    'tournament_id': 1410320,
+    'doc_name': 'IPL 17 Auction',
     'sheet_name': 'Points Worksheet',
     'start_row': 3,
     'team_gap': 5,
