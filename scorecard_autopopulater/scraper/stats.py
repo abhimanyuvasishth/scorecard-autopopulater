@@ -1,5 +1,4 @@
-from urllib.request import urlopen
-
+import requests
 from bs4 import BeautifulSoup
 
 
@@ -10,8 +9,11 @@ class Stats:
         self.content = self.get_content()
 
     def get_soup(self):
-        page = urlopen(self.url)
-        return BeautifulSoup(page, 'html.parser')
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'
+        }
+        response = requests.get(self.url, headers=headers)
+        return BeautifulSoup(response.text, 'html.parser')
 
     def get_content(self):
         data = self.soup.find_all('td', style='white-space: nowrap;')[1:]

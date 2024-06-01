@@ -1,8 +1,10 @@
 import csv
 import json
+from datetime import datetime
 from time import perf_counter, sleep
 
 import click
+import pytz
 
 from cli import logger
 from scorecard_autopopulater.cricket_match_generator import (generate_live_matches,
@@ -14,12 +16,12 @@ from scorecard_autopopulater.scraper.squad import Squad
 from scorecard_autopopulater.scraper.stats import Stats
 
 CONFIG = {
-    'tournament_id': 1410320,
-    'doc_name': 'IPL 17 Auction',
+    'tournament_id': 1411166,
+    'doc_name': 'World Cup 2024 Auction',
     'sheet_name': 'Points Worksheet',
     'start_row': 3,
     'team_gap': 5,
-    'match_class': 2,
+    'match_class': 3,
 }
 
 
@@ -31,8 +33,20 @@ def cricket_cli():
 @cricket_cli.command(name='get_matches')
 def get_matches():
     match_configs = []
+    tournament_start_date = datetime.strptime('2024-06-01', '%Y-%m-%d')
     for match in generate_matches_by_tournament(tournament_id=CONFIG['tournament_id']):
+        # Timezone adjusting
+        date_format = '%Y-%m-%dT%H:%M:%S.%fZ'
+        naive_datetime = datetime.strptime(match.start_time, date_format)
+        source_timezone = pytz.utc
+        localized_datetime = source_timezone.localize(naive_datetime)
+        target_timezone = pytz.timezone('US/Eastern')
+        converted_datetime = localized_datetime.astimezone(target_timezone)
+        match.start_time = converted_datetime.strftime(date_format)
         match.populate()
+
+        day_difference = datetime.strptime(match.start_time, date_format) - tournament_start_date
+
         match_config = {
             'team_1': match.teams[0].name,
             'team_1_num': match.teams[0].match_number,
@@ -41,6 +55,7 @@ def get_matches():
             'start_timestamp': match.start_time,
             'object_id': match.id,
             'location': match.location,
+            'match_day': day_difference.days + 1,
         }
         match_configs.append(match_config)
 
@@ -58,16 +73,16 @@ def get_points():
     start_time = perf_counter()
     player_points = {}
     allowed_teams = [
-        'Afghanistan',
-        'Australia',
-        'Bangladesh',
-        'England',
         'India',
-        'Netherlands',
-        'New Zealand',
         'Pakistan',
+        'Australia',
+        'England',
+        'Sri Lanka',
+        'Bangladesh',
+        'Afghanistan',
+        'West Indies',
         'South Africa',
-        'Sri Lanka'
+        'New Zealand',
     ]
     for team in squad.players:
         if team not in allowed_teams:
@@ -80,10 +95,10 @@ def get_points():
             url = f"{base_url}/{player['id']}.html?{params}"
             match_ids = Stats(url).content
             for match_id in match_ids[::-1][:25]:
-                series_id = find_series_id(match_id)
-                match = CricketMatch(id=match_id, tournament_id=series_id)
-                match.populate()
                 try:
+                    series_id = find_series_id(match_id)
+                    match = CricketMatch(id=match_id, tournament_id=series_id)
+                    match.populate()
                     match_team = next(filter(lambda x: x.name == team, match.teams))
                     all_points.append(int(match_team.get_player(int(player['id'])).points))
                 except Exception as e:
@@ -98,7 +113,7 @@ def get_points():
                 'url': url,
             }
             elapsed = perf_counter() - start_time
-            print(elapsed, player)
+            print(elapsed, player, avg)
             with open('raw/results.csv', 'a') as csvfile:
                 wr = csv.writer(csvfile)
                 wr.writerow([

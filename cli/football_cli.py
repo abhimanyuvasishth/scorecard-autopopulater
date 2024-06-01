@@ -1,10 +1,10 @@
+from time import sleep
+
 import click
 import requests
-
-from time import sleep
-from cli import logger
 from fake_useragent import UserAgent
 
+from cli import logger
 from scorecard_autopopulater.google_sheet import GoogleSheet
 
 CONFIG = {
