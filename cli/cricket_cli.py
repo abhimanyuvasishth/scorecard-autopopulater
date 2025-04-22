@@ -16,12 +16,12 @@ from scorecard_autopopulater.scraper.squad import Squad
 from scorecard_autopopulater.scraper.stats import Stats
 
 CONFIG = {
-    'tournament_id': 1411166,
-    'doc_name': 'World Cup 2024 Auction',
+    'tournament_id': 1449924,
+    'doc_name': 'IPL 18 Auction 2025',
     'sheet_name': 'Points Worksheet',
     'start_row': 3,
     'team_gap': 5,
-    'match_class': 3,
+    'match_class': 1,
 }
 
 
